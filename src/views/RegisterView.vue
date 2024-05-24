@@ -1,7 +1,8 @@
 <template>
   <div>
     <Register />
-    <router-link to="/login">Đã có tài khoản? Đăng nhập ngay!</router-link>
+    <router-link to="/login">Đã có tài khoản?
+      Đăng nhập ngay!</router-link>
   </div>
 </template>
 

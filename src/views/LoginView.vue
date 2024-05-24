@@ -2,7 +2,7 @@
   <div>
     <Login />
     <router-link to="/register">Chưa có tài khoản? Đăng ký ngay!</router-link>
-    <router-link to="/forgot-password">Quên mật khẩu?</router-link>
+    <router-link to="/FogotPassword">Quên mật khẩu?</router-link>
   </div>
 </template>
 

@@ -30,7 +30,7 @@ export default defineComponent({
       // Gọi API đăng nhập ở đây
       console.log('Đăng nhập với:', this.email, this.password);
       // Sau khi xác thực, điều hướng đến trang chính
-      this.$router.push('/dashboard');
+      this.$router.push('/home');
     }
   }
 });

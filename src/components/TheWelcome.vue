@@ -1,88 +1,101 @@
-<script setup lang="ts">
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
-</script>
 
 <template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
+
+
+  <div class="card flex justify-content-center flex-wrap gap-3">
+    <Toast/>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="secondary"></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="success"></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="info"></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="warning"></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="help"></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="danger"></SplitButton>
+    <SplitButton class="menu" label="Save" :model="items" @click="save" rounded severity="contrast"></SplitButton>
+  </div>
+<div  class="card ">
+  <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+  <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+
+
+
+
+
+
+  <Dropdown>
+    <template #dropdownicon>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g id="chevron-down">
+          <path d="M12,15.25a.74.74,0,0,1-.53-.22l-5-5A.75.75,0,0,1,7.53,9L12,13.44,16.47,9A.75.75,0,0,1,17.53,10l-5,5A.74.74,0,0,1,12,15.25Z"/>
+        </g>
+      </svg>
     </template>
-    <template #heading>Documentation</template>
+  </Dropdown>
 
-    Vue’s
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
-  </WelcomeItem>
 
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
 
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
 
-    <br />
+</div>
 
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
 
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
 
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
-
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
-
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
 </template>
+
+<script setup>
+import {useToast} from "primevue/usetoast";
+
+const toast = useToast();
+
+const items = [
+  {
+    label: 'Update',
+    command: () => {
+      this.$toast.add({severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000});
+    }
+  },
+  {
+    label: 'Delete',
+    command: () => {
+      this.$toast.add({severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000});
+    }
+  },
+  {
+    label: 'Vue Website',
+    command: () => {
+      window.location.href = 'https://vuejs.org/';
+    }
+  },
+  {label: 'Upload', to: '/fileupload'}
+];
+
+const save = () => {
+  toast.add({severity: 'success', summary: 'Success', detail: 'Data Saved', life: 3000});
+};
+</script>
+
+<style>
+
+body {
+  font-family: var(--font-family);
+  font-weight: normal;
+  background: var(--surface-ground);
+  color: var(--text-color);
+  padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  background: var(--surface-card);
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+.menu {
+  margin: 1rem;
+}
+p {
+  line-height: 1.75;
+}
+
+</style>
