@@ -5,7 +5,7 @@
         <div class="welcome-message">
 <!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
 
-          <i class="pi pi-spin pi-spinner-dotted" style="font-size: 2rem"></i>
+          <i class="pi pi-spin pi-sparkles" style="font-size: 2rem"></i>
 
 
           <h2>Welcome, Travel!</h2>

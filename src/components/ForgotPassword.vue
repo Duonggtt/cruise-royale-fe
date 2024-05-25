@@ -3,8 +3,8 @@
     <form @submit.prevent="resetPassword">
       <div class="card-container">
         <div class="welcome-message">
-<!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
-          <i class="pi pi-spin pi-spinner-dotted" style="font-size: 2rem"></i>
+          <!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
+          <i class="pi pi-spin pi-sparkles" style="font-size: 2rem"></i>
           <h2>Quên mật khẩu à :))))</h2>
         </div>
 
@@ -12,7 +12,7 @@
           <span class="p-float-label">
             <InputText id="email" v-model="email" class="input-field"
                        style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
-            <label for="email"  >Nhập Email vào đeyyyy:</label>
+            <label for="email">Nhập Email vào đeyyyy:</label>
           </span>
         </div>
 
@@ -97,10 +97,12 @@ form {
 .p-float-label {
   width: 100%;
 }
-.p-float-label label{
-  margin-top: -0.5em ;
-  padding-left:0.5em
+
+.p-float-label label {
+  margin-top: -0.5em;
+  padding-left: 0.5em
 }
+
 .input-group {
   width: 100%;
   margin-bottom: 1.8rem;
