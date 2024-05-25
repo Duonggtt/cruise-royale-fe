@@ -1,7 +1,7 @@
 <template>
   <div>
     <ForgotPassword />
-    <router-link to="/login">Quay lại trang đăng nhập</router-link>
+
   </div>
 </template>
 

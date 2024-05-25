@@ -1,108 +1,141 @@
 <template>
-  <div class="reset-password-container">
-    <h2 class="reset-password-title">Quên mật khẩu à :))))</h2>
-    <form @submit.prevent="resetPassword" class="reset-password-form">
-      <div class="form-group">
-        <label for="email" class="form-label">Nhập Email vào đeyyyy:</label>
-        <input type="email" id="email" v-model="email" required class="form-input">
+  <div class="login-container">
+    <form @submit.prevent="resetPassword">
+      <div class="card-container">
+        <div class="welcome-message">
+          <img :src="userImage" alt="User Image" class="user-image"/>
+          <h2>Quên mật khẩu à :))))</h2>
+        </div>
+
+        <div class="input-group">
+          <span class="p-float-label">
+            <InputText id="email" v-model="email" class="input-field"
+                       style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
+            <label for="email"  >Nhập Email vào đeyyyy:</label>
+          </span>
+        </div>
+
       </div>
-      <button type="submit" class="submit-btn">Gửi yêu cầu</button>
+
+      <div class="link-container">
+        <router-link to="/login" style="color:cornflowerblue">Quay lại trang đăng nhập</router-link>
+      </div>
+      <div class="link-container flex align-items-center">
+        <Button label="Gửi yêu cầu" severity="Primary" class="signup-button"
+                style="border-radius: 2rem; margin-right: 1.2em" @click="resetPassword"/>
+      </div>
+
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
+import {useRouter} from 'vue-router';
 
 export default defineComponent({
+  setup() {
+    const router = useRouter();
+    return {router};
+  },
   data() {
     return {
-      email: ''
+      email: '',
+      userImage: 'path_to_user_image.jpg'
     };
   },
   methods: {
     resetPassword() {
-      // Gọi API quên mật khẩu ở đây
       console.log('Yêu cầu quên mật khẩu cho:', this.email);
-      // Hiển thị thông báo cho người dùng
-      alert('Yêu cầu quên mật khẩu đã được gửi đến email của bạn.');
+      this.router.push('/login');
     }
   }
 });
 </script>
+
 <style scoped>
-.reset-password-container {
-  max-width: 200px;
-
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-}
-.reset-password-wrapper {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Đảm bảo chiều cao tối thiểu là toàn màn hình */
+  height: 100vh;
+  background-color: #f0f2f5;
 }
 
-.reset-password-container {
-  max-width: 600px; /* Tăng kích thước max-width */
-  margin: 2rem auto;
-  padding: 2rem;
+form {
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.reset-password-title {
+.welcome-message {
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.reset-password-form {
+.welcome-message h2 {
+  font-family: "Maven Pro ExtraBold", sans-serif;
+  color: #333;
+}
+
+.user-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.form-group {
+.p-float-label {
+  width: 100%;
+}
+.p-float-label label{
+  margin-top: -0.5em ;
+  padding-left:0.5em
+}
+.input-group {
+  width: 100%;
+  margin-bottom: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field {
+  width: 100%;
+  height: 2.5rem;
+  box-sizing: border-box;
+}
+
+.link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.form-label {
-  font-weight: bold;
+.signup-button,
+.login-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.google-button {
+  width: 100%;
   margin-bottom: 0.5rem;
-  color: #555;
-}
-
-.form-input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #4caf50;
-}
-
-.submit-btn {
-  padding: 0.75rem 1.5rem;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 1rem;
-}
-
-.submit-btn:hover {
-  background-color: #45a049;
 }
 </style>

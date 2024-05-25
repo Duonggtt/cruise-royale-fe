@@ -10,6 +10,8 @@
         <label for="password">Mật khẩu:</label>
         <input type="password" id="password" v-model="password" required>
       </div>
+      <router-link to="/login">Đã có tài khoản?
+        Đăng nhập ngay!</router-link>
       <button type="submit">Đăng ký</button>
     </form>
   </div>
