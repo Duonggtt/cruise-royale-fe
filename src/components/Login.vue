@@ -3,7 +3,7 @@
     <form @submit.prevent="login">
       <div class="card-container">
         <div class="welcome-message">
-<!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
+          <!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
 
           <i class="pi pi-spin pi-sparkles" style="font-size: 2rem"></i>
 
@@ -15,14 +15,14 @@
           <span class="p-float-label">
             <InputText id="username" v-model="username" class="input-field"
                        style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
-            <label for="username"  >Username</label>
+            <label for="username">Username</label>
           </span>
         </div>
         <div class="input-group">
           <span class="p-float-label">
             <InputText id="password" v-model="password" class="input-field"
                        style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
-            <label for="password"   >Password</label>
+            <label for="password">Password</label>
           </span>
         </div>
 
@@ -30,20 +30,23 @@
       </div>
 
       <div class="link-container">
-        <div class="flex align-items-center " >
+        <div class="flex align-items-center " style="padding-left: 0.8em;">
           <Checkbox v-model="checked" inputId="ingredient1" name="pizza" value="Cheese"/>
-          <label for="ingredient1"  style=" margin-left: 0.3em; " > Nhớ hộ ! </label>
+          <label for="ingredient1" style=" margin-left: 0.3em; "> Nhớ hộ ! </label>
         </div>
-        <a @click="handleForgotPassword" style="color:cornflowerblue;cursor: pointer;">Quên mk dồi:(</a>
+        <a @click="handleForgotPassword" style="color:cornflowerblue;cursor: pointer; padding-right: 0.8em;">Quên mk
+          dồi:(</a>
       </div>
       <div class="link-container flex align-items-center">
         <Button label="Đăng ký" severity="Primary" class="signup-button"
                 style="border-radius: 2rem; margin-right: 1.2em" @click="handleSignUp"/>
-        <Button label="Đăng nhập" severity="Primary" class="login-button" style="border-radius: 2rem;margin-left: 1.2em" @click="login"/>
+        <Button label="Đăng nhập" severity="Primary" class="login-button" style="border-radius: 2rem;margin-left: 1.2em"
+                @click="login"/>
       </div>
 
       <div class="social-login">
-        <Button label="Đăng nhập với Google" class="google-button" style="border-radius: 2rem; " @click="handleGoogleLogin"/>
+        <Button label="Đăng nhập với Google" class="google-button" style="border-radius: 2rem; "
+                @click="handleGoogleLogin"/>
       </div>
     </form>
   </div>
@@ -94,10 +97,12 @@ form {
 .p-float-label {
   width: 100%;
 }
-.p-float-label label{
-  margin-top: -0.5em ;
-  padding-left:0.5em
+
+.p-float-label label {
+  margin-top: -0.5em;
+  padding-left: 0.5em
 }
+
 .input-group {
   width: 100%;
   margin-bottom: 1.8rem;
