@@ -34,7 +34,7 @@
           <Checkbox v-model="checked" inputId="ingredient1" name="pizza" value="Cheese"/>
           <label for="ingredient1"  style=" margin-left: 0.3em; " > Nhớ hộ ! </label>
         </div>
-        <a @click="handleForgotPassword" style="color:cornflowerblue">Quên mk dồi:(</a>
+        <a @click="handleForgotPassword" style="color:cornflowerblue;cursor: pointer;">Quên mk dồi:(</a>
       </div>
       <div class="link-container flex align-items-center">
         <Button label="Đăng ký" severity="Primary" class="signup-button"

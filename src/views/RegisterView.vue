@@ -37,12 +37,13 @@
         </div>
       </div>
 
-      <div class="link-container">
-        <a @click="register" style="color:cornflowerblue">À Thôi đăng nhập luôn</a>
-      </div>
       <div class="link-container flex align-items-center">
         <Button label="Đăng Ký" severity="Primary" class="signup-button"
                 style="border-radius: 2rem; margin-right: 1.2em" @click="register"/>
+      </div>
+
+      <div class="link-container">
+        <Button icon="pi pi-arrow-left" label=" Quay lại" class="p-button-text button-with-icon" @click="register" />
       </div>
 
     </form>
@@ -134,6 +135,18 @@ form {
 .google-button {
   width: 100%;
   margin-bottom: 0.5rem;
+}
+
+.button-with-icon {
+  display: flex;
+  align-items: center;
+  font-size: small;
+
+
+}
+
+.button-with-icon .p-button-icon {
+  margin-right: 10em; /* Điều chỉnh khoảng cách này theo ý muốn */
 }
 </style>
 

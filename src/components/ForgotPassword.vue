@@ -15,17 +15,18 @@
             <label for="email">Nhập Email vào đeyyyy:</label>
           </span>
         </div>
-
       </div>
 
-      <div class="link-container">
-        <router-link to="/login" style="color:cornflowerblue">Quay lại trang đăng nhập</router-link>
-      </div>
       <div class="link-container flex align-items-center">
         <Button label="Gửi yêu cầu" severity="Primary" class="signup-button"
                 style="border-radius: 2rem; margin-right: 1.2em" @click="resetPassword"/>
       </div>
 
+      <div class="link-container">
+        <router-link to="/login">
+          <Button icon="pi pi-arrow-left" label="Quay lại" class="p-button-text button-with-icon"/>
+        </router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -141,4 +142,13 @@ form {
   width: 100%;
   margin-bottom: 0.5rem;
 }
+
+.button-with-icon {
+
+  align-items: center;
+  font-size: small;
+
+
+}
+
 </style>
