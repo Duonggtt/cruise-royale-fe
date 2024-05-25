@@ -1,10 +1,13 @@
 // import './assets/main.css'
-// import './assets/base.css'
+import './assets/base.css'
 
-import "primevue/resources/themes/lara-light-indigo/theme.css";
+// import "primevue/resources/themes/aura-light-indigo/theme.css"
+import "primevue/resources/themes/lara-light-green/theme.css"
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
+
+import FloatLabel from 'primevue/floatlabel';
 
 import PrimeVue from "primevue/config";
 import AutoComplete from "primevue/autocomplete";
@@ -116,6 +119,7 @@ app.directive("tooltip", Tooltip);
 app.directive("badge", BadgeDirective);
 app.directive("ripple", Ripple);
 
+app.component("FloatLabel", FloatLabel);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
 app.component("AutoComplete", AutoComplete);

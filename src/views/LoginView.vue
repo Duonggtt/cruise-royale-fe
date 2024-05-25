@@ -1,8 +1,6 @@
 <template>
   <div>
     <Login />
-    <router-link to="/register">Chưa có tài khoản? Đăng ký ngay!</router-link>
-    <router-link to="/FogotPassword">Quên mật khẩu?</router-link>
   </div>
 </template>
 
@@ -17,6 +15,3 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-/* Các style tùy chỉnh cho LoginView.vue */
-</style>

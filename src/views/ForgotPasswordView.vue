@@ -16,6 +16,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-/* Các style tùy chỉnh cho ForgotPasswordView.vue */
-</style>
+
