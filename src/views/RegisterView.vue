@@ -3,7 +3,8 @@
     <form @submit.prevent="register">
       <div class="card-container">
         <div class="welcome-message">
-          <img :src="userImage" alt="User Image" class="user-image"/>
+<!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
+          <i class="pi pi-spin pi-spinner-dotted" style="font-size: 2rem"></i>
           <h2>Đăng ký nhé !</h2>
         </div>
         <div class="input-group">
