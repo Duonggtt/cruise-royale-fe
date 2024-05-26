@@ -1,13 +1,24 @@
 <script setup lang="ts">
 import Login from "@/components/Login.vue";
-
+import Reg from "@/components/Register.vue";
+import Fogot from "@/components/ForgotPassword.vue";
+import Login2 from "@/views/LoginView.vue";
+import Navbar from "@/components/Navbar.vue";
 
 </script>
 
 <template>
   <main>
 
-    <Login/>
+    <Navbar/>
+    <Login2/>
+    <Reg/>
+    <Fogot/>
+
+
+
+
+
 
   </main>
 </template>

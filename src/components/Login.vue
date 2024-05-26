@@ -1,146 +1,60 @@
 <template>
-  <div class="login-container">
-    <form @submit.prevent="login">
-      <div class="card-container">
-        <div class="welcome-message">
-          <!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
+  <div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen">
 
-          <i class="pi pi-spin pi-sparkles" style="font-size: 2rem"></i>
+    <form @submit.prevent="login" class="max-w-30rem w-100 p-4 rounded-5 shadow-3 bg-white-alpha-50">
 
+      <div class="card-container flex-column align-items-center">
 
-          <h2>Welcome, Travel!</h2>
+        <div class="welcome-message text-center mb-3">
+          <img :src="userImage" alt="User Image" class="user-image rounded-circle w-5rem"/>
+          <h2 class="pt-3  font-bold">Welcome, Travel!</h2>
         </div>
 
-        <div class="input-group">
-          <span class="p-float-label">
-            <InputText id="username" v-model="username" class="input-field"
-                       style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
-            <label for="username">Username</label>
-          </span>
-        </div>
-        <div class="input-group">
-          <span class="p-float-label">
-            <InputText id="password" v-model="password" class="input-field"
-                       style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
-            <label for="password">Password</label>
-          </span>
-        </div>
+        <div class="input-group w-100 flex-column align-items-center mb-4">
+            <span class="p-float-label w-100 ">
 
+              <InputText id="username" v-model="username" class="input-field rounded-5 w-100 h-3rem "/>
+              <label for="username" class="pl-2  ">Username</label>
 
+            </span>
+        </div>
+        <div class="input-group w-100 flex-column align-items-center mb-4">
+            <span class="p-float-label w-100">
+              <InputText id="password" v-model="password" class="input-field rounded-5 w-100 h-3rem "/>
+              <label for="password" class="pl-2">Password</label>
+            </span>
+        </div>
       </div>
 
-      <div class="link-container">
-        <div class="flex align-items-center " style="padding-left: 0.8em;">
+      <div class="link-container flex justify-content-between align-items-center mb-2">
+        <div class="flex align-items-center pl-2 ">
           <Checkbox v-model="checked" inputId="ingredient1" name="pizza" value="Cheese"/>
-          <label for="ingredient1" style=" margin-left: 0.3em; "> Nhớ hộ ! </label>
+          <label for="ingredient1" class="ml-1 text-purple-800 cursor-pointer"> Lưu cho lần sau </label>
         </div>
-        <a @click="handleForgotPassword" style="color:cornflowerblue;cursor: pointer; padding-right: 0.8em;">Quên mk
-          dồi:(</a>
+
+        <a @click="handleForgotPassword" class="font-medium no-underline ml-2 pr-2 text-right cursor-pointer text-purple-800"  >Quên mật khẩu ?</a>
       </div>
       <div class="link-container flex align-items-center">
-        <Button label="Đăng ký" severity="Primary" class="signup-button"
-                style="border-radius: 2rem; margin-right: 1.2em" @click="handleSignUp"/>
-        <Button label="Đăng nhập" severity="Primary" class="login-button" style="border-radius: 2rem;margin-left: 1.2em"
-                @click="login"/>
+        <Button label="Đăng ký" severity="primary" class="signup-button rounded-pill mr-4 w-100 mt-1" @click="handleSignUp"/>
+        <Button label="Đăng nhập" severity="primary" class="login-button  rounded-pill ml-4 w-100 mt-1" @click="login"/>
       </div>
 
-      <div class="social-login">
-        <Button label="Đăng nhập với Google" class="google-button" style="border-radius: 2rem; "
-                @click="handleGoogleLogin"/>
+      <div class="social-login flex-column align-items-center mt-3">
+        <Button label="Đăng nhập với Google" class="google-button rounded-pill w-100 mb-1" @click="handleGoogleLogin"/>
       </div>
+
+
     </form>
   </div>
 </template>
 
 <style scoped>
+/* theo hướng không dùng thẻ style này  */
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
-
+.p-float-label label{
+  margin-top: -0.5em ;
 }
 
-form {
-  max-width: 400px;
-  width: 100%;
-  padding: 1.5rem;
-  background-color: #fff;
-  border-radius: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.welcome-message {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.welcome-message h2 {
-  font-family: "Maven Pro ExtraBold", sans-serif;
-  color: #333;
-}
-
-.user-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.p-float-label {
-  width: 100%;
-}
-
-.p-float-label label {
-  margin-top: -0.5em;
-  padding-left: 0.5em
-}
-
-.input-group {
-  width: 100%;
-  margin-bottom: 1.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.input-field {
-  width: 100%;
-  height: 2.5rem;
-  box-sizing: border-box;
-}
-
-.link-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.signup-button,
-.login-button {
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.social-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.google-button {
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
 </style>
 
 
@@ -158,18 +72,19 @@ export default defineComponent({
       username: '',
       password: '',
       checked: false,
-      userImage: 'path_to_user_image.jpg'
+      userImage: '/img_log/anh03.jpg'
     };
   },
   methods: {
     login() {
       console.log('Đăng nhập với:', this.username, this.password, this.checked);
-      this.router.push('/home');
+      this.router.push('/login');
     },
     handleSignUp() {
       this.router.push('/Register');
     },
     handleGoogleLogin() {
+      this.router.push('/');
       console.log('Xử lý đăng nhập với Google');
 
     },

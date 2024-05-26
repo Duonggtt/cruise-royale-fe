@@ -1,14 +1,10 @@
-// import './assets/main.css'
+import './assets/main.css'
 import './assets/base.css'
-
-
 import 'bootstrap/dist/css/bootstrap.css'
-
-// import "primevue/resources/themes/aura-light-indigo/theme.css"
 import "primevue/resources/themes/lara-light-green/theme.css"
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
-
+import 'primeflex/primeflex.css';
 
 import FloatLabel from 'primevue/floatlabel';
 import PrimeVue from "primevue/config";

@@ -1,30 +1,27 @@
 <template>
-  <div class="login-container">
-    <form @submit.prevent="resetPassword">
-      <div class="card-container">
-        <div class="welcome-message">
-          <!--          <img :src="userImage" alt="User Image" class="user-image"/>-->
-          <i class="pi pi-spin pi-sparkles" style="font-size: 2rem"></i>
-          <h2>Quên mật khẩu à :))))</h2>
+  <div class="ForgotPassword-container flex align-items-center justify-content-center h-screen ">
+    <form @submit.prevent="resetPassword" class="max-w-30rem w-100 p-4 rounded-5 shadow-3 bg-white-alpha-50">
+      <div class="card-containerflex-column align-items-center ">
+        <div class="welcome-message text-center mb-5">
+          <i class="pi pi-spin pi-sparkles text-5xl"  ></i>
+          <h2 class="font-bold pt-2">Quên mật khẩu à :))))</h2>
         </div>
 
         <div class="input-group">
-          <span class="p-float-label">
-            <InputText id="email" v-model="email" class="input-field"
-                       style="border-radius: 2rem; padding: 0.7rem 1rem;"/>
-            <label for="email">Nhập Email vào đeyyyy:</label>
+          <span class="p-float-label w-100">
+            <InputText id="email" v-model="email" class="input-field rounded-5 p-2 w-100" />
+            <label for="email" class="pl-2">Nhập Email vào đeyyyy:</label>
           </span>
         </div>
       </div>
 
-      <div class="link-container flex align-items-center">
-        <Button label="Gửi yêu cầu" severity="Primary" class="signup-button"
-                style="border-radius: 2rem; margin-right: 1.2em" @click="resetPassword"/>
+      <div class="link-container flex align-items-center pt-3">
+        <Button label="Gửi yêu cầu" severity="Primary" class="resetPassword-button rounded-5 p-2 rounded-pill w-100 mt-1" @click="resetPassword"/>
       </div>
 
-      <div class="link-container">
+      <div class="link-container flex justify-content-between align-items-center mb-2">
         <router-link to="/login">
-          <Button icon="pi pi-arrow-left" label="Quay lại" class="p-button-text button-with-icon"/>
+          <Button icon="pi pi-arrow-left" label=" &nbsp; Quay lại" class="p-button-text button-with-icon font-italic"/>
         </router-link>
       </div>
     </form>
@@ -56,99 +53,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
-}
-
-form {
-  max-width: 400px;
-  width: 100%;
-  padding: 1.5rem;
-  background-color: #fff;
-  border-radius: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.welcome-message {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.welcome-message h2 {
-  font-family: "Maven Pro ExtraBold", sans-serif;
-  color: #333;
-}
-
-.user-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.p-float-label {
-  width: 100%;
-}
+ 
 
 .p-float-label label {
-  margin-top: -0.5em;
-  padding-left: 0.5em
-}
-
-.input-group {
-  width: 100%;
-  margin-bottom: 1.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.input-field {
-  width: 100%;
-  height: 2.5rem;
-  box-sizing: border-box;
-}
-
-.link-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.signup-button,
-.login-button {
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.social-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.google-button {
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-
-.button-with-icon {
-
-  align-items: center;
-  font-size: small;
-
-
-}
+  margin-top: -0.5em; 
+} 
 
 </style>

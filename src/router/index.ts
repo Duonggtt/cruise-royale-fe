@@ -6,7 +6,8 @@ import HomeView from '../views/HomeView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 import aboutView from "@/views/AboutView.vue";
-
+ import Navbars from "@/components/Navbar.vue";
+ import Profile from "@/components/Profile.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +36,16 @@ const router = createRouter({
             path: '/about',
             name: 'about',
             component: aboutView
+        },
+        {
+            path: '/Navbars',
+            name: 'Navbars',
+            component: Navbars
+        },
+        {
+            path: '/Profile',
+            name: 'Profile',
+            component: Profile
         }
     ]
 });
