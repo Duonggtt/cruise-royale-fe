@@ -11,7 +11,7 @@
         <Button v-if="!isLoggedIn" label="Đăng ký" class="p-button-raised p-mr-2" @click="Register" />
         <Button v-if="!isLoggedIn" label="Đăng nhập" class="p-button-raised p-mr-2" @click="Login" />
         <div v-if="isLoggedIn" class="p-d-flex p-ai-center  justify-content-end">
-          <img :src="userImage" alt="User" class="p-mr-2 h-5rem rounded-circle">
+          <img :src="userImage" alt="User" class="p-mr-2 h-5rem rounded-circle" @click="Profile">
           <span>{{ username }}</span>
         </div>
       </div>
@@ -39,15 +39,18 @@ export default {
       { label: 'Doanh nghiệp', style: 'color: green;' },
       { label: 'Blog', style: 'color: yellow;' }
     ])
-    const isLoggedIn = ref(false)
+    const isLoggedIn = ref(true)
     const userImage = ref('/img_log/anh03.jpg')
     const username = ref('')
 
     const Register = () => {
       router.push('/Register');
-    } 
+    }
     const Login = () => {
       router.push('/Login');
+    }
+    const Profile = () => {
+      router.push('/Profile');
     }
 
     return {
@@ -56,8 +59,9 @@ export default {
       isLoggedIn,
       userImage,
       username,
-      Register, 
-      Login
+      Register,
+      Login,
+      Profile
     }
   }
 }
