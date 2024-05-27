@@ -36,16 +36,18 @@
            class="font-medium no-underline ml-2 pr-2 text-right cursor-pointer text-purple-800">Quên mật khẩu ?</a>
       </div>
       <div class="link-container flex align-items-center">
-        <Button label="Đăng ký" severity="primary" class="signup-button rounded-pill mr-4 w-100 mt-1"
-                @click="handleSignUp"/>
-        <Button label="Đăng nhập" severity="primary" class="login-button  rounded-pill ml-4 w-100 mt-1" @click="login"/>
+        <Button label="Đăng nhập" severity="primary" class="login-button  rounded-pill w-100 mt-1" @click="login"/>
       </div>
 
       <div class="social-login flex-column align-items-center mt-3">
         <Button label="Đăng nhập với Google" class="google-button rounded-pill w-100 mb-1" @click="handleGoogleLogin"/>
       </div>
 
-
+      <div class="welcome-message text-end mb-3">
+        <a @click="handleForgotPassword"
+           class="font-medium no-underline ml-2 pr-2 text-right cursor-pointer text-purple-800">Chưa có tài khoản ? Đăng ký</a>
+        </div>
+      
     </form>
   </div>
 </template>
