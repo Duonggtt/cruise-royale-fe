@@ -64,12 +64,9 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {useRouter} from 'vue-router';
-import Register from './Register.vue';
- 
- 
+
 
 export default defineComponent({
-  components: {Register },
   setup() {
     const router = useRouter();
     return {router};

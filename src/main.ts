@@ -212,13 +212,20 @@ app.component("Tree", Tree);
 app.component("TreeSelect", TreeSelect);
 app.component("TreeTable", TreeTable);
 app.component("TriStateCheckbox", TriStateCheckbox);
-//#endregion   Components Primevue 
+//#endregion   Components Primevue
+
+
+app.component("Log", Log);
+app.component("Reg", Reg);
+app.component("Fogot", Fogot);
+app.component("Navbar", Navbar);
+app.component("Profile", Profile);
+app.component("HomeView", HomeView);
+app.component("LoginView", LoginView);
+app.component("ForgotPasswordView", ForgotPasswordView);
+app.component("aboutView", aboutView);
 
 
 app.mount('#app')
 
 
-// Export Custom Components
-// export { Log, Reg, Fogot, Navbar, Profile, HomeView,
-//     LoginView, ForgotPasswordView,aboutView
-// };
