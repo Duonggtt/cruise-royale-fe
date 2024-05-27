@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import {
-    Login, Reg, Fogot, LoginView, Navbar, Profile,
-    LoginForm, ForgotPasswordView, HomeView,
-    RegisterView, aboutView
+import Login from '../components/Login.vue';
+import LoginView from './LoginView.vue';
+// import {
+//     Log, Reg, Fogot, LoginView, Navbar, Profile,
+//      ForgotPasswordView, HomeView,
+//      aboutView
 
-    } from '../main';
+//     } from '../main';
 
 </script>
 

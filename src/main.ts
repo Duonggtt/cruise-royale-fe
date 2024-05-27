@@ -102,15 +102,13 @@ import TriStateCheckbox from "primevue/tristatecheckbox";
 
 
 //#region  Import Custom Components  
-import Login from "@/components/Login.vue";
+import Log from "@/components/Login.vue";
 import Reg from "@/components/Register.vue";
 import Fogot from "@/components/ForgotPassword.vue";
-import LoginView from "@/views/LoginView.vue";
 import Navbar from "@/components/Navbar.vue";
 import Profile from "@/components/Profile.vue";
 import HomeView from "@/views/HomeView.vue";
-import LoginForm from "@/views/LoginForm.vue";
-import RegisterView from "@/views/RegisterView.vue";
+import LoginView from "@/views/LoginView.vue";
 import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 import aboutView from "@/views/AboutView.vue";
 
@@ -221,6 +219,6 @@ app.mount('#app')
 
 
 // Export Custom Components
-export { Login, Reg, Fogot, LoginView, Navbar, Profile, HomeView, 
-    LoginForm, RegisterView, ForgotPasswordView,aboutView
-};
+// export { Log, Reg, Fogot, Navbar, Profile, HomeView,
+//     LoginView, ForgotPasswordView,aboutView
+// };

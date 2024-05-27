@@ -32,10 +32,12 @@
           <label for="ingredient1" class="ml-1 text-purple-800 cursor-pointer"> Lưu cho lần sau </label>
         </div>
 
-        <a @click="handleForgotPassword" class="font-medium no-underline ml-2 pr-2 text-right cursor-pointer text-purple-800"  >Quên mật khẩu ?</a>
+        <a @click="handleForgotPassword"
+           class="font-medium no-underline ml-2 pr-2 text-right cursor-pointer text-purple-800">Quên mật khẩu ?</a>
       </div>
       <div class="link-container flex align-items-center">
-        <Button label="Đăng ký" severity="primary" class="signup-button rounded-pill mr-4 w-100 mt-1" @click="handleSignUp"/>
+        <Button label="Đăng ký" severity="primary" class="signup-button rounded-pill mr-4 w-100 mt-1"
+                @click="handleSignUp"/>
         <Button label="Đăng nhập" severity="primary" class="login-button  rounded-pill ml-4 w-100 mt-1" @click="login"/>
       </div>
 
@@ -48,11 +50,12 @@
   </div>
 </template>
 
-<style scoped>
-/* theo hướng không dùng thẻ style này  */
 
-.p-float-label label{
-  margin-top: -0.5em ;
+<style scoped>
+
+
+.p-float-label label {
+  margin-top: -0.5em;
 }
 
 </style>
@@ -61,8 +64,12 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {useRouter} from 'vue-router';
+import Register from './Register.vue';
+ 
+ 
 
 export default defineComponent({
+  components: {Register },
   setup() {
     const router = useRouter();
     return {router};
@@ -78,7 +85,7 @@ export default defineComponent({
   methods: {
     login() {
       console.log('Đăng nhập với:', this.username, this.password, this.checked);
-      // this.$emit('updateState', 'register');
+      this.$emit('updateState', 'register');
       // this.router.push('/login');
     },
     handleSignUp() {
