@@ -1,6 +1,6 @@
 <template>
   <div class="user-profile">
-    <img :src="user.image" alt="User Image" class="rounded-circle  ">
+    <img :src="user.image" alt="User Image" class="rounded-circle">
     <h2>{{ user.name }}</h2>
     <p>{{ user.email }}</p>
   </div>

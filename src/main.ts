@@ -1,11 +1,12 @@
 import './assets/main.css'
 import './assets/base.css'
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css' 
 import "primevue/resources/themes/lara-light-green/theme.css"
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import 'primeflex/primeflex.css';
 
+//#region Import Components Primevue 
 import FloatLabel from 'primevue/floatlabel';
 import PrimeVue from "primevue/config";
 import AutoComplete from "primevue/autocomplete";
@@ -97,26 +98,38 @@ import TreeSelect from "primevue/treeselect";
 import TreeTable from "primevue/treetable";
 import TriStateCheckbox from "primevue/tristatecheckbox";
 
+//#endregion Import Components Primevue 
+
+
+//#region  Import Custom Components  
+import Login from "@/components/Login.vue";
+import Reg from "@/components/Register.vue";
+import Fogot from "@/components/ForgotPassword.vue";
+import LoginView from "@/views/LoginView.vue";
+import Navbar from "@/components/Navbar.vue";
+import Profile from "@/components/Profile.vue";
+import HomeView from "@/views/HomeView.vue";
+import LoginForm from "@/views/LoginForm.vue";
+import RegisterView from "@/views/RegisterView.vue";
+import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
+import aboutView from "@/views/AboutView.vue";
+
+
+
+//#endregion Import Custom Components  
+
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
-
 const app = createApp(App)
-
 app.use(createPinia())
 app.use(router)
-
 app.use(PrimeVue, { ripple: true });
-app.use(ConfirmationService);
-app.use(ToastService);
 
-app.directive("tooltip", Tooltip);
-app.directive("badge", BadgeDirective);
-app.directive("ripple", Ripple);
 
+//#region Components Primevue 
 app.component("FloatLabel", FloatLabel);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
@@ -201,5 +214,13 @@ app.component("Tree", Tree);
 app.component("TreeSelect", TreeSelect);
 app.component("TreeTable", TreeTable);
 app.component("TriStateCheckbox", TriStateCheckbox);
+//#endregion   Components Primevue 
+
 
 app.mount('#app')
+
+
+// Export Custom Components
+export { Login, Reg, Fogot, LoginView, Navbar, Profile, HomeView, 
+    LoginForm, RegisterView, ForgotPasswordView,aboutView
+};

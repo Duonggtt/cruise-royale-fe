@@ -90,7 +90,8 @@ export default defineComponent({
   methods: {
     register() {
       console.log('Đăng ký với:', this.name, this.phone, this.email, this.password);
-      this.router.push('/login');
+      this.$emit('updateState', 'login');
+      // this.router.push('/login');
     }
   }
 });

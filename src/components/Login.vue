@@ -78,18 +78,20 @@ export default defineComponent({
   methods: {
     login() {
       console.log('Đăng nhập với:', this.username, this.password, this.checked);
-      this.router.push('/login');
+      // this.$emit('updateState', 'register');
+      // this.router.push('/login');
     },
     handleSignUp() {
-      this.router.push('/Register');
+      this.$emit('updateState', 'register');
+      // this.router.push('/Register');
     },
     handleGoogleLogin() {
-      this.router.push('/');
+      // this.router.push('/');
       console.log('Xử lý đăng nhập với Google');
 
     },
     handleForgotPassword() {
-      this.router.push('/FogotPassword'); // use this.router instead of useRouter()
+      // this.router.push('/FogotPassword'); // use this.router instead of useRouter()
     }
   }
 });
