@@ -53,7 +53,7 @@
 
       <div class="link-container flex justify-content-between align-items-center mb-2">
         <Button icon="pi pi-arrow-left" label=" &nbsp; Quay lại"
-          class="p-button-text button-with-icon flex align-items-center font-italic " @click="register" />
+          class="p-button-text button-with-icon flex align-items-center font-italic " @click="LoginView" />
       </div>
 
     </form>
@@ -92,7 +92,11 @@ export default defineComponent({
       console.log('Đăng ký với:', this.name, this.phone, this.email, this.password);
       this.$emit('updateState', 'log');
       // this.router.push('/login');
+    },
+    LoginView() {
+      this.router.push('/');
     }
+
   }
 });
 </script>

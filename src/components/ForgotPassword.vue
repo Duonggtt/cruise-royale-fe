@@ -20,7 +20,7 @@
       </div>
 
       <div class="link-container flex justify-content-between align-items-center mb-2">
-        <router-link to="/login">
+        <router-link to="/">
           <Button icon="pi pi-arrow-left" label=" &nbsp; Quay lại" class="p-button-text button-with-icon font-italic"/>
         </router-link>
       </div>

@@ -62,7 +62,7 @@ export default defineComponent({
     };
 
     const handleForgotPassword = () => {
-      router.push('/forgot-password');
+      router.push('/FogotPassword');
     };
 
     const onSubmit = () => {

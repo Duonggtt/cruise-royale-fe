@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 // import {Log, Reg, Fogot, Navbar, Profile, HomeView,
 //     LoginView, ForgotPasswordView,aboutView } from '@/main';
 
+import register from '@/components/Register.vue';
 import LoginView from '@/views/LoginView.vue';
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
 import HomeView from '@/views/HomeView.vue';
@@ -38,6 +39,10 @@ const router = createRouter({
             path: '/Profile',
             name: 'Profile',
             component: Profile
+        },   {
+            path: '/register',
+            name: 'register',
+            component: register
         },
         {
             path: '/',
