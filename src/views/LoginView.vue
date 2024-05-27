@@ -12,8 +12,7 @@
 
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-export default defineComponent({
+export default {
   data() {
     return {
       state: "log"
@@ -24,7 +23,7 @@ export default defineComponent({
       this.state = newState;
     }
   }
-});
+};
 </script>
   
   
