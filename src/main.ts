@@ -1,12 +1,15 @@
-import './assets/main.css'
-import './assets/base.css'
-import 'bootstrap/dist/css/bootstrap.css'
+
+// import 'bootstrap/dist/css/bootstrap.css'
 import "primevue/resources/themes/lara-light-green/theme.css"
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import 'primeflex/primeflex.css';
 
-//#region Import Components Primevue 
+import './assets/main.css'
+// import './assets/base.css'
+
+
+//#region Import Components Primevue
 import FloatLabel from 'primevue/floatlabel';
 import PrimeVue from "primevue/config";
 import AutoComplete from "primevue/autocomplete";
@@ -98,13 +101,13 @@ import TreeSelect from "primevue/treeselect";
 import TreeTable from "primevue/treetable";
 import TriStateCheckbox from "primevue/tristatecheckbox";
 
-//#endregion Import Components Primevue 
+//#endregion Import Components Primevue
 
 
-//#region  Import Custom Components  
+//#region  Import Custom Components
 import Log from "@/components/Login.vue";
 import Reg from "@/components/Register.vue";
-import Fogot from "@/components/ForgotPassword.vue";
+import ForgotPassword from "@/components/ForgotPassword.vue";
 import Navbar from "@/components/Navbar.vue";
 import Profile from "@/components/Profile.vue";
 import HomeView from "@/views/HomeView.vue";
@@ -113,11 +116,10 @@ import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 import aboutView from "@/views/AboutView.vue";
 
 
+//#endregion Import Custom Components
 
-//#endregion Import Custom Components  
 
-
-import { createApp } from 'vue'
+import {createApp, provide} from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
@@ -128,7 +130,8 @@ app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
 
 
-//#region Components Primevue 
+
+//#region Components Primevue
 app.component("FloatLabel", FloatLabel);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
@@ -218,7 +221,7 @@ app.component("TriStateCheckbox", TriStateCheckbox);
 
 app.component("Log", Log);
 app.component("Reg", Reg);
-app.component("Fogot", Fogot);
+app.component("ForgotPassword", ForgotPassword);
 app.component("Navbar", Navbar);
 app.component("Profile", Profile);
 app.component("HomeView", HomeView);

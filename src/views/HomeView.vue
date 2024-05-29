@@ -4,11 +4,11 @@
 </script>
 
 <template>
-  <main> 
+  <main>
     <Navbar/>
     <LoginView/>
     <Reg/>
-    <Fogot/>
-    <Profile/> 
+    <ForgotPassword/>
+    <Profile/>
   </main>
 </template>

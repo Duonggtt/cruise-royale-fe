@@ -1,10 +1,16 @@
 <template>
   <div>
-    <Container v-if="state === 'log'">
+    <Container v-if="state === 'login'">
       <Log @updateState="handleStateChange"/>
     </Container>
     <Container v-else-if="state === 'register'">
       <Reg @updateState="handleStateChange"/>
+    </Container>
+    <Container v-else-if="state === 'ForgotPassword'">
+      <ForgotPassword @updateState="handleStateChange"/>
+    </Container>
+    <Container v-else-if="state === 'HomeView'">
+      <HomeView @updateState="handleStateChange"/>
     </Container>
   </div>
 </template>
@@ -15,7 +21,7 @@
 export default {
   data() {
     return {
-      state: "log"
+      state: "login"
     }
   },
   methods: {
@@ -25,5 +31,4 @@ export default {
   }
 };
 </script>
-  
-  
+

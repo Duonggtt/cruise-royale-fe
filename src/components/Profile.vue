@@ -1,9 +1,21 @@
 <template>
-  <div class="user-profile">
-    <img :src="user.image" alt="User Image" class="rounded-circle">
-    <h2>{{ user.name }}</h2>
-    <p>{{ user.email }}</p>
-  </div>
+<navbar/>
+    <div class="ForgotPassword-container  flex align-items-center justify-content-center bg-white-alpha-100 h-screen ">
+        <div class="card-container w-30rem shadow-1 p-10 rounded-3xl">
+          <div class="user-profile">
+            <img :src="user.image" alt="User Image" class="rounded-full w-5rem h-5rem ">
+            <h2>{{ user.name }}</h2>
+            <p>{{ user.email }}</p>
+          </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
 </template>
 
 <script lang="ts">
@@ -29,15 +41,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.user-profile {
-  width: 300px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin: 0 auto;
-}
 
-.user-profile img {
-  width: 100%;
-  height: auto;
-}
+
+
 </style>

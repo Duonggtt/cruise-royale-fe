@@ -1,14 +1,21 @@
 @import './base.css';
-
+/*@tailwind base;*/
+@tailwind components;
+@tailwind utilities;
 
 .p-button {
   border-radius: 50px;
 }
-.p-inputtext{
+.p-input-filled{
   border-radius: 50px;
 }
 .p-menubar {
   border-radius: 0;
 }
+.p-float-label label {
+  margin-top: -0.5em;
+}
 
- 
+.no-underline {
+  text-decoration: none;
+}
