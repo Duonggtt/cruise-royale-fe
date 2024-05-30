@@ -10,6 +10,7 @@ import './assets/main.css'
 
 
 //#region Import Components Primevue
+import InputGroupAddon from 'primevue/inputgroupaddon';
 import FloatLabel from 'primevue/floatlabel';
 import PrimeVue from "primevue/config";
 import AutoComplete from "primevue/autocomplete";
@@ -132,6 +133,7 @@ app.use(ToastService);
 
 
 //#region Components Primevue
+app.component("InputGroupAddon", InputGroupAddon);
 app.component("FloatLabel", FloatLabel);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);

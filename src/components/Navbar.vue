@@ -1,5 +1,5 @@
 <template>
-  <div class="card w-full flex justify-center bg-gray-100 ">
+  <div class="card w-full flex justify-center bg-gray-100 fixed top-0 w-full z-50">
     <Menubar :model="items" class="flex w-8/12 justify-between bg-transparent border-none xl:max-w-7xl xl:mx-auto ">
 
       <template #item="{ item, props, hasSubmenu, root }" class="w-10/12 flex items-center justify-start">
