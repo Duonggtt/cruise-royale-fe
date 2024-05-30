@@ -1,9 +1,10 @@
-<template>
-  <div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen ">
-    <form @submit.prevent="onSubmit" class="p-5 border-round-3xl shadow-3  w-auto  ">
+<template >
+  <div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen "
+       :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}">
+    <form @submit.prevent="onSubmit" class="p-5 border-round-3xl shadow-3  w-auto bg-white">
       <div class="card-container  w-30rem">
         <div class="welcome-message text-center  align-items-center mb-3">
-          <img :src="userImage" alt="User Image" class="user-image rounded-full w-5rem mx-auto"/>
+          <img :src="userImage" alt="User Image" class="user-image  w-5rem mx-auto"/>
           <h2 class="pt-3 font-bold">Welcome, Travel!</h2>
         </div>
         <div class="input-group flex-column align-items-center mb-4">
@@ -31,7 +32,7 @@
         <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit" @click="HomeView" />
       </div>
       <div class="welcome-message text-center mb-3 pt-3">
-        <a @click="handleSignUp" class="font-normal  ml-2  cursor-pointer text-green-9500">Chưa có tài khoản? Đăng ký</a>
+        <a @click="handleSignUp" class="font-normal  ml-2  cursor-pointer text-green-500">Chưa có tài khoản? Đăng ký</a>
       </div>
     </form>
   </div>
@@ -82,7 +83,7 @@ export default defineComponent({
   data() {
     return {
       checked: false,
-      userImage: '/img_log/anh03.jpg'
+      userImage: '/Logo/Logo-Cruise-Royal.svg '
     };
   }
 });

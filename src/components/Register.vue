@@ -1,6 +1,7 @@
 <template>
-  <div class="regitser-container  flex align-items-center justify-content-center bg-white-alpha-100 h-screen ">
-    <form @submit.prevent="register" class="px-20 py-10  border-round-3xl shadow-3  w-auto ">
+  <div class="regitser-container  flex align-items-center justify-content-center bg-white-alpha-100 h-screen "
+       :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}">
+    <form @submit.prevent="register" class="px-20 py-10  border-round-3xl shadow-3  w-auto bg-white ">
       <div class="card-container w-30rem">
         <div class="welcome-message text-center mb-5">
           <h2 class="font-bold pt-2"><i class="pi pi-spin pi-sparkles text-5xl"></i> Đăng ký nhé !</h2>
