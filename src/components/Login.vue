@@ -27,6 +27,7 @@
         <a @click="handleForgotPassword" class="font-medium  ml-2 pr-2  cursor-pointer text-purple-800">Quên mật khẩu ?</a>
       </div>
       <div class="link-container flex align-items-center">
+        <Toast class="z-50"/>
         <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit" @click="HomeView" />
       </div>
       <div class="welcome-message text-center mb-3 pt-3">
@@ -56,7 +57,7 @@ export default defineComponent({
     const onSubmit = () => {
       console.log(user);
       if (user.username !== '' && user.password !== '') {
-        authStore.login(user.username, user.password);
+        authStore.register(user.username, user.password);
       }
     };
 
@@ -86,3 +87,6 @@ export default defineComponent({
   }
 });
 </script>
+
+
+

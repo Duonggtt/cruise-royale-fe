@@ -3,14 +3,16 @@
   <section class=" xl:max-w-6xl xl:mx-auto pt-32">
     <section class="mb-6 flex items-center justify-between ">
       <div class="flex items-center justify-start ">
-        <span class="inline-flex justify-center items-center w-3rem h-3rem rounded-full bg-white text-black dark:bg-slate-900/70 dark:text-white mr-3">
+        <span
+            class="inline-flex justify-center items-center w-3rem h-3rem rounded-full bg-white text-black dark:bg-slate-900/70 dark:text-white mr-3">
           <i class="pi pi-user" style="color: black"></i>
              </span>
         <span class=" text-3xl font-bold ">Profile</span></div>
-      <a class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700  px-4 py-2" href="" target="">
+      <a class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700  px-4 py-2"
+         href="" target="">
         <span class="inline-flex justify-center items-center w-6 h-6  ">
             <i class="pi pi-sign-out" style="color: white"></i>
-            <span class="px-1 font-medium" @click="logout" >Đăng xuất</span>
+            <span class="px-1 font-medium" @click="logout">Đăng xuất</span>
         </span>
 
       </a>
@@ -19,14 +21,18 @@
       <div class="flex-1 p-6">
         <div class="justify-around lg:justify-center items-center block md:flex">
           <div class="flex items-center justify-center mb-6 md:mb-0">
-            <div class="lg:mx-12"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Huy Chiến" class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800"></div>
+            <div class="lg:mx-12"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com"
+                                       alt="Huy Chiến"
+                                       class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800">
+            </div>
           </div>
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl"> Xin Chào, <b>{{ user.name }}</b>! </h1>
               <p>Đăng nhập lần cuối <b>12 phút trước</b> từ <b>127.0.0.1</b></p>
               <div class="flex justify-center md:block">
-                <div class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-white">
+                <div
+                    class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-white">
                   <span class="inline-flex justify-center items-center w- h-4 mr-2">
                     <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
                       <path fill="currentColor"
@@ -46,7 +52,8 @@
             <label class="block font-bold mb-2 ">Avatar</label>
             <div class="card shadow-1  ">
               <Toast class="z-50"/>
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload($event)" :multiple="true" accept="image/*" :maxFileSize="1000000" @click="uploadPhoto" >
+              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload($event)" :multiple="true"
+                          accept="image/*" :maxFileSize="1000000" @click="uploadPhoto">
                 <template #empty><p>Kéo thả file vào đây để upload. ( Max 3MB ) </p></template>
               </FileUpload>
             </div>
@@ -63,7 +70,7 @@
           </div>
           <InputGroup class="">
 
-            <InputText id="email1" class="p-input-filled w-full pl-3"  />
+            <InputText id="email1" class="p-input-filled w-full pl-3"/>
 
 
             <label class="block font-bold mb-2 pl-2">Email</label>
@@ -133,6 +140,9 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
+import {useAuthStore} from '@/stores/counter';
+
+
 
 interface User {
   name: string;
@@ -157,17 +167,19 @@ export default defineComponent({
       this.$toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 15000});
     },
     logout() {
-      this.$router.push('/');
+      const authStore = useAuthStore();
+      authStore.logout();
+      // this.$router.push('/');
     },
     async uploadPhoto() {
       try {
         // Replace this with the actual function that handles the photo upload
         await this.actualUploadPhotoFunction();
         // If the Promise resolves, the photo was uploaded successfully
-        this.$toast.add({ severity: 'success', summary: 'Success', detail: 'Photo Uploaded Successfully', life: 3000 });
+        this.$toast.add({severity: 'success', summary: 'Success', detail: 'Photo Uploaded Successfully', life: 3000});
       } catch (error) {
         // If the Promise rejects, there was an error uploading the photo
-        this.$toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to Upload Photo', life: 3000 });
+        this.$toast.add({severity: 'error', summary: 'Error', detail: 'Failed to Upload Photo', life: 3000});
       }
     },
   },

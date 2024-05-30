@@ -42,13 +42,33 @@
 
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, reactive} from 'vue';
 import {useRouter} from 'vue-router';
+import {useAuthStore} from "@/stores/counter";
 
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const authStore = useAuthStore();
+    const user = reactive({
+      username: '',
+      password: ''
+    });
+    const onSubmit = () => {
+      console.log(user);
+      if (user.username !== '' && user.password !== '') {
+        authStore.register(user.username, user.password);
+      }
+    };
+
+
+
+
+
     return {router};
+
+
+
   },
   data() {
     return {

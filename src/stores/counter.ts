@@ -2,10 +2,6 @@ import {defineStore} from 'pinia';
 import router from '../router';
 
 
-
-
-
- 
 interface AuthState {
     user: string | null;
     access_token: string | null;
@@ -50,6 +46,7 @@ export const useAuthStore = defineStore({
                         'Authorization': `Bearer ${this.access_token}`, // Use the new token here
                     },
                 });
+                return true;
             }
 
             if (response.status === 200) {
@@ -57,6 +54,7 @@ export const useAuthStore = defineStore({
                 localStorage.setItem('user', username);
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('refresh_token', refresh_token);
+                console.log(this.access_token);
                 this.user = username;
                 this.access_token = access_token;
                 this.refresh_token = refresh_token;
@@ -68,11 +66,30 @@ export const useAuthStore = defineStore({
                 // Redirect to the stored URL if it exists, otherwise to the default returnUrl
                 router.push(redirectUrl || this.returnUrl);
                 // Sử dụng toast để thông báo
-
+                return true;
 
             } else {
-
+                return false;
                 // Sử dụng toast để thông báo
+            }
+        },
+        async register(username: string, password: string) {
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+            const url = 'http://localhost:8080/api/register'; // replace with your register endpoint
+
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.status === 201) {
+                // Sử dụng toast để thông báo
+                return true;
+            } else {
+                // Sử dụng toast để thông báo
+                return false;
             }
         },
 
@@ -87,6 +104,7 @@ export const useAuthStore = defineStore({
 
             if (response.status === 200) {
                 const {access_token} = await response.json();
+
                 // adjust if your server returns a different data structure
                 localStorage.setItem('access_token', access_token);
                 this.access_token = access_token;
@@ -100,6 +118,7 @@ export const useAuthStore = defineStore({
             this.user = null;
             this.access_token = '';
             this.refresh_token = '';
+            console.log(this.access_token);
             localStorage.removeItem('user');
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');

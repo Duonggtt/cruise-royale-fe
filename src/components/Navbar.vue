@@ -1,5 +1,5 @@
 <template>
-  <div class="card w-full flex justify-center bg-gray-100 fixed top-0 z-50">
+  <div class="card w-full flex justify-center bg-gray-100 fixed top-0 z-50 shadow-3">
     <Menubar :model="items" class="flex w-8/12 justify-between bg-transparent border-none xl:max-w-7xl xl:mx-auto ">
        <template #start>
         <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-5rem "  @click="$router.push('/home')"/>
@@ -16,6 +16,7 @@
          <span class=" font-bold pr-3 hover:text-green-500 cursor-pointer">Liên Hệ: 0123456789</span>
           <Avatar class="h-3rem w-3rem border-2 hover:border-green-100" image="/img_log/anh03.jpg" shape="circle" @mouseover="showMenu = true" />
           <div v-if="showMenu" class="absolute top-20 right-30 bg-white rounded shadow p-2" @mouseover="showMenu = true" @mouseleave="showMenu = false">
+            <Toast class="z-50"/>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/profile')">Thông tin người dùng</div>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/')">Đăng xuất</div>
           </div>
@@ -37,8 +38,10 @@ const showMenu = ref(false);
 
 const items = ref<MenuItem[]>([
   { label: 'Tìm du thuyền', link:'home'},
-  { label: 'Tìm vé máy bay' , link:'home'},
+  // { label: 'Tìm vé máy bay' , link:'home'},
   { label: 'Doanh nghiệp', link:'home' },
   { label: 'Blog' , link:'home'}
 ]);
+
+
 </script>
