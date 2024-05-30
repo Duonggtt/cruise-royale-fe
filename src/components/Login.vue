@@ -20,9 +20,9 @@
         </div>
       </div>
       <div class="link-container flex justify-content-between align-items-center mb-2">
-        <div class="flex align-items-center pl-2">
+        <div class="flex align-items-center pl-3">
           <Checkbox v-model="checked" inputId="ingredient1" name="pizza" value="Cheese"/>
-          <label for="ingredient1" class="ml-1 text-purple-800 cursor-pointer"> Lưu cho lần sau </label>
+          <label for="ingredient1" class="ml-1.5 text-purple-800 cursor-pointer"> Lưu cho lần sau </label>
         </div>
         <a @click="handleForgotPassword" class="font-medium  ml-2 pr-2  cursor-pointer text-purple-800">Quên mật khẩu ?</a>
       </div>

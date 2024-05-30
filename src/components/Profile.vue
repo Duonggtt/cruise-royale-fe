@@ -10,7 +10,7 @@
       <a class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700  px-4 py-2" href="" target="">
         <span class="inline-flex justify-center items-center w-6 h-6  ">
             <i class="pi pi-sign-out" style="color: white"></i>
-            <span class="px-1 font-medium">Đăng xuất</span>
+            <span class="px-1 font-medium" @click="logout" >Đăng xuất</span>
         </span>
 
       </a>
@@ -152,6 +152,9 @@ export default defineComponent({
   methods: {
     onAdvancedUpload($event: any) {
       this.$toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 15000});
+    },
+    logout() {
+      this.$router.push('/');
     },
   },
 });
