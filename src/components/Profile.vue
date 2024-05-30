@@ -46,7 +46,7 @@
             <label class="block font-bold mb-2 ">Avatar</label>
             <div class="card shadow-1  ">
               <Toast class="z-50"/>
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload($event)" :multiple="true" accept="image/*" :maxFileSize="1000000">
+              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload($event)" :multiple="true" accept="image/*" :maxFileSize="1000000" @click="uploadPhoto" >
                 <template #empty><p>Kéo thả file vào đây để upload. ( Max 3MB ) </p></template>
               </FileUpload>
             </div>
@@ -62,6 +62,10 @@
             </InputGroup>
           </div>
           <InputGroup class="">
+
+            <InputText id="email1" class="p-input-filled w-full pl-3"  />
+
+
             <label class="block font-bold mb-2 pl-2">Email</label>
             <div class="card flex  md:flex-row align-items-center  gap-3  pb-2  ">
               <InputText class="rounded-2xl w-full pl-4" content="pi pi-user"/>
@@ -71,10 +75,10 @@
         </div>
 
         <footer class="px-6 ">
-          <button class="p-button py-2 px-3 mr-3   mb-3" type="submit"><!--v-if-->
+          <button class="p-button py-2 px-3 mr-3   mb-3" type="submit">
             <span class="px-2">Cập nhật</span>
           </button>
-          <button class="p-button py-2 px-3 mr-3 mb-3" type="button"><!--v-if-->
+          <button class="p-button py-2 px-3 mr-3 mb-3" type="button">
             <span class="px-2">Tuỳ chọn</span>
           </button>
         </footer>
@@ -125,8 +129,6 @@
       </form>
     </div>
   </section>
-
-
 </template>
 
 <script lang="ts">
@@ -146,6 +148,7 @@ export default defineComponent({
         email: 'chienhitarget@gmail.com',
         image: '/img_log/anh03.jpg',
       },
+
       checked: false,
     };
   },
@@ -155,6 +158,17 @@ export default defineComponent({
     },
     logout() {
       this.$router.push('/');
+    },
+    async uploadPhoto() {
+      try {
+        // Replace this with the actual function that handles the photo upload
+        await this.actualUploadPhotoFunction();
+        // If the Promise resolves, the photo was uploaded successfully
+        this.$toast.add({ severity: 'success', summary: 'Success', detail: 'Photo Uploaded Successfully', life: 3000 });
+      } catch (error) {
+        // If the Promise rejects, there was an error uploading the photo
+        this.$toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to Upload Photo', life: 3000 });
+      }
     },
   },
 });
