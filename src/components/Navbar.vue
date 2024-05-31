@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex justify-content-center w-full bg-gray-100 fixed top-0 z-50 shadow-2 ">
+  <div class="card flex justify-content-center w-full bg-white fixed top-0 z-50 shadow-2 ">
 
     <Menubar :model="items" class="flex w-8/12  bg-transparent border-none xl:max-w-7xl xl:mx-auto m-auto">
       <template #start>
@@ -11,7 +11,7 @@
           <span class="font-bold  rounded-full hover:text-green-500">{{ item.label }}</span>
         </a>
       </template>
-      <template #end  >
+      <template #end>
         <div class="flex items-center end-0 gap-2 w-full min-w-50 " @click="showMenu = false" >
           <i class="pi pi-phone"></i>
           <span class=" font-bold pr-3 hover:text-green-500 cursor-pointer"> Liên Hệ: 0123456789</span>
