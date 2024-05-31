@@ -58,7 +58,7 @@ export default defineComponent({
     const onSubmit = () => {
       console.log(user);
       if (user.username !== '' && user.password !== '') {
-        authStore.register(user.username, user.password);
+        authStore.login(user.username, user.password);
       }
     };
 
@@ -75,8 +75,8 @@ export default defineComponent({
       this.$emit('updateState', 'ForgotPassword');
     },
     HomeView() {
-      router.push('/home');
-     // this.$emit('updateState', 'HomeView');
+    //   router.push('/home');
+    //  this.$emit('updateState', 'HomeView');
     }
 
   },

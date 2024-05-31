@@ -28,7 +28,7 @@
           </div>
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
-              <h1 class="text-2xl"> Xin Chào, <b>{{ user.name }}</b>! </h1>
+              <h1 class="text-2xl"> Xin Chào, <b></b>! {{ user.name }}</h1>
               <p>Đăng nhập lần cuối <b>12 phút trước</b> từ <b>127.0.0.1</b></p>
               <div class="flex justify-center md:block">
                 <div
@@ -63,30 +63,46 @@
             <InputGroup class="">
               <label class="block font-bold mb-2 pl-2">Tên</label>
               <div class="card flex  md:flex-row align-items-center  gap-3  pb-2  ">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user"/>
+                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.name"/>
               </div>
               <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Tên của bạn</div>
             </InputGroup>
           </div>
-          <InputGroup class="">
+          
+          <div class="mb-3">
+            <InputGroup class="">
+              <label class="block font-bold mb-2 pl-2">Email</label>
+              <div class="card flex  md:flex-row align-items-center  gap-3  pb-2  ">
+                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.email"/>
+              </div>
+              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Email của bạn</div>
+            </InputGroup>
+          </div>
 
-            <InputText id="email1" class="p-input-filled w-full pl-3"/>
+          <div class="mb-3">
+            <InputGroup class="">
+              <label class="block font-bold mb-2 pl-2">Số điện thoại</label>
+              <div class="card flex  md:flex-row align-items-center  gap-3  pb-2  ">
+                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.phone"/>
+              </div>
+              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Số điện thoại của bạn</div>
+            </InputGroup>
+          </div>
 
-
-            <label class="block font-bold mb-2 pl-2">Email</label>
-            <div class="card flex  md:flex-row align-items-center  gap-3  pb-2  ">
-              <InputText class="rounded-2xl w-full pl-4" content="pi pi-user"/>
-            </div>
-            <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Email của bạn</div>
-          </InputGroup>
+          <div class="mb-3">
+            <InputGroup class="">
+              <label class="block font-bold mb-2 pl-2">Địa chỉ</label>
+              <div class="card flex  md:flex-row align-items-center  gap-3  pb-2  ">
+                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.address"/>
+              </div>
+              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Địa chỉ của bạn</div>
+            </InputGroup>
+          </div>
         </div>
 
         <footer class="px-6 ">
-          <button class="p-button py-2 px-3 mr-3   mb-3" type="submit">
+          <button class="p-button py-2 px-3 mr-3   mb-3" type="submit" @click="updateUser">
             <span class="px-2">Cập nhật</span>
-          </button>
-          <button class="p-button py-2 px-3 mr-3 mb-3" type="button">
-            <span class="px-2">Tuỳ chọn</span>
           </button>
         </footer>
 
@@ -143,26 +159,25 @@ import {defineComponent} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 
 
-
-interface User {
-  name: string;
-  email: string;
-  image: string;
-}
-
 export default defineComponent({
-  data(): { user: User, checked: boolean } {
+  data(): {user: any, checked: boolean ,access_token: string} {
     return {
-      user: {
-        name: 'Nguyễn Huy Chiến',
-        email: 'chienhitarget@gmail.com',
-        image: '/img_log/anh03.jpg',
-      },
-
+      user: {},
+      access_token : localStorage.getItem('access_token') || '',
       checked: false,
     };
   },
+  created() {
+    this.fetchUserInfo();
+  },
   methods: {
+    fetchUserInfo(){
+      const userInfo = localStorage.getItem('userInfo');
+      if (userInfo !== null) {
+        this.user = JSON.parse(userInfo);
+      }
+      console.log("user: ",this.user);
+    },
     onAdvancedUpload($event: any) {
       this.$toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 15000});
     },
@@ -174,14 +189,43 @@ export default defineComponent({
     async uploadPhoto() {
       try {
         // Replace this with the actual function that handles the photo upload
-        await this.actualUploadPhotoFunction();
+        // await this.actualUploadPhotoFunction();
         // If the Promise resolves, the photo was uploaded successfully
-        this.$toast.add({severity: 'success', summary: 'Success', detail: 'Photo Uploaded Successfully', life: 3000});
+        // this.$toast.add({severity: 'success', summary: 'Success', detail: 'Photo Uploaded Successfully', life: 3000});
       } catch (error) {
         // If the Promise rejects, there was an error uploading the photo
         this.$toast.add({severity: 'error', summary: 'Error', detail: 'Failed to Upload Photo', life: 3000});
       }
     },
+    async updateUser() {
+      const username = localStorage.getItem('user');
+      const url = `http://localhost:8080/api/user?username=${username}`; 
+            
+            try {
+              const res = await fetch(url, {
+                headers: {
+                  'Authorization': `Bearer ${this.access_token}` // Use the token here
+                },
+              });
+          
+              // If the token has expired
+              if (res.status === 403) {
+                // toastr.error("Phiên đăng nhập hết hạn.");
+                useAuthStore().logout();
+                return;
+              }
+          
+              if (!res.ok) {
+                throw new Error(`Server responded with status code ${res.status}`);
+              }
+          
+              const userData = await res.json();
+              console.log("User Data:", userData);
+              localStorage.setItem('userInfo', JSON.stringify(userData));
+            } catch (error) {
+              console.log("Error updating user infomation!", error);
+            }
+    }
   },
 });
 </script>

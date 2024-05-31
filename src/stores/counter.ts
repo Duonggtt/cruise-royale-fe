@@ -54,7 +54,7 @@ export const useAuthStore = defineStore({
                 localStorage.setItem('user', username);
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('refresh_token', refresh_token);
-                console.log(this.access_token);
+                this.fetchUserInfo();
                 this.user = username;
                 this.access_token = access_token;
                 this.refresh_token = refresh_token;
@@ -73,6 +73,39 @@ export const useAuthStore = defineStore({
                 // Sử dụng toast để thông báo
             }
         },
+
+        async fetchUserInfo() {
+            const username = localStorage.getItem('user');
+            const access_token = localStorage.getItem('access_token');
+            const url = `http://localhost:8080/api/user?username=${username}`; 
+            
+            try {
+              const res = await fetch(url, {
+                headers: {
+                  'Authorization': `Bearer ${access_token}` // Use the token here
+                }
+              });
+          
+              // If the token has expired
+              if (res.status === 403) {
+                // toastr.error("Phiên đăng nhập hết hạn.");
+                useAuthStore().logout();
+                return;
+              }
+          
+              if (!res.ok) {
+                throw new Error(`Server responded with status code ${res.status}`);
+              }
+          
+              const userData = await res.json();
+              console.log("User Data:", userData);
+              localStorage.setItem('userInfo', JSON.stringify(userData));
+            } catch (error) {
+              router.replace("/");
+              console.log("Error fetching user by username!", error);
+            }
+        },
+
         async register(username: string, password: string) {
             const formData = new FormData();
             formData.append('username', username);
@@ -118,10 +151,10 @@ export const useAuthStore = defineStore({
             this.user = null;
             this.access_token = '';
             this.refresh_token = '';
-            console.log(this.access_token);
             localStorage.removeItem('user');
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
+            localStorage.removeItem('userInfo');
             router.push('/'); // replace with your logout route
         },
     },
