@@ -100,6 +100,7 @@ export const useAuthStore = defineStore({
               const userData = await res.json();
               console.log("User Data:", userData);
               localStorage.setItem('userInfo', JSON.stringify(userData));
+              localStorage.setItem('userId', JSON.stringify(userData.id)) 
             } catch (error) {
               router.replace("/");
               console.log("Error fetching user by username!", error);
@@ -155,6 +156,7 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('userInfo');
+            localStorage.removeItem('userId')
             router.push('/'); // replace with your logout route
         },
     },

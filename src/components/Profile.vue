@@ -161,9 +161,16 @@
 import {defineComponent} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 
+interface UserImage {
+  id: number;
+  data: string;
+  type: string;
+  createdAt: string;
+}
 export default defineComponent({
-  data(): { user: any, originalUser: any, checked: boolean, access_token: string } {
+  data(): {userImages: any ,user: any, originalUser: any, checked: boolean, access_token: string } {
     return {
+      userImages: {} as UserImage || null,
       user: {},
       originalUser: {},
       access_token: localStorage.getItem('access_token') || '',
@@ -172,6 +179,7 @@ export default defineComponent({
   },
   created() {
     this.fetchUserInfo();
+    this.fetchUserImage();
   },
   methods: {
     fetchUserInfo() {
@@ -239,6 +247,34 @@ export default defineComponent({
       } catch (error) {
         console.log("Error updating user information!", error);
       }
+    },
+    async fetchUserImage() {
+      const userId = localStorage.getItem('userId');
+      const url = `http://localhost:8080/api/images/?userId=${userId}`;
+      try {
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${this.access_token}`,
+          },
+        });
+        // If the token has expired
+        if (!res.ok) {
+          throw new Error(`Server responded with status code ${res.status}`);
+        }
+        const data = await res.json();
+        this.userImages = data;
+        console.log(data)
+      } catch (error) {
+        console.log("Error updating user information!", error);
+      }
+    },
+    formatDate(dateString: string): string {
+      const date = new Date(dateString);
+      return date.toLocaleDateString();
+    },
+    getImageUrl(imageData: string): string {
+      return `data:image/jpeg;base64,${imageData}`;
     }
   },
 });
