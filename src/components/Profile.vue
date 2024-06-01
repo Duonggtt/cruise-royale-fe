@@ -22,15 +22,14 @@
         <div class="justify-around lg:justify-center items-center block md:flex">
           <div class="flex items-center justify-center mb-6 md:mb-0">
             <div class="lg:mx-12">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com"
-                   alt="Huy Chiến"
-                   class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800">
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" />
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" />
             </div>
           </div>
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl"> Xin Chào, <b></b>! {{ user.name }}</h1>
-              <p>Đăng nhập lần cuối <b>12 phút trước</b> từ <b>127.0.0.1</b></p>
+              <p>Cập nhật ngày: {{ formatDate(userImage.createdAt) }}</p>
               <div class="flex justify-center md:block">
                 <div
                     class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-white">
@@ -168,9 +167,9 @@ interface UserImage {
   createdAt: string;
 }
 export default defineComponent({
-  data(): {userImages: any ,user: any, originalUser: any, checked: boolean, access_token: string } {
+  data(): {userImage: any ,user: any, originalUser: any, checked: boolean, access_token: string } {
     return {
-      userImages: {} as UserImage || null,
+      userImage: [] as UserImage[],
       user: {},
       originalUser: {},
       access_token: localStorage.getItem('access_token') || '',
@@ -230,6 +229,11 @@ export default defineComponent({
           },
           body: JSON.stringify(updatedFields)
         });
+        if (res.status === 403) {
+                // toastr.error("Phiên đăng nhập hết hạn.");
+          useAuthStore().logout();
+          return;
+        }
 
         // If the token has expired
         if (!res.ok) {
@@ -263,8 +267,7 @@ export default defineComponent({
           throw new Error(`Server responded with status code ${res.status}`);
         }
         const data = await res.json();
-        this.userImages = data;
-        console.log(data)
+        this.userImage = data;
       } catch (error) {
         console.log("Error updating user information!", error);
       }
@@ -274,7 +277,7 @@ export default defineComponent({
       return date.toLocaleDateString();
     },
     getImageUrl(imageData: string): string {
-      return `data:image/jpeg;base64,${imageData}`;
+      return imageData ? `data:image/jpeg;base64,${imageData}` : '';
     }
   },
 });
