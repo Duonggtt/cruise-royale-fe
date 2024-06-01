@@ -22,8 +22,8 @@
         <div class="justify-around lg:justify-center items-center block md:flex">
           <div class="flex items-center justify-center mb-6 md:mb-0">
             <div class="lg:mx-12">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" />
-              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" />
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="max-h-15rem max-w-15rem  rounded-full"/>
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full" />
             </div>
           </div>
           <div class="flex items-center justify-center">

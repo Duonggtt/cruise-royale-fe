@@ -8,7 +8,7 @@
       <template #item="{ item, props }">
         <a v-ripple class="flex items-center " v-bind="props.action" :href="item.link">
           <span :class="item.icon"/>
-          <span class="font-bold  rounded-full hover:text-green-500">{{ item.label }}</span>
+          <span class="font-bold  rounded-full hover:text-green-500 bg-tr">{{ item.label }}</span>
         </a>
       </template>
       <template #end>
