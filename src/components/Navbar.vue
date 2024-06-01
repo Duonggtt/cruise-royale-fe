@@ -3,7 +3,7 @@
 
     <Menubar :model="items" class="flex w-8/12  bg-transparent border-none xl:max-w-7xl xl:mx-auto m-auto">
       <template #start>
-        <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem " @click="$router.push('/home')"/>
+        <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem mr-3" @click="$router.push('/home')"/>
       </template>
       <template #item="{ item, props }">
         <a v-ripple class="flex items-center " v-bind="props.action" :href="item.link">
