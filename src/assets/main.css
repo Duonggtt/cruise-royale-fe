@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Archivo', sans-serif !important;
   font-size: 1rem;
   line-height: 1.5;
   color: #333;
