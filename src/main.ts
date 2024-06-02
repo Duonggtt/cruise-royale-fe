@@ -19,7 +19,6 @@ import AccordionTab from "primevue/accordiontab";
 import Avatar from "primevue/avatar";
 import AvatarGroup from "primevue/avatargroup";
 import Badge from "primevue/badge";
-import BadgeDirective from "primevue/badgedirective";
 import BlockUI from "primevue/blockui";
 import Button from "primevue/button";
 import Breadcrumb from "primevue/breadcrumb";
@@ -35,7 +34,6 @@ import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup";
 import ConfirmDialog from "primevue/confirmdialog";
 import ConfirmPopup from "primevue/confirmpopup";
-import ConfirmationService from "primevue/confirmationservice";
 import ContextMenu from "primevue/contextmenu";
 import DataTable from "primevue/datatable";
 import DataView from "primevue/dataview";
@@ -72,7 +70,7 @@ import ProgressBar from "primevue/progressbar";
 import ProgressSpinner from "primevue/progressspinner";
 import Rating from "primevue/rating";
 import RadioButton from "primevue/radiobutton";
-import Ripple from "primevue/ripple";
+
 import Row from "primevue/row";
 import SelectButton from "primevue/selectbutton";
 import ScrollPanel from "primevue/scrollpanel";
@@ -96,7 +94,6 @@ import Tag from "primevue/tag";
 import Terminal from "primevue/terminal";
 import Timeline from "primevue/timeline";
 import ToggleButton from "primevue/togglebutton";
-import Tooltip from "primevue/tooltip";
 import Tree from "primevue/tree";
 import TreeSelect from "primevue/treeselect";
 import TreeTable from "primevue/treetable";
@@ -113,8 +110,6 @@ import Navbar from "@/components/Navbar.vue";
 import Profile from "@/components/Profile.vue";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
-import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
-import aboutView from "@/views/AboutView.vue";
 import SearchYachts from "@/components/Home/SearchYachts.vue";
 import Footer from "@/components/Footer.vue";
 import HomeListCruiseView from "@/components/HomeListCruiseView.vue";
@@ -122,7 +117,7 @@ import HomeListCruiseView from "@/components/HomeListCruiseView.vue";
 //#endregion Import Custom Components
 
 
-import {createApp, provide} from 'vue'
+import {createApp} from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
@@ -234,8 +229,6 @@ app.component("Navbar", Navbar);
 app.component("Profile", Profile);
 app.component("HomeView", HomeView);
 app.component("LoginView", LoginView);
-app.component("ForgotPasswordView", ForgotPasswordView);
-app.component("aboutView", aboutView);
 app.component("SearchYachts", SearchYachts);
 app.component("Footer", Footer);
 app.component("HomeListCruiseView", HomeListCruiseView)

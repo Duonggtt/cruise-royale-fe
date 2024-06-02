@@ -1,11 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import register from '@/components/Account_Auth/Register.vue';
-import LoginView from '@/views/LoginView.vue';
-import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
-import HomeView from '@/views/HomeView.vue';
-import aboutView from '@/views/AboutView.vue';
+import FogotPassword from '@/components/Account_Auth/ForgotPassword.vue';
+
 import Navbar from '@/components/Navbar.vue';
 import Profile from '@/components/Profile.vue';
+
+import LoginView from '@/views/LoginView.vue';
+import HomeView from '@/views/HomeView.vue';
+
 
 
 
@@ -16,18 +18,14 @@ const router = createRouter({
         {
             path: '/FogotPassword',
             name: 'FogotPassword',
-            component: ForgotPasswordView
+            component: FogotPassword
         },
         {
             path: '/home',
             name: 'home',
             component: HomeView
         },
-        {
-            path: '/about',
-            name: 'about',
-            component: aboutView
-        },
+
         {
             path: '/Navbar',
             name: 'Navbar',
