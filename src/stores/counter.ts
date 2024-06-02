@@ -14,7 +14,7 @@ export const useAuthStore = defineStore({
         user: localStorage.getItem('user') || null,
         access_token: localStorage.getItem('access_token') || null,
         refresh_token: localStorage.getItem('refresh_token') || null,
-        returnUrl: '/home', // replace with your success route
+        returnUrl: '/', // replace with your success route
     }),
     actions: {
         async login(username: string, password: string) {

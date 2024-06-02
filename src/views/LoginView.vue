@@ -1,7 +1,10 @@
 <template>
   <div>
     <Container v-if="state === 'login'">
-      <Log @updateState="handleStateChange"/>
+      <div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen " :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}"  >
+        <Log @updateState="handleStateChange" />
+      </div>
+
     </Container>
     <Container v-else-if="state === 'register'">
       <Reg @updateState="handleStateChange"/>

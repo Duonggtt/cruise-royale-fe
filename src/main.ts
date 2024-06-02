@@ -103,7 +103,7 @@ import TriStateCheckbox from "primevue/tristatecheckbox";
 
 
 //#region  Import Custom Components
-import Log from "@/components/Account_Auth/Login.vue";
+import Login from "@/components/Account_Auth/Login.vue";
 import Reg from "@/components/Account_Auth/Register.vue";
 import ForgotPassword from "@/components/Account_Auth/ForgotPassword.vue";
 import Navbar from "@/components/Navbar.vue";
@@ -222,7 +222,7 @@ app.component("TriStateCheckbox", TriStateCheckbox);
 //#endregion   Components Primevue
 
 
-app.component("Log", Log);
+app.component("Login", Login);
 app.component("Reg", Reg);
 app.component("ForgotPassword", ForgotPassword);
 app.component("Navbar", Navbar);

@@ -1,6 +1,5 @@
 <template>
-<div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen " :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}"  >
-    <form @submit.prevent="onSubmit" class="p-5 border-round-3xl shadow-3  w-auto bg-white opacity-95">
+    <form @submit.prevent="onSubmit" class="p-5 border-round-3xl  w-auto bg-white opacity-95">
         <div class="card-container  w-30rem">
             <div class="welcome-message text-center  align-items-center mb-3">
                 <img :src="userImage" alt="User Image" class="user-image  w-6rem mx-auto" />
@@ -35,7 +34,7 @@
             <a @click="handleSignUp" class="font-normal  ml-2  cursor-pointer text-green-500">Chưa có tài khoản? Đăng ký</a>
         </div>
     </form>
-</div>
+
 </template>
 
 <script lang="ts">

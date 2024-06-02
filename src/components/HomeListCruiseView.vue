@@ -9,11 +9,11 @@
         <p class="mb-8 text-xl">Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.</p>
       </div>
 
-      <div class="cruise-card-container grid grid-cols-3">
+      <div class="cruise-card-container grid grid-cols-3 cursor-pointer">
         <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3">
           <div class="cruise-card-header relative">
-            <img :alt="cruise.name" :src="cruise.image" class="w-full h-60 object-cover rounded-3xl"/>
-            <div class="rating-badge absolute top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex items-center gap-1 opacity-85">
+            <img :alt="cruise.name" :src="cruise.image" class="w-full max-h-52 object-cover rounded-3xl"/>
+            <div class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
               <i class="pi pi-star"></i> 4.5 (2) đánh giá
             </div>
             <div class="location-badge flex gap-1 h-5 bg-gray-100 rounded-full px-2 py-1 align-items-center absolute bottom--7 left-3">
@@ -36,7 +36,7 @@
           </div>
           <div class="cruise-card-footer flex justify-between align-items-center w-full pl-3 pt-4">
             <p class="text-green-950 font-bold">{{ cruise.price }} / khách</p>
-            <Button class="inline-flex items-center px-5 py-2 text-sm text-center" label="Đặt ngay"/>
+            <Button class="inline-flex items-center px-5 py-2 text-sm text-center shadow-3" label="Đặt ngay"/>
           </div>
         </div>
       </div>
@@ -48,15 +48,11 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
-import Card from 'primevue/card';
-import Button from 'primevue/button';
+
+
 
 export default defineComponent({
   name: 'App',
-  components: {
-    Card,
-    Button,
-  },
   setup() {
     const cruises = ref([
       {id: 1, image: 'Cruises/Cruise01.webp', name: 'Du thuyền Heritage Bình Chuẩn Cát Bà ', description: 'Vịnh Hạ Long - Hạ thủy 2019 - Tàu vỏ Kim loại - 20 phòng', price: '3,550,000đ'},

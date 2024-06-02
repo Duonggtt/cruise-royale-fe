@@ -20,11 +20,11 @@
             </span>
 
             <span class="p-float-label mb-4 ">
-                <Password id="password1" v-model="password" :toggleMask="false" class="" inputClass="p-input-filled pl-3"></Password>
+                <Password id="password1" v-model="password" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
                 <label for="password1" class="pl-3 ">Nhập mật khẩu</label>
             </span>
             <span class="p-float-label mb-4 ">
-                <Password id="password2" v-model="password2" :toggleMask="false" class="" inputClass="p-input-filled pl-3"></Password>
+                <Password id="password2" v-model="password2" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
                 <label for="password2" class="pl-3">Nhập lại mật khẩu</label>
             </span>
 
@@ -40,16 +40,9 @@
 </template>
 
 <script lang="ts">
-import {
-    defineComponent,
-    reactive
-} from 'vue';
-import {
-    useRouter
-} from 'vue-router';
-import {
-    useAuthStore
-} from "../../stores/counter";
+import {  defineComponent,  reactive} from 'vue';
+import {  useRouter } from 'vue-router';
+import {   useAuthStore } from "@/stores/counter";
 
 export default defineComponent({
     setup() {
