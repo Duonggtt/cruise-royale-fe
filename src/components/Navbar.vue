@@ -1,21 +1,21 @@
 <template>
-  <div class="card flex justify-content-center w-full bg-white fixed top-0 z-50 shadow-2 ">
+  <div class="card flex justify-content-center  fixed top-0 z-50 shadow-1 bg-white">
 
-    <Menubar :model="items" class="flex w-8/12  bg-transparent border-none xl:max-w-7xl xl:mx-auto m-auto">
+    <Menubar :model="items" class="flex w-8/12  border-none xl:max-w-7xl xl:mx-auto m-auto bg-white" >
       <template #start>
         <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem mr-3" @click="$router.push('/home')"/>
       </template>
       <template #item="{ item, props }">
-        <a v-ripple class="flex items-center " v-bind="props.action" :href="item.link">
+        <a v-ripple class="flex items-center  " v-bind="props.action" :href="item.link">
           <span :class="item.icon"/>
-          <span class="font-bold  rounded-full hover:text-green-500 bg-tr">{{ item.label }}</span>
+          <span class="font-bold   ">{{ item.label }}</span>
         </a>
       </template>
       <template #end>
         <div class="flex items-center end-0 gap-2 w-full min-w-50 " @click="showMenu = false" >
           <i class="pi pi-phone"></i>
           <span class=" font-bold pr-3 hover:text-green-500 cursor-pointer"> Liên Hệ: 0123456789</span>
-          <Avatar class="h-2rem w-2rem border-2 hover:border-green-100" image="/img_log/anh03.jpg" shape="circle"
+          <Avatar class="h-2rem w-2rem border-2 hover:border-green-100" image="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" shape="circle"
                   @mouseover="showMenu = true"/>
           <div v-if="showMenu" class="absolute top-20 right-30 bg-white rounded shadow p-2" @mouseover="showMenu = true"
                @mouseleave="showMenu = false">

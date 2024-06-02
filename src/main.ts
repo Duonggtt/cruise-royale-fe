@@ -88,7 +88,7 @@ import TabMenu from "primevue/tabmenu";
 import TieredMenu from "primevue/tieredmenu";
 import Textarea from "primevue/textarea";
 import Toast from "primevue/toast";
-import ToastService from "primevue/toastservice";
+
 import Toolbar from "primevue/toolbar";
 import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
@@ -106,16 +106,18 @@ import TriStateCheckbox from "primevue/tristatecheckbox";
 
 
 //#region  Import Custom Components
-import Log from "@/components/Login.vue";
-import Reg from "@/components/Register.vue";
-import ForgotPassword from "@/components/ForgotPassword.vue";
+import Log from "@/components/Account_Auth/Login.vue";
+import Reg from "@/components/Account_Auth/Register.vue";
+import ForgotPassword from "@/components/Account_Auth/ForgotPassword.vue";
 import Navbar from "@/components/Navbar.vue";
 import Profile from "@/components/Profile.vue";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 import aboutView from "@/views/AboutView.vue";
-
+import SearchYachts from "@/components/Home/SearchYachts.vue";
+import Footer from "@/components/Footer.vue";
+import HomeListCruiseView from "@/components/HomeListCruiseView.vue";
 
 //#endregion Import Custom Components
 
@@ -124,11 +126,15 @@ import {createApp, provide} from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
+
+import ToastService from "primevue/toastservice";
+
 const app = createApp(App)
 app.use(createPinia())
 app.use(router)
+app.use(ToastService)
 app.use(PrimeVue, { ripple: true });
-app.use(ToastService);
+
 
 
 
@@ -230,6 +236,9 @@ app.component("HomeView", HomeView);
 app.component("LoginView", LoginView);
 app.component("ForgotPasswordView", ForgotPasswordView);
 app.component("aboutView", aboutView);
+app.component("SearchYachts", SearchYachts);
+app.component("Footer", Footer);
+app.component("HomeListCruiseView", HomeListCruiseView)
 
 
 app.mount('#app')

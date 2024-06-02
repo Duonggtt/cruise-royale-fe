@@ -1,12 +1,12 @@
 <template>
   <div>
-    <ForgotPassword /> 
+    <ForgotPassword />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ForgotPassword from '../components/ForgotPassword.vue';
+import ForgotPassword from '../components/Account_Auth/ForgotPassword.vue';
 
 export default defineComponent({
   components: {

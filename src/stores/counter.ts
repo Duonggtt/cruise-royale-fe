@@ -1,14 +1,12 @@
 import {defineStore} from 'pinia';
 import router from '../router';
 
-
 interface AuthState {
     user: string | null;
     access_token: string | null;
     refresh_token: string | null;
     returnUrl: string;
 }
-
 
 export const useAuthStore = defineStore({
     id: 'auth',
@@ -24,29 +22,24 @@ export const useAuthStore = defineStore({
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
-            const url = 'http://localhost:8080/api/login'; // replace with your login endpoint
-
-
+            const url = 'http://localhost:8080/api/login';
             let response = await fetch(url, {
                 method: 'POST',
                 body: formData,
             });
 
-            // If the token has expired
             if (response.status === 403) {
-                // Store the current URL
-                localStorage.setItem('redirectUrl', window.location.href);
-                // Call your refresh token function here
+                // localStorage.setItem('redirectUrl', window.location.href);
                 await this.refreshToken();
-                // Retry the request with the new token
                 response = await fetch(url, {
                     method: 'POST',
                     body: formData,
                     headers: {
-                        'Authorization': `Bearer ${this.access_token}`, // Use the new token here
+                        'Authorization': `Bearer ${this.access_token}`,
                     },
                 });
-                return true;
+
+                return false;
             }
 
             if (response.status === 200) {
@@ -65,42 +58,37 @@ export const useAuthStore = defineStore({
                 localStorage.removeItem('redirectUrl');
                 // Redirect to the stored URL if it exists, otherwise to the default returnUrl
                 router.push(redirectUrl || this.returnUrl);
-                // Sử dụng toast để thông báo
                 return true;
-
-            } else {
-                return false;
-                // Sử dụng toast để thông báo
             }
         },
 
         async fetchUserInfo() {
             const username = localStorage.getItem('user');
             const access_token = localStorage.getItem('access_token');
-            const url = `http://localhost:8080/api/user?username=${username}`; 
-            
+            const url = `http://localhost:8080/api/user?username=${username}`;
+
             try {
               const res = await fetch(url, {
                 headers: {
                   'Authorization': `Bearer ${access_token}` // Use the token here
                 }
               });
-          
+
               // If the token has expired
               if (res.status === 403) {
                 // toastr.error("Phiên đăng nhập hết hạn.");
                 useAuthStore().logout();
                 return;
               }
-          
+
               if (!res.ok) {
                 throw new Error(`Server responded with status code ${res.status}`);
               }
-          
+
               const userData = await res.json();
               console.log("User Data:", userData);
               localStorage.setItem('userInfo', JSON.stringify(userData));
-              localStorage.setItem('userId', JSON.stringify(userData.id)) 
+              localStorage.setItem('userId', JSON.stringify(userData.id))
             } catch (error) {
               router.replace("/");
               console.log("Error fetching user by username!", error);

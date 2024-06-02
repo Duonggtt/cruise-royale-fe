@@ -8,7 +8,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: #333;
-
+  /*cursor: url('./cusor.svg'),auto;*/
 }
 .p-button {
   border-radius: 50px;
@@ -16,6 +16,7 @@ body {
 }
 .p-input-filled{
   border-radius: 50px;
+
 }
 .p-menubar {
   border-radius: 0;
@@ -33,4 +34,12 @@ body {
 .p-menubar-end {
   display: flex;
   margin: auto 0 auto auto;
+}
+
+.p-input-filled {
+  width:30rem;
+}
+
+.rounded-4xl {
+  border-radius: 2.5rem;
 }

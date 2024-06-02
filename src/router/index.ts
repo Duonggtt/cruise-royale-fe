@@ -1,15 +1,12 @@
 import {createRouter, createWebHistory} from 'vue-router';
-// import {Log, Reg, Fogot, Navbar, Profile, HomeView,
-//     LoginView, ForgotPasswordView,aboutView } from '@/main';
-
-
-import register from '@/components/Register.vue';
+import register from '@/components/Account_Auth/Register.vue';
 import LoginView from '@/views/LoginView.vue';
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue';
 import HomeView from '@/views/HomeView.vue';
 import aboutView from '@/views/AboutView.vue';
 import Navbar from '@/components/Navbar.vue';
 import Profile from '@/components/Profile.vue';
+
 
 
 
@@ -46,15 +43,16 @@ const router = createRouter({
             component: register
         },
         {
-            path: '/',
+            path: '/LoginView',
             name: 'LoginView',
             component: LoginView
         },
         {
-            path: '/HomeView',
+            path: '/',
             name: 'HomeView',
             component: HomeView
         }
+
     ]
 });
 
