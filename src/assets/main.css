@@ -43,3 +43,9 @@ body {
 .rounded-4xl {
   border-radius: 2.5rem;
 }
+.p-card-content {
+  padding: 1rem 0 0 0;
+}
+.p-card-body{
+  padding:  1rem 1rem 0 1rem;
+}
