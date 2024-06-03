@@ -12,7 +12,7 @@
       <div class="cruise-card-container grid grid-cols-3 cursor-pointer">
         <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3">
           <div class="cruise-card-header relative">
-            <img :alt="cruise.name" :src="cruise.image" class="w-full max-h-52 object-cover rounded-3xl"/>
+            <img alt="Placeholder Image" src="https://via.placeholder.com/400x200.png?text=Placeholder+Image" class="w-full max-h-52 object-cover rounded-3xl"/>
             <div class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
               <i class="pi pi-star"></i> 4.5 (2) đánh giá
             </div>
@@ -78,7 +78,7 @@ export default defineComponent({
           useAuthStore().logout();
         }
           return res;
-      })  
+      })
       .then(res => res.json())
       .then(data => {
         this.cruises = data;
