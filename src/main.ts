@@ -106,13 +106,18 @@ import TriStateCheckbox from "primevue/tristatecheckbox";
 import Login from "@/components/Account_Auth/Login.vue";
 import Reg from "@/components/Account_Auth/Register.vue";
 import ForgotPassword from "@/components/Account_Auth/ForgotPassword.vue";
+
 import Navbar from "@/components/Navbar.vue";
 import Profile from "@/components/Profile.vue";
-import HomeView from "@/views/HomeView.vue";
-import LoginView from "@/views/LoginView.vue";
+
 import SearchYachts from "@/components/Home/SearchYachts.vue";
 import Footer from "@/components/Footer.vue";
 import HomeListCruiseView from "@/components/HomeListCruiseView.vue";
+
+
+import ProfileView from "@/views/ProfileView.vue";
+import HomeView from "@/views/HomeView.vue";
+import LoginView from "@/views/LoginView.vue";
 
 //#endregion Import Custom Components
 
@@ -227,6 +232,7 @@ app.component("Reg", Reg);
 app.component("ForgotPassword", ForgotPassword);
 app.component("Navbar", Navbar);
 app.component("Profile", Profile);
+app.component("ProfileView", ProfileView);
 app.component("HomeView", HomeView);
 app.component("LoginView", LoginView);
 app.component("SearchYachts", SearchYachts);

@@ -7,6 +7,7 @@ import Profile from '@/components/Profile.vue';
 
 import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
+import ProfileView from '@/views/ProfileView.vue';
 
 
 
@@ -32,9 +33,9 @@ const router = createRouter({
             component: Navbar
         },
         {
-            path: '/Profile',
-            name: 'Profile',
-            component: Profile
+            path: '/profile',
+            name: 'ProfileView',
+            component: ProfileView
         },   {
             path: '/register',
             name: 'register',

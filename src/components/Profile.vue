@@ -1,5 +1,4 @@
 <template>
-  <Navbar/>
   <section class="xl:max-w-6xl xl:mx-auto pt-32">
     <section class="mb-6 flex items-center justify-between">
       <div class="flex items-center justify-start">

@@ -1,12 +1,8 @@
 <template>
   <main>
     <Navbar class="w-screen"/>
-    <SearchYachts/>
-    <HomeListCruiseView/>
+    <Profile/>
     <Footer/>
   </main>
 </template>
 
-<script setup lang="ts">
-
-</script>

@@ -19,15 +19,19 @@
                   @mouseover="showMenu = true" @click="visible = true"/>
           <div v-if="showMenu" class="absolute top-20 right-30 bg-white rounded shadow p-2" @mouseover="showMenu = true"
                @mouseleave="showMenu = false">
-            <Dialog v-model:visible="visible" modal :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }"  >
-                <Login/>
-            </Dialog>
+
             <Toast class="z-50"/>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/profile')">
               Thông tin người dùng
             </div>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/')">Đăng xuất</div>
           </div>
+
+          <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }"  >
+            <Login v-if="dialogState === 'login'" @updateState="handleStateChange" @updateVisible="handleVisibleChange"/>
+            <Reg v-else-if="dialogState === 'register'" @updateState="handleStateChange"/>
+            <ForgotPassword v-else-if="dialogState === 'ForgotPassword'" @updateState="handleStateChange"/>
+          </Dialog>
         </div>
       </template>
     </Menubar>
@@ -45,7 +49,18 @@ interface MenuItem {
   link?: string;
 }
 
+const handleVisibleChange = (newVisible:boolean) => {
+  visible.value = newVisible;
+};
 const visible = ref(true);
+
+const dialogState = ref('login'); // 'login', 'register', or 'forgotPassword'
+
+const handleStateChange = (newState: string) => {
+  dialogState.value = newState;
+  visible.value = true;
+};
+
 
 const showMenu = ref(false);
 

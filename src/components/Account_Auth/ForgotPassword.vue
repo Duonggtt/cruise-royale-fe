@@ -1,7 +1,6 @@
 <template>
-  <div class="ForgotPassword-container  flex align-items-center justify-content-center bg-white-alpha-100 h-screen "
-       :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}">
-    <form @submit.prevent="resetPassword" class="px-20 py-10  border-round-3xl shadow-3  w-auto bg-white opacity-95">
+  <div class="ForgotPassword-container  flex align-items-center justify-content-center "  >
+    <form @submit.prevent="resetPassword" class="px-20 py-10  border-round-3xl w-auto ">
       <div class="card-container w-30rem">
         <div class="welcome-message text-center mb-5 ">
           <i class="pi pi-spin pi-sparkles text-3xl"  ></i>
