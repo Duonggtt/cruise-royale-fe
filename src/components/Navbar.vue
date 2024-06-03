@@ -26,11 +26,11 @@
             </div>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/')">Đăng xuất</div>
           </div>
-
-          <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }"  >
+          <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }" :destroyOnClose="true">
             <Login v-if="dialogState === 'login'" @updateState="handleStateChange" @updateVisible="handleVisibleChange"/>
             <Reg v-else-if="dialogState === 'register'" @updateState="handleStateChange"/>
             <ForgotPassword v-else-if="dialogState === 'ForgotPassword'" @updateState="handleStateChange"/>
+            <button @click="visible = false">Đóng</button>
           </Dialog>
         </div>
       </template>
@@ -41,13 +41,25 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 
+import {useAuthStore} from '../stores/counter';
 interface MenuItem {
   label?: string;
   icon?: string;
   link?: string;
 }
+
+const authStore = useAuthStore(); // Tạo một instance của authStore
+
+onMounted(() => {
+  if (authStore.access_token) {
+    setTimeout(() => {
+      visible.value = false;
+      console.log(authStore.access_token);
+    }, 1);
+  }
+});
 
 const handleVisibleChange = (newVisible:boolean) => {
   visible.value = newVisible;

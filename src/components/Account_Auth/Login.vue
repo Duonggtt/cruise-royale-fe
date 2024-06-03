@@ -65,11 +65,22 @@ export default defineComponent({
         const authStore = useAuthStore();
         authStore.login(this.user.username, this.user.password).then(sta => {
           if (sta) {
-            this.$toast.add({ severity: 'success', summary: 'Login Thành Công ', detail: `Xin chào ${this.user.username}`, life: 3000 });
+            this.$toast.add({
+              severity: 'success',
+              summary: 'Login Thành Công ',
+              detail: `Xin chào ${this.user.username}`,
+              life: 3000
+            });
             this.$emit('updateVisible', false);
-            this.$toast.add({ severity: 'success', summary: 'Đăng nhập thành công', life: 3000 }); // Thêm dòng này
+            this.$emit('  visible', 'false');
+            router.push('/home');
           } else {
-            this.$toast.add({  severity: 'error',  summary: 'Error',  detail: `Vui lòng kiểm tra lại  ${this.user.username}`,     life: 3000   });
+            this.$toast.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `Vui lòng kiểm tra lại  ${this.user.username}`,
+              life: 3000
+            });
           }
         });
       }
