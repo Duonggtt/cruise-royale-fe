@@ -1,6 +1,7 @@
 <template>
   <main>
     <Navbar class="w-screen"/>
+    <Toast class="z-50" />
     <SearchYachts/>
     <HomeListCruiseView/>
     <Footer/>

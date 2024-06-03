@@ -28,7 +28,7 @@
         ?</a>
     </div>
     <div class="link-container flex align-items-center">
-      <Toast class="z-50"/>
+<!--      <Toast class="z-50"/>-->
       <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit" @click="HomeView"/>
     </div>
 
@@ -42,7 +42,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {useRouter} from 'vue-router';
-import {useAuthStore} from '../../stores/counter';
+import {useAuthStore} from '@/stores/counter';
 import {reactive} from 'vue';
 import router from "@/router";
 
@@ -64,23 +64,22 @@ export default defineComponent({
         const router = useRouter();
         const authStore = useAuthStore();
         authStore.login(this.user.username, this.user.password).then(sta => {
+
           if (sta) {
-            this.$toast.add({
-              severity: 'success',
-              summary: 'Login Thành Công ',
-              detail: `Xin chào ${this.user.username}`,
-              life: 3000
-            });
-            this.$emit('updateVisible', false);
-            this.$emit('  visible', 'false');
-            router.push('/home');
+
+            setTimeout(() => {
+              this.$toast.add({  severity: 'success', summary: 'Login Thành Công ',  detail: `Xin chào ${this.user.username}`, life: 3000  });
+              this.$emit('updateVisible', false);
+              this.$emit('visible', 'false');
+
+              // setTimeout(() => {
+              //   router.push('/home');
+              // }, 1000);
+            }, 1);
+
           } else {
-            this.$toast.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: `Vui lòng kiểm tra lại  ${this.user.username}`,
-              life: 3000
-            });
+            console.log('Login Failed');
+            this.$toast.add({  severity: 'error',   summary: 'Error',  detail: `Vui lòng kiểm tra lại  ${this.user.username}`, life: 3000 });
           }
         });
       }

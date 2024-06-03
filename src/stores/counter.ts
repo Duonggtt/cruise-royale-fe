@@ -145,7 +145,7 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('userInfo');
             localStorage.removeItem('userId')
-            router.push('/'); // replace with your logout route
+            router.push('/');
         },
     },
 });

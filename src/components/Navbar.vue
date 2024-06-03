@@ -15,22 +15,19 @@
         <div class="flex items-center end-0 gap-2 w-full min-w-50 " @click="showMenu = false">
           <i class="pi pi-phone"></i>
           <span class=" font-bold pr-3 hover:text-green-500 cursor-pointer"> Liên Hệ: 0123456789</span>
-          <Avatar class="h-2rem w-2rem border-2 hover:border-green-100" image="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" shape="circle"
-                  @mouseover="showMenu = true" @click="visible = true"/>
-          <div v-if="showMenu" class="absolute top-20 right-30 bg-white rounded shadow p-2" @mouseover="showMenu = true"
+          <Avatar class="h-2rem w-2rem border-2 hover:border-green-100 cursor-pointer" image="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" shape="circle"
+                  @mouseover="showMenu = true" @click="handleAvatarClick"/>
+          <div v-if="showMenu && authStore.user" class="absolute top-20 right-30 bg-white rounded shadow p-2" @mouseover="showMenu = true"
                @mouseleave="showMenu = false">
-
-            <Toast class="z-50"/>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/profile')">
               Thông tin người dùng
             </div>
-            <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/')">Đăng xuất</div>
+            <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="logout">Đăng xuất</div>
           </div>
           <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }" :destroyOnClose="true">
             <Login v-if="dialogState === 'login'" @updateState="handleStateChange" @updateVisible="handleVisibleChange"/>
             <Reg v-else-if="dialogState === 'register'" @updateState="handleStateChange"/>
             <ForgotPassword v-else-if="dialogState === 'ForgotPassword'" @updateState="handleStateChange"/>
-            <button @click="visible = false">Đóng</button>
           </Dialog>
         </div>
       </template>
@@ -41,9 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
 
+import {onMounted, ref} from 'vue';
 import {useAuthStore} from '../stores/counter';
+import router from "@/router";
 interface MenuItem {
   label?: string;
   icon?: string;
@@ -53,26 +51,37 @@ interface MenuItem {
 const authStore = useAuthStore(); // Tạo một instance của authStore
 
 onMounted(() => {
-  if (authStore.access_token) {
-    setTimeout(() => {
-      visible.value = false;
-      console.log(authStore.access_token);
-    }, 1);
+  if (authStore.user) {
+    visible.value = false;
   }
 });
+const handleAvatarClick = () => {
+  if (authStore.user) {
+    // If user is logged in, navigate to profile page
+    router.push('/profile');
+  } else {
+    // If user is not logged in, show login dialog
+    visible.value = true;
+  }
+};
 
 const handleVisibleChange = (newVisible:boolean) => {
   visible.value = newVisible;
 };
-const visible = ref(true);
 
-const dialogState = ref('login'); // 'login', 'register', or 'forgotPassword'
+const visible = ref(false);
+
+const dialogState = ref('login');
 
 const handleStateChange = (newState: string) => {
   dialogState.value = newState;
   visible.value = true;
 };
 
+const logout = () => {
+  const authStore = useAuthStore();
+  authStore.logout();
+};
 
 const showMenu = ref(false);
 

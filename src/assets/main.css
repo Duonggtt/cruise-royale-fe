@@ -10,6 +10,7 @@ body {
   color: #333;
   /*cursor: url('./cusor.svg'),auto;*/
 }
+
 .p-button {
   border-radius: 50px;
   gap: 0.5em;
