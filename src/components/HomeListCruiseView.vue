@@ -71,11 +71,7 @@ export default defineComponent({
   methods: {
     fetchCruiseFertured() {
       const url = `http://localhost:8080/api/cruises/featured`;
-      fetch(url , {
-         headers: {
-            'Authorization': `Bearer ${access_token}` // Use the token here
-         }
-      })
+      fetch(url)
       .then(res => {
         if(res.status === 403) {
           //toast Phien dang nhap het han
