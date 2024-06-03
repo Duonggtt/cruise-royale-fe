@@ -9,7 +9,7 @@
         <p class="mb-8 text-xl">Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.</p>
       </div>
 
-      <!-- <div class="cruise-card-container grid grid-cols-3 cursor-pointer">
+      <div class="cruise-card-container grid grid-cols-3 cursor-pointer">
         <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3">
           <div class="cruise-card-header relative">
             <img :alt="cruise.name" :src="cruise.image" class="w-full max-h-52 object-cover rounded-3xl"/>
@@ -39,7 +39,7 @@
             <Button class="inline-flex items-center px-5 py-2 text-sm text-center shadow-3" label="Đặt ngay"/>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
   <div class="flex justify-center mt-10 relative">
@@ -51,12 +51,18 @@ import {defineComponent, ref} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 
 const access_token = localStorage.getItem('access_token');
-
+interface Cruise {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+}
 export default defineComponent({
   name: 'App',
   data() {
     return {
-      cruises: []
+      cruises: [] as Cruise[]
     }
   },
   beforeMount(){
@@ -80,7 +86,7 @@ export default defineComponent({
       .then(res => res.json())
       .then(data => {
         this.cruises = data;
-        console.log("data: ",data);
+        console.log("data: ",this.cruises);
       })
       .catch(err => console.log(err));
     }
