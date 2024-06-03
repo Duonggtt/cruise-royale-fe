@@ -9,7 +9,7 @@
         <p class="mb-8 text-xl">Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.</p>
       </div>
 
-      <div class="cruise-card-container grid grid-cols-3 cursor-pointer">
+      <!-- <div class="cruise-card-container grid grid-cols-3 cursor-pointer">
         <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3">
           <div class="cruise-card-header relative">
             <img :alt="cruise.name" :src="cruise.image" class="w-full max-h-52 object-cover rounded-3xl"/>
@@ -39,7 +39,7 @@
             <Button class="inline-flex items-center px-5 py-2 text-sm text-center shadow-3" label="Đặt ngay"/>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="flex justify-center mt-10 relative">
@@ -48,24 +48,43 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
+import {useAuthStore} from '@/stores/counter';
 
-
+const access_token = localStorage.getItem('access_token');
 
 export default defineComponent({
   name: 'App',
-  setup() {
-    const cruises = ref([
-      {id: 1, image: 'Cruises/Cruise01.webp', name: 'Du thuyền Heritage Bình Chuẩn Cát Bà ', description: 'Vịnh Hạ Long - Hạ thủy 2019 - Tàu vỏ Kim loại - 20 phòng', price: '3,550,000đ'},
-      {id: 2, image: 'Cruises/Cruise02.jpg', name: 'Du Thuyền Stellar of the Seas', description: 'Vịnh Hạ Long - Hạ thủy 2018 - Tàu vỏ Kim loại - 22 phòng', price: '5,300,000đ'},
-      {id: 3, image: 'Cruises/Cruise03.webp', name: 'Du thuyền Ambassador Hạ Long', description: 'Hạ thuỷ 2018 - Tàu vỏ Kim loại - 46 phòng', price: '3,7500,000đ'},
-      {id: 4, image: 'Cruises/Cruise04.webp', name: 'Du thuyền Scarlet Pearl', description: 'Hạ thuỷ 2019 - Tàu vỏ Kim loại - 22 phòng', price: '3,650,000đ'},
-      {id: 5, image: 'Cruises/Cruise05.webp', name: 'Du thuyền Essence Grand', description: 'Hạ thuỷ 2023 - Tàu vỏ Kim loại - 56 phòng', price: '4,700,000đ'},
-      {id: 6, image: 'Cruises/Cruise06.webp', name: 'Du thuyền Catherine', description: 'Hạ thuỷ 2023 - Tàu vỏ Kim loại - 39 phòng', price: '5,050,000đ'},
-    ]);
-
+  data() {
     return {
-      cruises
-    };
+      cruises: []
+    }
   },
+  beforeMount(){
+    this.fetchCruiseFertured();
+  },
+  methods: {
+    fetchCruiseFertured() {
+      const url = `http://localhost:8080/api/cruises/featured`;
+      fetch(url , {
+         headers: {
+            'Authorization': `Bearer ${access_token}` // Use the token here
+         }
+      })
+      .then(res => {
+        if(res.status === 403) {
+          //toast Phien dang nhap het han
+          useAuthStore().logout();
+        }
+          return res;
+      })  
+      .then(res => res.json())
+      .then(data => {
+        this.cruises = data;
+        console.log("data: ",data);
+      })
+      .catch(err => console.log(err));
+    }
+  }
 });
 </script>
+
