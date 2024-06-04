@@ -1,15 +1,14 @@
 <template>
   <div class="card flex justify-content-center  fixed top-0 z-50 shadow-1 bg-white">
-
     <Menubar :model="items" class="flex w-8/12  border-none xl:max-w-7xl xl:mx-auto m-auto bg-white bg-transparent">
       <template #start>
         <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem mr-3" @click="$router.push('/home')"/>
       </template>
       <template #item="{ item, props }">
-        <a v-ripple class="flex items-center  " v-bind="props.action" :href="item.link">
+        <p v-ripple class="flex items-center" v-bind="props.action"  @click="router.push(item.link)" >
           <span :class="item.icon"/>
           <span class="font-bold   ">{{ item.label }}</span>
-        </a>
+        </p>
       </template>
       <template #end>
         <div class="flex items-center end-0 gap-2 w-full min-w-50 " @click="showMenu = false">
@@ -84,9 +83,8 @@ const logout = () => {
 const showMenu = ref(false);
 
 const items = ref<MenuItem[]>([
-  {label: 'Tìm du thuyền', link: 'home'},
-  // { label: 'Tìm vé máy bay' , link:'home'},
-  {label: 'Doanh nghiệp', link: 'home'},
+  {label: 'Tìm du thuyền', link: 'profile'},
+  {label: 'Doanh nghiệp', link: '/'},
   {label: 'Blog', link: 'home'}
 ]);
 
