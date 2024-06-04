@@ -1,5 +1,5 @@
 <template>
-  <section class="xl:max-w-6xl xl:mx-auto pt-32">
+  <section class="xl:max-w-6xl xl:mx-auto pt-24">
     <section class="mb-6 flex items-center justify-between">
       <div class="flex items-center justify-start">
         <span
@@ -8,7 +8,7 @@
         </span>
         <span class="text-3xl font-bold">Profile</span>
       </div>
-      <p class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700 px-4 py-2"
+      <p class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 cursor-pointer"
          @click="logouts">
         <span class="inline-flex justify-center items-center w-6 h-6">
           <i class="pi pi-sign-out" style="color: white"></i>
@@ -19,18 +19,18 @@
     </section>
     <div class="rounded-3xl flex-col dark:bg-slate-900/70 bg-white flex mb-6 shadow-2">
       <div class="flex-1 p-6">
-        <div class="justify-around lg:justify-center items-center block md:flex">
-          <div class="flex items-center justify-center mb-6 md:mb-0">
-            <div class="lg:mx-12">
+        <div class="md:flex justify-center  block ">
+          <div class="flex  mb-6 md:mb-0">
+            <div class="mx-12 ">
               <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type"
-                   class="h-15rem w-15rem  rounded-full object-cover"/>
+                   class="h-15rem w-15rem  rounded-full object-cover shadow-1"/>
               <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com"
-                   alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10"/>
+                   alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10 shadow-5"/>
             </div>
           </div>
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
-              <h1 class="text-2xl"> Xin Chào, <b></b>! {{ user.name }}</h1>
+              <h1 class="text-2xl font-medium"> Xin Chào! <b class="font-bold">{{ user.name }}</b></h1>
               <p>Cập nhật ngày: {{ formatDate(userImage.createdAt) }}</p>
               <div class="flex justify-center md:block">
                 <div
@@ -51,14 +51,13 @@
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <form class="rounded-2xl bg-white shadow-2">
-        <div class="flex-1 p-6">
-          <div class="mb-6">
+        <div class="flex-1 p-6 ">
+          <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
-            <div class="card shadow-1">
-              <Toast class="z-50"/>
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload($event)" :multiple="true"
-                          accept="image/*" :maxFileSize="1000000" @click="uploadPhoto">
-                <template #empty>
+            <div class="card shadow-1 border-round-xl">
+              <Toast  />
+              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload()" :multiple="true" accept="image/*" :maxFileSize="1000000">
+                <template #empty  >
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
                 </template>
               </FileUpload>
@@ -194,8 +193,8 @@ export default defineComponent({
       console.log("user: ", this.user);
       this.fetchUserImage();
     },
-    onAdvancedUpload($event: any) {
-      this.$toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 15000});
+    onAdvancedUpload() {
+      this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
     },
     logouts: async function () {
       const authStore = useAuthStore();
@@ -204,17 +203,6 @@ export default defineComponent({
       setTimeout(() => {
         router.push('/')
       }, 500);
-    },
-    async uploadPhoto() {
-      try {
-        // Replace this with the actual function that handles the photo upload
-        // await this.actualUploadPhotoFunction();
-        // If the Promise resolves, the photo was uploaded successfully
-        // this.$toast.add({severity: 'success', summary: 'Success', detail: 'Photo Uploaded Successfully', life: 3000});
-      } catch (error) {
-        // If the Promise rejects, there was an error uploading the photo
-        this.$toast.add({severity: 'error', summary: 'Error', detail: 'Failed to Upload Photo', life: 3000});
-      }
     },
     async updateUser() {
       const username = localStorage.getItem('user');
