@@ -6,17 +6,23 @@
           Du thuyền mới và phổ biến nhất
           <img src="/heading-border.webp" alt="">
         </h1>
-        <p class="mb-8 text-xl">Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.</p>
+        <p class="mb-8 text-xl">Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám
+          phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể
+          quên.</p>
       </div>
 
-      <div class="cruise-card-container  cursor-pointer grid  lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6">
-        <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 ">
+      <div
+          class="cruise-card-container  cursor-pointer grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6 ">
+        <div v-for="cruise in cruises" :key="cruise.id"
+             class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 hover:shadow-5 " @click="CruiseInformationView">
           <div class="cruise-card-header relative">
             <img :src="cruise.image" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
-            <div class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
+            <div
+                class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
               <i class="pi pi-star"></i> 4.5 (2) đánh giá
             </div>
-            <div class="location-badge flex gap-1 h-5 bg-gray-100 rounded-full px-2 py-1 align-items-center absolute bottom--7 left-3">
+            <div
+                class="location-badge flex gap-1 h-5 bg-gray-100 rounded-full px-2 py-1 align-items-center absolute bottom--7 left-3">
               <span class="pi pi-flag text-xs"></span>
               <p class="text-xs font-medium">Vịnh Hạ Long</p>
             </div>
@@ -45,7 +51,8 @@
     </div>
   </div>
   <div class="flex justify-center mt-10 relative">
-    <Button class="view-all-button align-items-center rounded-full p-3 bg-transparent border-none text-black shadow-2" icon="pi pi-chevron-right" label="Xem tất cả Du thuyền" iconPos="right"/>
+    <Button class="view-all-button align-items-center rounded-full p-3 bg-transparent border-none text-black shadow-2"
+            icon="pi pi-chevron-right" label="Xem tất cả Du thuyền" iconPos="right"/>
   </div>
 
 
@@ -92,7 +99,11 @@ export default defineComponent({
             console.log("data: ", this.cruises);
           })
           .catch(err => console.log(err));
+    },
+    CruiseInformationView() {
+      this.$router.push('/CruiseInformationView');
     }
+
   }
 });
 </script>

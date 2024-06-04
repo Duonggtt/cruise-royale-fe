@@ -147,7 +147,10 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('userInfo');
             localStorage.removeItem('userId')
-            router.push('/').then(r => r);
+
+            setTimeout(() => {
+                router.push('/').then(r => r);
+            }, 3000);
         },
     },
 });

@@ -12,6 +12,7 @@
          href="" target="">
         <span class="inline-flex justify-center items-center w-6 h-6">
           <i class="pi pi-sign-out" style="color: white"></i>
+          <Toast class="z-50"/>
           <span class="px-1 font-medium" @click="logout">Đăng xuất</span>
         </span>
       </a>
@@ -21,8 +22,10 @@
         <div class="justify-around lg:justify-center items-center block md:flex">
           <div class="flex items-center justify-center mb-6 md:mb-0">
             <div class="lg:mx-12">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="h-15rem w-15rem  rounded-full object-cover"/>
-              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10" />
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type"
+                   class="h-15rem w-15rem  rounded-full object-cover"/>
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com"
+                   alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10"/>
             </div>
           </div>
           <div class="flex items-center justify-center">
@@ -166,8 +169,9 @@ interface UserImage {
   type: string;
   createdAt: string;
 }
+
 export default defineComponent({
-  data(): {userImage: any ,user: any, originalUser: any, checked: boolean, access_token: string } {
+  data(): { userImage: any, user: any, originalUser: any, checked: boolean, access_token: string } {
     return {
       userImage: [] as UserImage[],
       user: {},
@@ -185,7 +189,7 @@ export default defineComponent({
       const userInfo = localStorage.getItem('userInfo');
       if (userInfo != null) {
         this.user = JSON.parse(userInfo);
-        this.originalUser = { ...this.user }; // Lưu trữ thông tin người dùng ban đầu
+        this.originalUser = {...this.user}; // Lưu trữ thông tin người dùng ban đầu
       }
       console.log("user: ", this.user);
     },
@@ -193,10 +197,14 @@ export default defineComponent({
       this.$toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 15000});
     },
     logout() {
-      const authStore = useAuthStore();
-      authStore.logout();
-      this.$toast.add({  severity: 'error',   summary: 'Error',  detail: `Đã đăng xuuất`, life: 3000 });
-      router.push('/')
+      this.$toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuuất`, life: 3000});
+
+      setTimeout(() => {
+        const authStore = useAuthStore();
+        authStore.logout();
+        router.push('/')
+      }, 3000);
+
     },
     async uploadPhoto() {
       try {
@@ -231,7 +239,7 @@ export default defineComponent({
           body: JSON.stringify(updatedFields)
         });
         if (res.status === 403) {
-                // toastr.error("Phiên đăng nhập hết hạn.");
+          // toastr.error("Phiên đăng nhập hết hạn.");
           useAuthStore().logout();
           return;
         }
@@ -243,7 +251,7 @@ export default defineComponent({
 
         // Update user information in data and originalUser
         this.user = updatedFields;
-        this.originalUser = { ...updatedFields };
+        this.originalUser = {...updatedFields};
 
         // Store the updated user information in localStorage
         localStorage.setItem('userInfo', JSON.stringify(updatedFields));
