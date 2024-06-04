@@ -63,15 +63,10 @@ export default defineComponent({
         authStore.login(this.user.username, this.user.password).then(sta => {
 
           if (sta) {
-
             setTimeout(() => {
               this.$toast.add({  severity: 'success', summary: 'Login Thành Công ',  detail: `Xin chào ${this.user.username}`, life: 500  });
               this.$emit('updateVisible', false);
               this.$emit('visible', 'false');
-
-              // setTimeout(() => {
-              //   router.push('/home');
-              // }, 1000);
             }, 1);
 
           } else {

@@ -8,14 +8,14 @@
         </span>
         <span class="text-3xl font-bold">Profile</span>
       </div>
-      <a class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700 px-4 py-2"
-         href="" target="">
+      <p class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700 px-4 py-2"
+         @click="logouts">
         <span class="inline-flex justify-center items-center w-6 h-6">
           <i class="pi pi-sign-out" style="color: white"></i>
           <Toast class="z-50"/>
-          <span class="px-1 font-medium" @click="logout">Đăng xuất</span>
+          <span class="px-1 font-medium">Đăng xuất</span>
         </span>
-      </a>
+      </p>
     </section>
     <div class="rounded-3xl flex-col dark:bg-slate-900/70 bg-white flex mb-6 shadow-2">
       <div class="flex-1 p-6">
@@ -182,9 +182,9 @@ export default defineComponent({
   },
   created() {
     this.fetchUserInfo();
-    this.fetchUserImage();
   },
   methods: {
+
     fetchUserInfo() {
       const userInfo = localStorage.getItem('userInfo');
       if (userInfo != null) {
@@ -192,19 +192,18 @@ export default defineComponent({
         this.originalUser = {...this.user}; // Lưu trữ thông tin người dùng ban đầu
       }
       console.log("user: ", this.user);
+      this.fetchUserImage();
     },
     onAdvancedUpload($event: any) {
       this.$toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 15000});
     },
-    logout() {
-      this.$toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuuất`, life: 3000});
-
+    logouts: async function () {
+      const authStore = useAuthStore();
+      await authStore.logout();
+      this.$toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuuất`, life: 500});
       setTimeout(() => {
-        const authStore = useAuthStore();
-        authStore.logout();
         router.push('/')
-      }, 3000);
-
+      }, 500);
     },
     async uploadPhoto() {
       try {
@@ -292,5 +291,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-</style>
+

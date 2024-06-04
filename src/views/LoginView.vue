@@ -2,7 +2,7 @@
   <div>
     <Container v-if="state === 'login'">
       <div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen " :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}"  >
-        <Log @updateState="handleStateChange" />
+        <Login @updateState="handleStateChange" />
       </div>
 
     </Container>

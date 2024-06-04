@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia';
 import router from '../router';
-import {useToast} from "primevue/usetoast";
+
 
 interface AuthState {
     user: string | null;
@@ -147,10 +147,9 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('userInfo');
             localStorage.removeItem('userId')
-
-            setTimeout(() => {
-                router.push('/').then(r => r);
-            }, 3000);
+            // setTimeout(() => {
+            //     router.push('/').then(r => r);
+            // }, 500);
         },
     },
 });

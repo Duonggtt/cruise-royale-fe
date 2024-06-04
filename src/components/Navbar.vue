@@ -17,12 +17,12 @@
           <span class=" font-bold pr-3 hover:text-green-500 cursor-pointer"> Liên Hệ: 0123456789</span>
           <Avatar class="h-2rem w-2rem border-2 hover:border-green-100 cursor-pointer" image="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" shape="circle"
                   @mouseover="showMenu = true" @click="handleAvatarClick"/>
-          <div v-if="showMenu && authStore.user" class="absolute top-20 right-30 bg-white rounded shadow p-2" @mouseover="showMenu = true"
+          <div v-if="showMenu && authStore.user &&router.currentRoute.value.path !=='/profile'" class="absolute top-16 right-44 bg-white rounded shadow p-2" @mouseover="showMenu = true"
                @mouseleave="showMenu = false">
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/profile')">
               Thông tin người dùng
             </div>
-            <Toast class="z-50" />
+            <Toast class="z-50"/>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="logout">Đăng xuất</div>
           </div>
           <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }" :destroyOnClose="true">
@@ -40,10 +40,11 @@
 
 <script setup lang="ts">
 import Toast from "primevue/toast";
-import {onMounted, ref} from 'vue';
+import { ref} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
 import {useToast} from "primevue/usetoast";
+
 interface MenuItem {
   label?: string;
   icon?: string;
@@ -52,29 +53,21 @@ interface MenuItem {
 
 const authStore = useAuthStore(); // Tạo một instance của authStore
 
-onMounted(() => {
-  if (authStore.user) {
-    visible.value = false;
-  }
-});
+
 const handleAvatarClick = () => {
   if (authStore.user) {
-    // If user is logged in, navigate to profile page
     router.push('/profile');
   } else {
-    // If user is not logged in, show login dialog
     visible.value = true;
   }
 };
 
-const handleVisibleChange = (newVisible:boolean) => {
+const handleVisibleChange = (newVisible: boolean) => {
   visible.value = newVisible;
 };
 
 const visible = ref(false);
-
 const dialogState = ref('login');
-
 const handleStateChange = (newState: string) => {
   dialogState.value = newState;
   visible.value = true;
@@ -85,8 +78,7 @@ const toast = useToast();
 const logout = () => {
   const authStore = useAuthStore();
   authStore.logout();
-  toast.add({  severity: 'error',   summary: 'Đã đăng xuuất',  detail: ` Đã đăng xuuất `, life: 500 });
-
+  toast.add({severity: 'error', summary: 'Đã đăng xuuất', detail: ` Đã đăng xuuất `, life: 500});
 };
 
 const showMenu = ref(false);

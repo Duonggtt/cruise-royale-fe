@@ -116,7 +116,7 @@ import Footer from "@/components/Footer.vue";
 import HomeListCruiseView from "@/components/HomeListCruiseView.vue";
 
 import YachtTitle from "@/components/CruiseInformation/YachtTitle.vue";
-import FeaturesSection from './components/CruiseInformation/YachtTitle.vue'
+
 import RoomTypes from './components/CruiseInformation/RoomTypes.vue'
 import Introduction from './components/CruiseInformation/Introduction.vue'
 import Policies from './components/CruiseInformation/Policies.vue'
@@ -249,7 +249,7 @@ app.component("SearchYachts", SearchYachts);
 app.component("Footer", Footer);
 app.component("HomeListCruiseView", HomeListCruiseView)
 app.component("YachtTitle", YachtTitle)
-app.component("FeaturesSection", FeaturesSection)
+
 app.component("RoomTypes", RoomTypes)
 
 app.component("Introduction", Introduction)
