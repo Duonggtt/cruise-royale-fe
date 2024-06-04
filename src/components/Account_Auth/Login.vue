@@ -41,11 +41,8 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {useRouter} from 'vue-router';
 import {useAuthStore} from '@/stores/counter';
 import {reactive} from 'vue';
-import router from "@/router";
-
 export default defineComponent({
   data() {
     return {
@@ -61,14 +58,14 @@ export default defineComponent({
     onSubmit() {
       console.log(this.user);
       if (this.user.username !== '' && this.user.password !== '') {
-        const router = useRouter();
+
         const authStore = useAuthStore();
         authStore.login(this.user.username, this.user.password).then(sta => {
 
           if (sta) {
 
             setTimeout(() => {
-              this.$toast.add({  severity: 'success', summary: 'Login Thành Công ',  detail: `Xin chào ${this.user.username}`, life: 3000  });
+              this.$toast.add({  severity: 'success', summary: 'Login Thành Công ',  detail: `Xin chào ${this.user.username}`, life: 500  });
               this.$emit('updateVisible', false);
               this.$emit('visible', 'false');
 
@@ -79,7 +76,7 @@ export default defineComponent({
 
           } else {
             console.log('Login Failed');
-            this.$toast.add({  severity: 'error',   summary: 'Error',  detail: `Vui lòng kiểm tra lại  ${this.user.username}`, life: 3000 });
+            this.$toast.add({  severity: 'error',   summary: 'Error',  detail: `Vui lòng kiểm tra lại  ${this.user.username}`, life: 500 });
           }
         });
       }

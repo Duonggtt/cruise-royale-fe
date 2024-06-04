@@ -1,6 +1,10 @@
 <template>
   <div class="flex justify-center mt-24 relative">
-    <video class="max-w-6xl rounded-3xl" src="/Video/Mixivivuduthuyen.mp4" autoplay muted loop></video>
+    <Carousel :value="images"  class="max-w-7xl rounded-3xl" :autoplay="true" :autoplayTimeout="2000" :navigation="false">
+      <template #item="slotProps">
+        <img :src="slotProps.data" class="object-cover h-full w-full rounded-3xl" alt="">
+      </template>
+    </Carousel>
     <div class="absolute bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center bottom-[-8rem] w-3/4 max-w-5xl">
       <h2 class="text-3xl font-bold mb-2">Bạn lựa chọn du thuyền Hạ Long nào?</h2>
       <p class="text-gray-600 mb-4">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
@@ -20,18 +24,31 @@
 import { ref } from 'vue';
 
 
-const yachts = ref([
-  'Du thuyền Indochine',
-  'Du thuyền Le Theatre',
-  'Du thuyền Orchid Trendy',
-  'Du thuyền Milalux',
-  'Du thuyền Paradise Elegance Hạ Long',
-  'Du thuyền Paradise Peak',
-  'Du thuyền Aspira',
-  'Du thuyền La Pandora',
-  'Du thuyền Orchid Premium Ha Long'
-]);
+// const yachts = ref([
+//   'Du thuyền Indochine',
+//   'Du thuyền Le Theatre',
+//   'Du thuyền Orchid Trendy',
+//   'Du thuyền Milalux',
+//   'Du thuyền Paradise Elegance Hạ Long',
+//   'Du thuyền Paradise Peak',
+//   'Du thuyền Aspira',
+//   'Du thuyền La Pandora',
+//   'Du thuyền Orchid Premium Ha Long'
+// ]);
 
+
+const images = ref([
+  '/thum01.jpg',
+  '/thum01.jpg',
+  '/thum01.jpg',
+  '/thum01.jpg',
+  '/thum01.jpg',
+  '/thum01.jpg',
+  '/thum01.jpg',
+  '/thum01.jpg',
+
+  // thêm đường dẫn ảnh vào đây
+]);
 
 const locations = ref([
   { name: 'Tất cả địa điểm' },

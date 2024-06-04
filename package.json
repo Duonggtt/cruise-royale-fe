@@ -20,6 +20,7 @@
     "primevue": "^3.52.0",
     "toastr": "^2.1.4",
     "vue": "^3.4.21",
+    "vue-ripple-directive": "^2.0.1",
     "vue-router": "^4.3.0",
     "vuex": "^4.1.0"
   },

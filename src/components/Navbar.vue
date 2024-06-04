@@ -22,6 +22,7 @@
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/profile')">
               Thông tin người dùng
             </div>
+            <Toast class="z-50" />
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="logout">Đăng xuất</div>
           </div>
           <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }" :destroyOnClose="true">
@@ -38,10 +39,11 @@
 </template>
 
 <script setup lang="ts">
-
+import Toast from "primevue/toast";
 import {onMounted, ref} from 'vue';
-import {useAuthStore} from '../stores/counter';
+import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
+import {useToast} from "primevue/usetoast";
 interface MenuItem {
   label?: string;
   icon?: string;
@@ -78,9 +80,13 @@ const handleStateChange = (newState: string) => {
   visible.value = true;
 };
 
+const toast = useToast();
+
 const logout = () => {
   const authStore = useAuthStore();
   authStore.logout();
+  toast.add({  severity: 'error',   summary: 'Đã đăng xuuất',  detail: ` Đã đăng xuuất `, life: 500 });
+
 };
 
 const showMenu = ref(false);

@@ -158,6 +158,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {useAuthStore} from '@/stores/counter';
+import router from "@/router";
 
 interface UserImage {
   id: number;
@@ -182,7 +183,7 @@ export default defineComponent({
   methods: {
     fetchUserInfo() {
       const userInfo = localStorage.getItem('userInfo');
-      if (userInfo !== null) {
+      if (userInfo != null) {
         this.user = JSON.parse(userInfo);
         this.originalUser = { ...this.user }; // Lưu trữ thông tin người dùng ban đầu
       }
@@ -194,7 +195,8 @@ export default defineComponent({
     logout() {
       const authStore = useAuthStore();
       authStore.logout();
-      // this.$router.push('/');
+      this.$toast.add({  severity: 'error',   summary: 'Error',  detail: `Đã đăng xuuất`, life: 3000 });
+      router.push('/')
     },
     async uploadPhoto() {
       try {
