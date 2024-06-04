@@ -8,6 +8,7 @@ import Profile from '@/components/Profile.vue';
 import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
 import ProfileView from '@/views/ProfileView.vue';
+import CruiseInformationView from '@/views/CruiseInformationView.vue';
 
 
 
@@ -45,6 +46,11 @@ const router = createRouter({
             path: '/LoginView',
             name: 'LoginView',
             component: LoginView
+        }
+        ,{
+            path: '/CruiseInformationView',
+            name: 'CruiseInformationView',
+            component: CruiseInformationView
         },
         {
             path: '/',
