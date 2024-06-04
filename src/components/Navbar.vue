@@ -50,9 +50,7 @@ interface MenuItem {
   link?: string;
 }
 
-const authStore = useAuthStore(); // Tạo một instance của authStore
-
-
+const authStore = useAuthStore();
 const handleAvatarClick = () => {
   if (authStore.user) {
     router.push('/profile');
@@ -83,9 +81,9 @@ const logout = () => {
 const showMenu = ref(false);
 
 const items = ref<MenuItem[]>([
-  {label: 'Tìm du thuyền', link: 'profile'},
+  {label: 'Tìm du thuyền', link: 'CruiseInformationView'},
   {label: 'Doanh nghiệp', link: '/'},
-  {label: 'Blog', link: 'home'}
+  {label: 'Blog', link: 'profile'}
 ]);
 
 
