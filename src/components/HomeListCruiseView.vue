@@ -12,7 +12,7 @@
       <div class="cruise-card-container  cursor-pointer grid  lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6">
         <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 ">
           <div class="cruise-card-header relative">
-            <img :src="cruise.image" alt="Null " class="w-full min-h-52 max-h-52 object-cover rounded-3xl"/>
+            <img :src="cruise.image" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
             <div class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
               <i class="pi pi-star"></i> 4.5 (2) đánh giá
             </div>
