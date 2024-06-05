@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex justify-content-center  fixed top-0 z-50 shadow-1 bg-white">
+  <div class="card fixed top-0 z-50 border-bottom-1 border-gray-200 bg-white">
     <Menubar :model="items" class="flex w-8/12  border-none xl:max-w-7xl xl:mx-auto m-auto bg-white bg-transparent">
       <template #start>
         <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem mr-3" @click="$router.push('/home')"/>
@@ -81,7 +81,7 @@ const logout = () => {
 const showMenu = ref(false);
 
 const items = ref<MenuItem[]>([
-  {label: 'Tìm du thuyền', link: 'CruiseInformationView'},
+  {label: 'Tìm du thuyền', link: 'CruiseDetailsView'},
   {label: 'Doanh nghiệp', link: '/'},
   {label: 'Blog', link: 'profile'}
 ]);

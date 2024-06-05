@@ -3,7 +3,7 @@
     <Navbar class="w-screen"/>
     <Toast class="z-50" />
     <SearchYachts/>
-    <HomeListCruiseView/>
+    <ListCruiseView/>
     <Footer/>
   </main>
 </template>

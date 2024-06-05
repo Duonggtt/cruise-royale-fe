@@ -2,17 +2,10 @@ import {createRouter, createWebHistory} from 'vue-router';
 import register from '@/components/Account_Auth/Register.vue';
 import FogotPassword from '@/components/Account_Auth/ForgotPassword.vue';
 
-import Navbar from '@/components/Navbar.vue';
-import Profile from '@/components/Profile.vue';
-
 import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
 import ProfileView from '@/views/ProfileView.vue';
-import CruiseInformationView from '@/views/CruiseInformationView.vue';
-
-
-
-
+import CruiseDetailsView from '@/views/CruiseDetailsView.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,12 +19,6 @@ const router = createRouter({
             path: '/home',
             name: 'home',
             component: HomeView
-        },
-
-        {
-            path: '/Navbar',
-            name: 'Navbar',
-            component: Navbar
         },
         {
             path: '/profile',
@@ -48,9 +35,9 @@ const router = createRouter({
             component: LoginView
         }
         ,{
-            path: '/CruiseInformationView',
-            name: 'CruiseInformationView',
-            component: CruiseInformationView
+            path: '/CruiseDetailsView',
+            name: 'CruiseDetailsView',
+            component: CruiseDetailsView
         },
         {
             path: '/',

@@ -1,12 +1,8 @@
-
-// import 'bootstrap/dist/css/bootstrap.css'
 import "primevue/resources/themes/lara-light-green/theme.css"
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import 'primeflex/primeflex.css';
-
 import './assets/main.css'
-// import './assets/base.css'
 
 
 //#region Import Components Primevue
@@ -104,30 +100,29 @@ import TriStateCheckbox from "primevue/tristatecheckbox";
 
 
 //#region  Import Custom Components
+
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+
 import Login from "@/components/Account_Auth/Login.vue";
 import Reg from "@/components/Account_Auth/Register.vue";
 import ForgotPassword from "@/components/Account_Auth/ForgotPassword.vue";
-
-import Navbar from "@/components/Navbar.vue";
-import Profile from "@/components/Profile.vue";
+import Profile from "@/components/Account_Auth/Profile.vue";
 
 import SearchYachts from "@/components/Home/SearchYachts.vue";
-import Footer from "@/components/Footer.vue";
-import HomeListCruiseView from "@/components/HomeListCruiseView.vue";
+import ListCruiseView from "@/components/Home/ListCruiseView.vue";
 
-import YachtTitle from "@/components/CruiseInformation/YachtTitle.vue";
+import BreadcrumbDetail  from "@/components/CruiseInformation/T1_BreadcrumbDetail.vue";
+import YachtTitle from "@/components/CruiseInformation/T2_YachtTitle.vue";
+import  Highlight from "@/components/CruiseInformation/T3_Highlight.vue";
 
-import RoomTypes from './components/CruiseInformation/RoomTypes.vue'
-import Introduction from './components/CruiseInformation/Introduction.vue'
-import Policies from './components/CruiseInformation/Policies.vue'
-import FAQ from './components/CruiseInformation/FAQ.vue'
-import Map from './components/CruiseInformation/Map.vue'
-import Reviews from './components/CruiseInformation/Reviews.vue'
+
 
 
 import ProfileView from "@/views/ProfileView.vue";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
+import CruiseDetailsView from "@/views/CruiseDetailsView.vue";
 
 //#endregion Import Custom Components
 
@@ -247,16 +242,11 @@ app.component("HomeView", HomeView);
 app.component("LoginView", LoginView);
 app.component("SearchYachts", SearchYachts);
 app.component("Footer", Footer);
-app.component("HomeListCruiseView", HomeListCruiseView)
+app.component("ListCruiseView", ListCruiseView)
 app.component("YachtTitle", YachtTitle)
-
-app.component("RoomTypes", RoomTypes)
-
-app.component("Introduction", Introduction)
-app.component("Policies", Policies)
-app.component("FAQ", FAQ)
-app.component("Map", Map)
-app.component("Reviews", Reviews)
+app.component("BreadcrumbDetail", BreadcrumbDetail)
+app.component("CruiseDetailsView", CruiseDetailsView)
+app.component("Highlight", Highlight)
 
 
 
