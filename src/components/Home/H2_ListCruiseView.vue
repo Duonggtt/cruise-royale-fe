@@ -101,7 +101,7 @@ export default defineComponent({
           .catch(err => console.log(err));
     },
     CruiseInformationView() {
-      this.$router.push('/CruiseInformationView');
+      this.$router.push('/CruiseDetail');
     }
 
   }

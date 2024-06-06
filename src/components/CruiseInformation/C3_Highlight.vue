@@ -37,40 +37,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
 
-export default defineComponent({
-  name: 'Layout',
-  data() {
-    return {
-      shipDetails: {
-        'Hạ thủy': '2019',
-        Cabin: '20',
-        'Thân vỏ': 'Kim loại',
-        'Hành trình': 'Vịnh Lan Hạ - Bãi tắm Ba Trái Đào - Hang Sáng Tối',
-        'Điều hành': 'Công ty cổ phần Heritage Cruises',
-      },
-      features: [
-        {label: 'Có bể sục', icon: 'pi  pi-home'},
-        {label: 'Bao gồm tất cả các bữa ăn', icon: 'pi  pi-home'},
-        {label: 'Quầy bar', icon: 'pi  pi-home'},
-        {label: 'Lễ tân 24 giờ', icon: 'pi pi-clock'},
-        {label: 'Nhà hàng', icon: 'pi pi-home'},
-        {label: 'Phòng có bồn tắm', icon: 'pi  pi-home'},
-      ],
-      highlights: [
-        'Du thuyền được thiết kế với phong cách sang trọng và truyền thống',
-        'Phòng ngủ tiện nghi sang trọng mang phong cách Á Đông đều có bồn tắm cạnh cửa kính lớn view vịnh',
-        'Đặc biệt hơn, du thuyền thiết kế bể bơi 4 mùa to rộng là địa điểm check-in yêu thích của mọi du khách',
-        'Du thuyền có nhiều lịch trình 2 ngày 1 đêm, 3 ngày 2 đêm và 4 ngày 3 đêm cho những ai muốn 1 lịch trình dài hơn trên vịnh Lan Hạ',
-      ],
+<script setup lang="ts">
+const shipDetails = {
+  'Hạ thủy': '2019',
+  Cabin: '20',
+  'Thân vỏ': 'Kim loại',
+  'Hành trình': 'Vịnh Lan Hạ - Bãi tắm Ba Trái Đào - Hang Sáng Tối',
+  'Điều hành': 'Công ty cổ phần Heritage Cruises',
+};
 
-    };
-  },
-});
+const features = [
+  { label: 'Có bể sục', icon: 'pi  pi-home' },
+  { label: 'Bao gồm tất cả các bữa ăn', icon: 'pi  pi-home' },
+  { label: 'Quầy bar', icon: 'pi  pi-home' },
+  { label: 'Lễ tân 24 giờ', icon: 'pi pi-clock' },
+  { label: 'Nhà hàng', icon: 'pi pi-home' },
+  { label: 'Phòng có bồn tắm', icon: 'pi  pi-home' },
+];
+
+const highlights = [
+  'Du thuyền được thiết kế với phong cách sang trọng và truyền thống',
+  'Phòng ngủ tiện nghi sang trọng mang phong cách Á Đông đều có bồn tắm cạnh cửa kính lớn view vịnh',
+  'Đặc biệt hơn, du thuyền thiết kế bể bơi 4 mùa to rộng là địa điểm check-in yêu thích của mọi du khách',
+  'Du thuyền có nhiều lịch trình 2 ngày 1 đêm, 3 ngày 2 đêm và 4 ngày 3 đêm cho những ai muốn 1 lịch trình dài hơn trên vịnh Lan Hạ',
+];
 </script>
 
-<style scoped>
 
-</style>

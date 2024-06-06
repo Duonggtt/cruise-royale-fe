@@ -5,7 +5,7 @@
         <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem mr-3" @click="$router.push('/home')"/>
       </template>
       <template #item="{ item, props }">
-        <p v-ripple class="flex items-center" v-bind="props.action"  @click="router.push(item.link)" >
+        <p v-ripple class="flex items-center" v-bind="props.action" @click="router.push(item.link)">
           <span :class="item.icon"/>
           <span class="font-bold   ">{{ item.label }}</span>
         </p>
@@ -37,9 +37,11 @@
 
 </template>
 
+
+
 <script setup lang="ts">
 import Toast from "primevue/toast";
-import { ref} from 'vue';
+import {ref} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
 import {useToast} from "primevue/usetoast";
@@ -81,10 +83,11 @@ const logout = () => {
 const showMenu = ref(false);
 
 const items = ref<MenuItem[]>([
-  {label: 'Tìm du thuyền', link: 'CruiseDetailsView'},
+  {label: 'Tìm du thuyền', link: 'CruiseDetails'},
   {label: 'Doanh nghiệp', link: '/'},
   {label: 'Blog', link: 'profile'}
 ]);
 
-
 </script>
+
+

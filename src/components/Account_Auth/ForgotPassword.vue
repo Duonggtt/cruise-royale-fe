@@ -28,33 +28,24 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
-import {useRouter} from 'vue-router';
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const router = useRouter();
-    return {router};
-  },
-  data() {
-    return {
-      email: '',
-      userImage: 'path_to_user_image.jpg'
-    };
-  },
-  methods: {
-    resetPassword() {
-      console.log('Yêu cầu quên mật khẩu cho:', this.email);
-      this.$emit('updateState', 'login');
+const router = useRouter();
+const email = ref('');
+const userImage = ref('path_to_user_image.jpg');
 
-    } ,
-    back() {
-      this.$emit('updateState', 'login');
+const resetPassword = () => {
+  console.log('Yêu cầu quên mật khẩu cho:', email.value);
+  emit('updateState', 'login');
+};
 
-    }
-  }
-});
+const back = () => {
+  emit('updateState', 'login');
+};
+
+const emit = defineEmits(['updateState']);
 </script>
 
 

@@ -11,15 +11,11 @@ import Footer from "@/components/Footer.vue";
   <Footer/>
 
 
-  <div class="w-screen  relative top-24">
-    <div class=" w-9/12 mx-auto ">
-      <div class="container  ">
-
-
-      </div>
-    </div>
-
-  </div>
+<!--  <div class="w-screen  relative top-24">-->
+<!--    <div class=" w-9/12 mx-auto ">-->
+<!--      <div class="container  "></div>-->
+<!--    </div>-->
+<!--  </div>-->
 
 </template>
 

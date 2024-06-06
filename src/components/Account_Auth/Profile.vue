@@ -31,7 +31,8 @@
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl font-medium"> Xin Chào! <b class="font-bold">{{ user.name }}</b></h1>
-              <p>Cập nhật ngày: {{ formatDate(userImage.createdAt) }}</p>
+              <!--              <p>Cập nhật ngày: {{ formatDate(userImage.createdAt) }}</p>-->
+              <!--              <p>Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>-->
               <div class="flex justify-center md:block">
                 <div
                     class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-white">
@@ -55,9 +56,9 @@
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
-              <Toast  />
+              <Toast/>
               <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload()" :multiple="true" accept="image/*" :maxFileSize="1000000">
-                <template #empty  >
+                <template #empty>
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
                 </template>
               </FileUpload>
@@ -106,7 +107,7 @@
         </div>
 
         <footer class="px-6">
-          <button class="p-button py-2 px-3 mr-3 mb-3" type="submit" @click="updateUser">
+          <button class="p-button py-2 px-3 mr-3 mb-3" @click="updateUser">
             <span class="px-2">Cập nhật</span>
           </button>
         </footer>
@@ -145,7 +146,7 @@
         </div>
 
         <footer class="px-6">
-          <button class="p-button py-2 px-3 mr-3 mb-3" type="submit">
+          <button class="p-button py-2 px-3 mr-3 mb-3" type="button">
             <span class="px-2">Cập nhật</span>
           </button>
           <button class="p-button py-2 px-3 mr-3 mb-3" type="button">
@@ -157,10 +158,11 @@
   </section>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
+<script setup lang="ts">
+import {ref, onMounted} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
+import {useToast} from 'primevue/usetoast';
 
 interface UserImage {
   id: number;
@@ -169,113 +171,111 @@ interface UserImage {
   createdAt: string;
 }
 
-export default defineComponent({
-  data(): { userImage: any, user: any, originalUser: any, checked: boolean, access_token: string } {
-    return {
-      userImage: [] as UserImage[],
-      user: {},
-      originalUser: {},
-      access_token: localStorage.getItem('access_token') || '',
-      checked: false,
-    };
-  },
-  created() {
-    this.fetchUserInfo();
-  },
-  methods: {
+const toast = useToast();
+const userImage = ref<UserImage[]>([]);
+const user = ref<any>({});
+const originalUser = ref<any>({});
+const access_token = ref(localStorage.getItem('access_token') || '');
+const checked = ref(false);
 
-    fetchUserInfo() {
-      const userInfo = localStorage.getItem('userInfo');
-      if (userInfo != null) {
-        this.user = JSON.parse(userInfo);
-        this.originalUser = {...this.user}; // Lưu trữ thông tin người dùng ban đầu
-      }
-      console.log("user: ", this.user);
-      this.fetchUserImage();
+const fetchUserInfo = () => {
+  const userInfo = localStorage.getItem('userInfo');
+  if (userInfo != null) {
+    user.value = JSON.parse(userInfo);
+    originalUser.value = {...user.value}; // Lưu trữ thông tin người dùng ban đầu
+  }
+  console.log("user: ", user.value);
+  fetchUserImage();
+};
+
+const onAdvancedUpload = () => {
+  toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000});
+};
+
+const logouts = async () => {
+  const authStore = useAuthStore();
+  await authStore.logout();
+  toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuất`, life: 500});
+  setTimeout(() => {
+    router.push('/')
+  }, 500);
+};
+
+const updateUser = async () => {
+  const username = localStorage.getItem('user');
+  const url = `http://localhost:8080/api/user/update?username=${username}`;
+
+  // Create an object with all fields
+  const updatedFields = {
+    name: user.value.name,
+    email: user.value.email,
+    phone: user.value.phone,
+    address: user.value.address,
+  };
+
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${access_token.value}`,
+      'Content-Type': 'application/json'
     },
-    onAdvancedUpload() {
-      this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
-    },
-    logouts: async function () {
-      const authStore = useAuthStore();
-      await authStore.logout();
-      this.$toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuuất`, life: 500});
-      setTimeout(() => {
-        router.push('/')
-      }, 500);
-    },
-    async updateUser() {
-      const username = localStorage.getItem('user');
-      const url = `http://localhost:8080/api/user/update?username=${username}`;
+    body: JSON.stringify(updatedFields)
+  });
+  if (res.status === 403) {
+    // toastr.error("Phiên đăng nhập hết hạn.");
+    useAuthStore().logout();
+    return;
+  }
 
-      // Create an object with all fields
-      const updatedFields = {
-        name: this.user.name,
-        email: this.user.email,
-        phone: this.user.phone,
-        address: this.user.address,
-      };
+  // If the token has expired
+  if (!res.ok) {
+    throw new Error(`Server responded with status code ${res.status}`);
+  }
 
-      try {
-        const res = await fetch(url, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${this.access_token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(updatedFields)
-        });
-        if (res.status === 403) {
-          // toastr.error("Phiên đăng nhập hết hạn.");
-          useAuthStore().logout();
-          return;
-        }
+  // Update user information in data and originalUser
+  user.value = updatedFields;
+  originalUser.value = {...updatedFields};
 
-        // If the token has expired
-        if (!res.ok) {
-          throw new Error(`Server responded with status code ${res.status}`);
-        }
+  // Store the updated user information in localStorage
+  localStorage.setItem('userInfo', JSON.stringify(updatedFields));
 
-        // Update user information in data and originalUser
-        this.user = updatedFields;
-        this.originalUser = {...updatedFields};
+  console.log("User information updated successfully!");
 
-        // Store the updated user information in localStorage
-        localStorage.setItem('userInfo', JSON.stringify(updatedFields));
+};
 
-        console.log("User information updated successfully!");
-      } catch (error) {
-        console.log("Error updating user information!", error);
-      }
-    },
-    async fetchUserImage() {
-      const userId = localStorage.getItem('userId');
-      const url = `http://localhost:8080/api/images/?userId=${userId}`;
-      try {
-        const res = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${this.access_token}`,
-          },
-        });
-        // If the token has expired
-        if (!res.ok) {
-          throw new Error(`Server responded with status code ${res.status}`);
-        }
-        const data = await res.json();
-        this.userImage = data;
-      } catch (error) {
-        console.log("Error updating user information!", error);
-      }
-    },
-    formatDate(dateString: string): string {
-      const date = new Date(dateString);
-      return date.toLocaleDateString();
-    },
-    getImageUrl(imageData: string): string {
-      return imageData ? `data:image/jpeg;base64,${imageData}` : '';
+const fetchUserImage = async () => {
+  const userId = localStorage.getItem('userId');
+  const url = `http://localhost:8080/api/images/?userId=${userId}`;
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${access_token.value}`,
+      },
+    });
+    // If the token has expired
+    if (!res.ok) {
+      throw new Error(`Server responded with status code ${res.status}`);
     }
-  },
+    const data = await res.json();
+    userImage.value = data;
+  } catch (error) {
+    console.log("Error updating user information!", error);
+  }
+};
+
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+};
+
+const getImageUrl = (imageData: string): string => {
+  return imageData ? `data:image/jpeg;base64,${imageData}` : '';
+};
+
+onMounted(() => {
+  fetchUserInfo();
 });
 </script>
 

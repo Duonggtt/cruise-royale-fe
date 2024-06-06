@@ -109,12 +109,12 @@ import Reg from "@/components/Account_Auth/Register.vue";
 import ForgotPassword from "@/components/Account_Auth/ForgotPassword.vue";
 import Profile from "@/components/Account_Auth/Profile.vue";
 
-import SearchYachts from "@/components/Home/SearchYachts.vue";
-import ListCruiseView from "@/components/Home/ListCruiseView.vue";
+import SearchYachts from "@/components/Home/H1_SearchYachts.vue";
+import ListCruiseView from "@/components/Home/H2_ListCruiseView.vue";
 
-import BreadcrumbDetail  from "@/components/CruiseInformation/T1_BreadcrumbDetail.vue";
-import YachtTitle from "@/components/CruiseInformation/T2_YachtTitle.vue";
-import  Highlight from "@/components/CruiseInformation/T3_Highlight.vue";
+import BreadcrumbDetail  from "@/components/CruiseInformation/C1_BreadcrumbDetail.vue";
+import YachtTitle from "@/components/CruiseInformation/C2_YachtTitle.vue";
+import  Highlight from "@/components/CruiseInformation/C3_Highlight.vue";
 
 
 

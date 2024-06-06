@@ -39,54 +39,52 @@
 
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
-import {useAuthStore} from '@/stores/counter';
-import {reactive} from 'vue';
-export default defineComponent({
-  data() {
-    return {
-      user: reactive({
-        username: '',
-        password: ''
-      }),
-      checked: false,
-      userImage: '/Logo/Logo-Cruise-Royal.svg '
-    };
-  },
-  methods: {
-    onSubmit() {
-      console.log(this.user);
-      if (this.user.username !== '' && this.user.password !== '') {
 
-        const authStore = useAuthStore();
-        authStore.login(this.user.username, this.user.password).then(sta => {
+<script setup lang="ts">
+import { useAuthStore } from '@/stores/counter';
+import { reactive, ref } from 'vue';
+import { useToast } from 'primevue/usetoast';
 
-          if (sta) {
-            setTimeout(() => {
-              this.$toast.add({  severity: 'success', summary: 'Login Thành Công ',  detail: `Xin chào ${this.user.username}`, life: 500  });
-              this.$emit('updateVisible', false);
-              this.$emit('visible', 'false');
-            }, 1);
-
-          } else {
-            console.log('Login Failed');
-            this.$toast.add({  severity: 'error',   summary: 'Error',  detail: `Vui lòng kiểm tra lại  ${this.user.username}`, life: 500 });
-          }
-        });
-      }
-    },
-    handleSignUp() {
-      this.$emit('updateState', 'register');
-    },
-    handleForgotPassword() {
-      this.$emit('updateState', 'ForgotPassword');
-    },
-    HomeView() {
-      //   router.push('/home');
-      //  this.$emit('updateState', 'HomeView');
-    }
-
-  }
+const user = reactive({
+  username: '',
+  password: ''
 });
+
+const checked = ref(false);
+const userImage = ref('/Logo/Logo-Cruise-Royal.svg');
+const toast = useToast();
+
+const onSubmit = () => {
+  console.log(user);
+  if (user.username !== '' && user.password !== '') {
+    const authStore = useAuthStore();
+    authStore.login(user.username, user.password).then(state => {
+      if (state) {
+        setTimeout(() => {
+          toast.add({ severity: 'success', summary: 'Login Thành Công', detail: `Xin chào ${user.username}`, life: 1500 });
+          emit('updateVisible', false);
+          emit('visible', 'false');
+        }, 1);
+      } else {
+        console.log('Login Failed');
+        toast.add({ severity: 'error', summary: 'Error', detail: `Vui lòng kiểm tra lại  ${user.username}`, life: 1500 });
+      }
+    });
+  }
+};
+
+const handleSignUp = () => {
+  emit('updateState', 'register');
+};
+
+const handleForgotPassword = () => {
+  emit('updateState', 'ForgotPassword');
+};
+
+const HomeView = () => {
+  // router.push('/home');
+  // emit('updateState', 'HomeView');
+};
+
+const emit = defineEmits(['updateVisible', 'visible', 'updateState']);
 </script>
