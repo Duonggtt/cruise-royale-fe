@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <form class="rounded-2xl bg-white shadow-2">
+      <form class="rounded-2xl bg-white shadow-2" @submit.prevent="updateUser">
         <div class="flex-1 p-6 ">
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
@@ -108,7 +108,7 @@
         </div>
 
         <footer class="px-6">
-          <button class="p-button py-2 px-3 mr-3 mb-3" @click="updateUser">
+          <button class="p-button py-2 px-3 mr-3 mb-3">
             <span class="px-2">Cập nhật</span>
           </button>
         </footer>
@@ -181,9 +181,8 @@ const checked = ref(false);
 
 
 onMounted(() => {
- fetchUserInfo();
+  fetchUserInfo();
 });
-
 
 
 const fetchUserInfo = () => {
@@ -221,33 +220,28 @@ const updateUser = async () => {
     address: user.value.address,
   };
 
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${access_token.value}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedFields)
+  });
 
-  try {
-    const res = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${access_token.value}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedFields)
-    });
-
-    if (!res.ok) {
-      throw new Error(`Server responded with status code ${res.status}`);
-    }
-
-    // Update user information in data and originalUser
-    user.value = updatedFields;
-    originalUser.value = {...updatedFields};
-
-    // Store the updated user information in localStorage
-    localStorage.setItem('userInfo', JSON.stringify(updatedFields));
-
-    console.log("User information updated successfully!");
-
-  } catch (error) {
-    console.error("Error updating user information!", error);
+  if (!res.ok) {
+    throw new Error(`Server responded with status code ${res.status}`);
   }
+
+  // Update user information in data and originalUser
+  user.value = updatedFields;
+  originalUser.value = {...updatedFields};
+
+  // Store the updated user information in localStorage
+  localStorage.setItem('userInfo', JSON.stringify(updatedFields));
+
+  console.log("User information updated successfully!");
+  toast.add({severity: 'success', summary: 'Success', detail: 'User information updated successfully!', life: 3000});
 };
 
 const fetchUserImage = async () => {
