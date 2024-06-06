@@ -57,7 +57,8 @@
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
               <Toast/>
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload()" :multiple="true" accept="image/*" :maxFileSize="1000000">
+              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload()" :multiple="true" accept="image/*"
+                          :maxFileSize="1000000">
                 <template #empty>
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
                 </template>
@@ -178,6 +179,13 @@ const originalUser = ref<any>({});
 const access_token = ref(localStorage.getItem('access_token') || '');
 const checked = ref(false);
 
+
+onMounted(() => {
+ fetchUserInfo();
+});
+
+
+
 const fetchUserInfo = () => {
   const userInfo = localStorage.getItem('userInfo');
   if (userInfo != null) {
@@ -214,34 +222,32 @@ const updateUser = async () => {
   };
 
 
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${access_token.value}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updatedFields)
-  });
-  if (res.status === 403) {
-    // toastr.error("Phiên đăng nhập hết hạn.");
-    useAuthStore().logout();
-    return;
+  try {
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${access_token.value}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedFields)
+    });
+
+    if (!res.ok) {
+      throw new Error(`Server responded with status code ${res.status}`);
+    }
+
+    // Update user information in data and originalUser
+    user.value = updatedFields;
+    originalUser.value = {...updatedFields};
+
+    // Store the updated user information in localStorage
+    localStorage.setItem('userInfo', JSON.stringify(updatedFields));
+
+    console.log("User information updated successfully!");
+
+  } catch (error) {
+    console.error("Error updating user information!", error);
   }
-
-  // If the token has expired
-  if (!res.ok) {
-    throw new Error(`Server responded with status code ${res.status}`);
-  }
-
-  // Update user information in data and originalUser
-  user.value = updatedFields;
-  originalUser.value = {...updatedFields};
-
-  // Store the updated user information in localStorage
-  localStorage.setItem('userInfo', JSON.stringify(updatedFields));
-
-  console.log("User information updated successfully!");
-
 };
 
 const fetchUserImage = async () => {
@@ -274,9 +280,7 @@ const getImageUrl = (imageData: string): string => {
   return imageData ? `data:image/jpeg;base64,${imageData}` : '';
 };
 
-onMounted(() => {
-  fetchUserInfo();
-});
+
 </script>
 
 

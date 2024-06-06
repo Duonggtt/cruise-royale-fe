@@ -90,7 +90,7 @@ export const useAuthStore = defineStore({
                 localStorage.setItem('userInfo', JSON.stringify(userData));
                 localStorage.setItem('userId', JSON.stringify(userData.id))
             } catch (error) {
-                await router.replace("/");
+                // await router.replace("/");
                 console.log("Error fetching user by username!", error);
 
             }
