@@ -6,23 +6,19 @@
           Du thuyền mới và phổ biến nhất
           <img src="/heading-border.webp" alt="">
         </h1>
-        <p class="mb-8 text-xl">Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám
-          phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể
-          quên.</p>
+        <p class="mb-8 text-xl">
+          Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.
+        </p>
       </div>
 
-      <div
-          class="cruise-card-container  cursor-pointer grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6 ">
-        <div v-for="cruise in cruises" :key="cruise.id"
-             class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 hover:shadow-5 " @click="CruiseInformationView">
+      <div class="cruise-card-container  cursor-pointer grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6 ">
+        <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 hover:shadow-5 " @click="() => CruiseInformationView(cruise)">
           <div class="cruise-card-header relative">
-            <img :src="cruise.image" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
-            <div
-                class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
+            <img :src="getImageUrl(cruise.id)" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
+            <div class="rating-badge absolute  top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center  gap-1 opacity-85">
               <i class="pi pi-star"></i> 4.5 (2) đánh giá
             </div>
-            <div
-                class="location-badge flex gap-1 h-5 bg-gray-100 rounded-full px-2 py-1 align-items-center absolute bottom--7 left-3">
+            <div class="location-badge flex gap-1 h-5 bg-gray-100 rounded-full px-2 py-1 align-items-center absolute bottom--7 left-3">
               <span class="pi pi-flag text-xs"></span>
               <p class="text-xs font-medium">Vịnh Hạ Long</p>
             </div>
@@ -57,11 +53,14 @@
 
 
 </template>
-<script lang="ts">
-import {defineComponent, ref} from 'vue';
-import {useAuthStore} from '@/stores/counter';
 
-const access_token = localStorage.getItem('access_token');
+<script setup lang="ts">
+import {useAuthStore} from '@/stores/counter';
+import {ref} from "vue";
+import {useToast} from "primevue/usetoast";
+import router from "@/router";
+
+const access_token = ref(localStorage.getItem('access_token') || '');
 
 interface Cruise {
   id: number;
@@ -69,42 +68,56 @@ interface Cruise {
   image: string;
   description: string;
   price: number;
+  imageUrl?: string; // Add this line
 }
 
-export default defineComponent({
-  name: 'App',
-  data() {
-    return {
-      cruises: [] as Cruise[]
-    }
-  },
-  beforeMount() {
-    this.fetchCruiseFertured();
-  },
-  methods: {
-    fetchCruiseFertured() {
-      const url = `http://localhost:8080/api/cruises/featured`;
-      fetch(url)
-          .then(res => {
-            if (res.status === 403) {
-              //toast Phien dang nhap het han
-              useAuthStore().logout();
-              this.$toast.add({severity: 'info', summary: 'Đăng Xuất', detail: 'Hết phiên đăng nhập', life: 3000});
-            }
-            return res;
-          })
-          .then(res => res.json())
-          .then(data => {
-            this.cruises = data;
-            console.log("data: ", this.cruises);
-          })
-          .catch(err => console.log(err));
+const cruises = ref<Cruise[]>([]);
+const CruiseInformationView = (cruise: Cruise) => {
+  // Navigate to the cruise information view
+  router.push(`/cruise/${cruise.id}`);
+};
+
+
+const getImageUrl = (cruiseId: number): string => {
+  return `http://localhost:8080/api/cruise/images/${cruiseId}`;
+};
+const fetchCruiseFertured = () => {
+  const url = `http://localhost:8080/api/cruises/featured`;
+  fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${access_token.value}`,
     },
-    CruiseInformationView() {
-      this.$router.push('/CruiseDetail');
-    }
+  })
+      .then(res => {
+        if (res.status === 403) {
+          useAuthStore().logout();
+          useToast().add({severity: 'info', summary: 'Đăng Xuất', detail: 'Hết phiên đăng nhập', life: 3000});
+        }
+        return res;
+      })
+      .then(res => res.json())
+      .then(data => {
+        cruises.value = data;
+        // Fetch the image for each cruise
+        cruises.value.forEach(cruise => {
+          fetch(`http://localhost:8080/api/cruise/images/${cruise.id}`, {
+            headers: {
+              'Authorization': `Bearer ${access_token.value}`,
+            },
+          })
+              .then(res => res.blob()) // parse the response as Blob
+              .then(imageBlob => {
+                // Create a URL for the image Blob
+                const imageUrl = URL.createObjectURL(imageBlob);
+                // Store the image URL in the cruise object
+                cruise.imageUrl = imageUrl;
+              })
+              .catch(err => console.log(err));
+        });
+        console.log("data: ", cruises.value);
+      })
+      .catch(err => console.log(err));
+};
 
-  }
-});
+fetchCruiseFertured();
 </script>
-

@@ -6,17 +6,16 @@
         <h2 class="pt-3 font-bold">Welcome, Cruise Royal</h2>
       </div>
       <div class="input-group flex-column align-items-center mb-4">
-                <span class="p-float-label ">
-                    <InputText id="username" v-model="user.username" class="p-input-filled  w-full h-3rem pl-3"/>
-                    <label for="username" class="pl-2">Username</label>
-                </span>
+        <span class="p-float-label ">
+           <InputText id="username" v-model="user.username" class="p-input-filled  w-full h-3rem pl-3"/>
+           <label for="username" class="pl-2">Username</label>
+        </span>
       </div>
       <div class="input-group flex-column align-items-center mb-4">
-                <span class="p-float-label">
-                    <InputText id="password" v-model="user.password" type="password"
-                               class="p-input-filled  w-full h-3rem pl-3"/>
-                    <label for="password" class="pl-2">Password</label>
-                </span>
+       <span class="p-float-label">
+        <InputText id="password" v-model="user.password" type="password" class="p-input-filled  w-full h-3rem pl-3"/>
+              <label for="password" class="pl-2">Password</label>
+        </span>
       </div>
     </div>
     <div class="link-container flex justify-content-between align-items-center mb-2">
@@ -28,8 +27,7 @@
         ?</a>
     </div>
     <div class="link-container flex align-items-center">
-      <!--      <Toast class="z-50"/>-->
-      <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit" @click="HomeView"/>
+      <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit"/>
     </div>
 
     <div class="welcome-message text-center mb-3 pt-3">
@@ -61,14 +59,14 @@ const onSubmit = () => {
     authStore.login(user.username, user.password).then(state => {
       if (state) {
         setTimeout((showMenu: any): void => {
-          toast.add({severity: 'success', summary: 'Login Thành Công', detail: `Xin chào ${user.username}`, life: 1500 , contentStyleClass: 'gap-3' , closable: false});
+          toast.add({severity: 'success', summary: 'Login Thành Công', detail: `Xin chào ${user.username}`, life: 1500, contentStyleClass: 'gap-3', closable: false});
           emit('updateVisible', false);
           emit('visible', 'false');
           showMenu.value = false;
         }, 1);
       } else {
         console.log('Login Failed');
-        toast.add({severity: 'error', summary: 'Error', detail: `Vui lòng kiểm tra lại  ${user.username}`, life: 1500 , contentStyleClass: 'gap-3' , closable: false});
+        toast.add({severity: 'error', summary: 'Error', detail: `Vui lòng kiểm tra lại  ${user.username}`, life: 1500, contentStyleClass: 'gap-3', closable: false});
       }
     });
   }
@@ -82,10 +80,6 @@ const handleForgotPassword = () => {
   emit('updateState', 'ForgotPassword');
 };
 
-const HomeView = () => {
-  // router.push('/home');
-  // emit('updateState', 'HomeView');
-};
 
 const emit = defineEmits(['updateVisible', 'visible', 'updateState']);
 </script>
