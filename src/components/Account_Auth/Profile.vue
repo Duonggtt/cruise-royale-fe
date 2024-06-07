@@ -1,5 +1,5 @@
 <template>
-  <section class="xl:max-w-6xl xl:mx-auto pt-24">
+  <section class="xl:max-w-6xl xl:mx-auto pt-24 ">
     <section class="mb-6 flex items-center justify-between">
       <div class="flex items-center justify-start">
         <span
@@ -12,7 +12,6 @@
          @click="logouts">
         <span class="inline-flex justify-center items-center w-6 h-6">
           <i class="pi pi-sign-out" style="color: white"></i>
-          <Toast class="z-50"/>
           <span class="px-1 font-medium">Đăng xuất</span>
         </span>
       </p>
@@ -56,8 +55,7 @@
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
-              <Toast/>
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload()" :multiple="true" accept="image/*"
+              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload" :multiple="true" accept="image/*"
                           :maxFileSize="1000000">
                 <template #empty>
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
@@ -196,13 +194,13 @@ const fetchUserInfo = () => {
 };
 
 const onAdvancedUpload = () => {
-  toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000});
+  toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000, contentStyleClass: 'gap-3', closable: false});
 };
 
 const logouts = async () => {
   const authStore = useAuthStore();
   await authStore.logout();
-  toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuất`, life: 500});
+  toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuất`, life: 500, contentStyleClass: 'gap-3', closable: false});
   setTimeout(() => {
     router.push('/')
   }, 500);
@@ -241,7 +239,7 @@ const updateUser = async () => {
   localStorage.setItem('userInfo', JSON.stringify(updatedFields));
 
   console.log("User information updated successfully!");
-  toast.add({severity: 'success', summary: 'Success', detail: 'User information updated successfully!', life: 3000});
+  toast.add({severity: 'success', summary: 'Success', detail: 'Cập nhật thông tin thành công !', closable: false, life: 3000, contentStyleClass: 'gap-3'});
 };
 
 const fetchUserImage = async () => {

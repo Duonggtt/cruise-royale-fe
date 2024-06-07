@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Toast  class="z-50"/>
     <Container v-if="state === 'login'">
       <div class="login-container flex align-items-center justify-content-center bg-white-alpha-100 h-screen " :style="{backgroundImage: 'url(/Logo/BG.png)', backgroundSize: 'cover'}"  >
         <Login @updateState="handleStateChange" />

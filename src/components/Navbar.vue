@@ -1,5 +1,5 @@
 <template>
-  <div class="card fixed top-0 z-50 border-bottom-1 border-gray-200 bg-white">
+  <div class="card fixed top-0 z-2 border-bottom-1 border-gray-200 bg-white">
     <Menubar :model="items" class="flex w-8/12  border-none xl:max-w-7xl xl:mx-auto m-auto bg-white bg-transparent">
       <template #start>
         <img src="/Logo/Logo-Cruise-Royal.svg" alt="logo" class=" h-3rem mr-3" @click="$router.push('/home')"/>
@@ -21,7 +21,6 @@
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="$router.push('/profile')">
               Thông tin người dùng
             </div>
-            <Toast class="z-50"/>
             <div class="cursor-pointer p-2 hover:bg-black-alpha-10 rounded" @click="logout">Đăng xuất</div>
           </div>
           <Dialog v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }" :destroyOnClose="true">
@@ -77,7 +76,7 @@ const toast = useToast();
 const logout = () => {
   const authStore = useAuthStore();
   authStore.logout();
-  toast.add({severity: 'error', summary: 'Đã đăng xuuất', detail: ` Đã đăng xuuất `, life: 500});
+  toast.add({severity: 'error', summary: 'Đã đăng xuuất', detail: ` Đã đăng xuuất `, life: 500 , contentStyleClass: 'gap-3' , closable: false });
 };
 
 const showMenu = ref(false);

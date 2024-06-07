@@ -28,7 +28,7 @@
         ?</a>
     </div>
     <div class="link-container flex align-items-center">
-<!--      <Toast class="z-50"/>-->
+      <!--      <Toast class="z-50"/>-->
       <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit" @click="HomeView"/>
     </div>
 
@@ -41,9 +41,9 @@
 
 
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/counter';
-import { reactive, ref } from 'vue';
-import { useToast } from 'primevue/usetoast';
+import {useAuthStore} from '@/stores/counter';
+import {reactive, ref} from 'vue';
+import {useToast} from 'primevue/usetoast';
 
 const user = reactive({
   username: '',
@@ -60,14 +60,15 @@ const onSubmit = () => {
     const authStore = useAuthStore();
     authStore.login(user.username, user.password).then(state => {
       if (state) {
-        setTimeout(() => {
-          toast.add({ severity: 'success', summary: 'Login Thành Công', detail: `Xin chào ${user.username}`, life: 1500 });
+        setTimeout((showMenu: any): void => {
+          toast.add({severity: 'success', summary: 'Login Thành Công', detail: `Xin chào ${user.username}`, life: 1500 , contentStyleClass: 'gap-3' , closable: false});
           emit('updateVisible', false);
           emit('visible', 'false');
+          showMenu.value = false;
         }, 1);
       } else {
         console.log('Login Failed');
-        toast.add({ severity: 'error', summary: 'Error', detail: `Vui lòng kiểm tra lại  ${user.username}`, life: 1500 });
+        toast.add({severity: 'error', summary: 'Error', detail: `Vui lòng kiểm tra lại  ${user.username}`, life: 1500 , contentStyleClass: 'gap-3' , closable: false});
       }
     });
   }
