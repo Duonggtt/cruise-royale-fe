@@ -2,10 +2,13 @@
   <div class="flex justify-center mt-48 relative">
     <div class="min-h-screen w-full max-w-screen-xl">
       <div class="head-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
-        <h1 class="text-3xxl font-bold mb-6 col-5">
-          Du thuyền mới và phổ biến nhất
+        <div class="col-5 w-3/4">
+          <h1 class="text-3xxl font-bold mb-3 ">
+            Du thuyền mới và phổ biến nhất
+
+          </h1>
           <img src="/heading-border.webp" alt="">
-        </h1>
+        </div>
         <p class="mb-8 text-xl">
           Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.
         </p>
@@ -56,9 +59,11 @@
 </template>
 <script setup lang="ts">
 import {useAuthStore} from '@/stores/counter';
-import {ref} from "vue";
+import {ref,watchEffect} from "vue";
 import {useToast} from "primevue/usetoast";
 import router from "@/router";
+import { nextTick } from 'vue';
+
 
 const access_token = ref(localStorage.getItem('access_token') || '');
 
@@ -98,13 +103,13 @@ const fetchCruiseFeatured = async () => {
         'Authorization': `Bearer ${access_token.value}`,
       },
     });
-
     const imageBlob = await imageResponse.blob();
     cruise.imageUrl = URL.createObjectURL(imageBlob);
   }
 };
 
 fetchCruiseFeatured();
+
 
 const formattedCruiseDescription = (cruise: Cruise) => {
   return `Hạ thuỷ ${cruise.launchedYear} - ${cruise.material} - ${cruise.cabinQuantity} Phòng`;
