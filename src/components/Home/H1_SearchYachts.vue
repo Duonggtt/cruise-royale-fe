@@ -8,10 +8,10 @@
       </Carousel>
     </div>
 
-    <div class="absolute bg-white rounded-3xl shadow-1 p-6 flex flex-col items-center -bottom-20 w-3/4 max-w-5xl">
+    <div class="lg:absolute bg-white rounded-3xl shadow-1 p-6 flex flex-col items-center -bottom-20 w-3/4 max-w-5xl">
       <h2 class="text-3xl font-bold mb-2">Bạn lựa chọn du thuyền Hạ Long nào?</h2>
       <p class="text-gray-600 mb-4">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
-      <div class="flex space-x-3  text-sm">
+      <div class="lg:flex space-x-3  text-sm">
         <InputText type="text " class="w-auto  text-sm rounded-3xl pl-4" placeholder="Nhập tên du thuyền"/>
         <Dropdown class="w-auto rounded-3xl pi pi-flag flex align-items-center px-3" :options="locations" optionLabel="name" placeholder="Tất cả địa điểm" scroll-height="1"/>
         <Dropdown class="w-auto  rounded-3xl pi pi-money-bill flex align-items-center px-3" :options="prices" optionLabel="range" placeholder="Tất cả mức giá" scroll-height="1"/>
