@@ -5,6 +5,7 @@
     <SearchYachts/>
     <ListCruiseView/>
     <Footer/>
+
   </main>
 </template>
 

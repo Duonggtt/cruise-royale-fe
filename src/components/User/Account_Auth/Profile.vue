@@ -55,8 +55,7 @@
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload" :multiple="true" accept="image/*"
-                          :maxFileSize="1000000">
+              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload" custom-upload="true" :multiple="true" accept="image/*" :maxFileSize="1000000">
                 <template #empty>
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
                 </template>
@@ -274,5 +273,4 @@ const getImageUrl = (imageData: string): string => {
 
 
 </script>
-
 

@@ -26,7 +26,7 @@ body {
   margin-top: -0.5em;
 }
 
-.no-underline {
+.no-underline  ,a {
   text-decoration: none;
 }
 .p-fileupload .p-button {
@@ -53,5 +53,6 @@ body {
 .p-input-icon{
   margin-top: -0.4rem;
   margin-right: 0.6rem;
- 
+
 }
+

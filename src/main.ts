@@ -101,28 +101,31 @@ import TriStateCheckbox from "primevue/tristatecheckbox";
 
 //#region  Import Custom Components
 
-import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
+import Navbar from "@/components/User/Navbar.vue";
+import Footer from "@/components/User/Footer.vue";
 
-import Login from "@/components/Account_Auth/Login.vue";
-import Reg from "@/components/Account_Auth/Register.vue";
-import ForgotPassword from "@/components/Account_Auth/ForgotPassword.vue";
-import Profile from "@/components/Account_Auth/Profile.vue";
+import Login from "@/components/User/Account_Auth/Login.vue";
+import Reg from "@/components/User/Account_Auth/Register.vue";
+import ForgotPassword from "@/components/User/Account_Auth/ForgotPassword.vue";
+import Profile from "@/components/User/Account_Auth/Profile.vue";
 
-import SearchYachts from "@/components/Home/H1_SearchYachts.vue";
-import ListCruiseView from "@/components/Home/H2_ListCruiseView.vue";
+import SearchYachts from "@/components/User/Home/H1_SearchYachts.vue";
+import ListCruiseView from "@/components/User/Home/H2_ListCruiseView.vue";
 
-import BreadcrumbDetail  from "@/components/CruiseInformation/C1_BreadcrumbDetail.vue";
-import YachtTitle from "@/components/CruiseInformation/C2_YachtTitle.vue";
-import  Highlight from "@/components/CruiseInformation/C3_Highlight.vue";
+import BreadcrumbDetail  from "@/components/User/CruiseInformation/C1_BreadcrumbDetail.vue";
+import YachtTitle from "@/components/User/CruiseInformation/C2_YachtTitle.vue";
+import  Highlight from "@/components/User/CruiseInformation/C3_Highlight.vue";
+
+import Dashboard from "@/components/Admin/Dashboard.vue";
+import AdminView from "@/views/AdminView/AdminView.vue";
+import SlideBar  from "@/components/Admin/SlideBar.vue";
 
 
 
-
-import ProfileView from "@/views/ProfileView.vue";
-import HomeView from "@/views/HomeView.vue";
-import LoginView from "@/views/LoginView.vue";
-import CruiseDetailsView from "@/views/CruiseDetailsView.vue";
+import ProfileView from "@/views/UserView/ProfileView.vue";
+import HomeView from "@/views/UserView/HomeView.vue";
+import LoginView from "@/views/UserView/LoginView.vue";
+import CruiseDetailsView from "@/views/UserView/CruiseDetailsView.vue";
 
 //#endregion Import Custom Components
 
@@ -247,6 +250,9 @@ app.component("YachtTitle", YachtTitle)
 app.component("BreadcrumbDetail", BreadcrumbDetail)
 app.component("CruiseDetailsView", CruiseDetailsView)
 app.component("Highlight", Highlight)
+app.component("Dashboard", Dashboard)
+app.component("AdminView", AdminView)
+app.component("SlideBar", SlideBar)
 
 
 

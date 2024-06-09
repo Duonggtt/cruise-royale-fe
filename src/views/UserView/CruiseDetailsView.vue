@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/User/Footer.vue";
 </script>
 <template>
   <Navbar class="w-screen z-50"/>

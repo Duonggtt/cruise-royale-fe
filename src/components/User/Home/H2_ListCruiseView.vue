@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center mt-48 relative">
-    <div class="min-h-screen w-full max-w-screen-xl">
+    <div class=" w-full max-w-screen-xl">
       <div class="head-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
         <div class="col-5 w-3/4">
           <h1 class="text-3xxl font-bold mb-3 ">
