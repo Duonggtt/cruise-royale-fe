@@ -2,12 +2,14 @@
 
 
 import Footer from "@/components/User/Footer.vue";
+
 </script>
 <template>
   <Navbar class="w-screen z-50"/>
   <BreadcrumbDetail class="w-screen relative top-20 "/>
   <YachtTitle class="w-screen relative top-20 "/>
   <Highlight class="w-screen relative top-20 "/>
+
   <Footer/>
 
 

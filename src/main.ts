@@ -115,6 +115,10 @@ import ListCruiseView from "@/components/User/Home/H2_ListCruiseView.vue";
 import BreadcrumbDetail  from "@/components/User/CruiseInformation/C1_BreadcrumbDetail.vue";
 import YachtTitle from "@/components/User/CruiseInformation/C2_YachtTitle.vue";
 import  Highlight from "@/components/User/CruiseInformation/C3_Highlight.vue";
+import RomCruise from "@/components/User/CruiseInformation/C4_RomCruise.vue";
+import Introduce from "@/components/User/CruiseInformation/C5_Introduce.vue";
+import Rules from "@/components/User/CruiseInformation/C6_Rules.vue";
+import Evaluate from "@/components/User/CruiseInformation/C7_Evaluate.vue";
 
 import Dashboard from "@/components/Admin/Dashboard.vue";
 import AdminView from "@/views/AdminView/AdminView.vue";
@@ -245,11 +249,20 @@ app.component("HomeView", HomeView);
 app.component("LoginView", LoginView);
 app.component("SearchYachts", SearchYachts);
 app.component("Footer", Footer);
+
 app.component("ListCruiseView", ListCruiseView)
 app.component("YachtTitle", YachtTitle)
 app.component("BreadcrumbDetail", BreadcrumbDetail)
 app.component("CruiseDetailsView", CruiseDetailsView)
 app.component("Highlight", Highlight)
+app.component("RomCruise", RomCruise)
+app.component("Introduce", Introduce)
+app.component("Rules", Rules)
+app.component("Evaluate", Evaluate)
+
+
+
+
 app.component("Dashboard", Dashboard)
 app.component("AdminView", AdminView)
 app.component("SlideBar", SlideBar)

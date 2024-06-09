@@ -30,8 +30,7 @@
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl font-medium"> Xin Chào! <b class="font-bold">{{ user.name }}</b></h1>
-              <!--              <p>Cập nhật ngày: {{ formatDate(userImage.createdAt) }}</p>-->
-              <!--              <p>Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>-->
+              <p v-if="userImage.length > 0">Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>
               <div class="flex justify-center md:block">
                 <div
                     class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-white">
@@ -55,7 +54,14 @@
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
-              <FileUpload name="demo[]" url="/api/upload" @upload="onAdvancedUpload" custom-upload="true" :multiple="true" accept="image/*" :maxFileSize="1000000">
+              <FileUpload
+                 url="/api/images/upload/17"
+                  @uploader="onAdvancedUpload"
+                  :multiple="false"
+                  accept="image/*"
+                  :auto="true"
+                  :maxFileSize="1000000"
+              >
                 <template #empty>
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
                 </template>
@@ -177,6 +183,18 @@ const access_token = ref(localStorage.getItem('access_token') || '');
 const checked = ref(false);
 
 
+const customBase64Uploader = async (event:any) => {
+  const file = event.files[0];
+  const reader = new FileReader();
+  let blob = await fetch(file.objectURL).then((r) => r.blob()); //blob:url
+
+  reader.readAsDataURL(blob);
+
+  reader.onloadend = function () {
+    const base64data = reader.result;
+  };
+};
+
 onMounted(() => {
   fetchUserInfo();
 });
@@ -192,10 +210,58 @@ const fetchUserInfo = () => {
   fetchUserImage();
 };
 
-const onAdvancedUpload = () => {
-  toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000, contentStyleClass: 'gap-3', closable: false});
-};
 
+const onAdvancedUpload = async (event: any) => {
+  if (!event.files) {
+    console.error('Chọn file ảnh đã bạn');
+    toast.add({severity: 'error', summary: 'Error', detail: 'Chọn file ảnh đã bạn', life: 3000, contentStyleClass: 'gap-3', closable: false,});
+    return;
+  }
+
+  const files = event.files;
+  const userId = localStorage.getItem('userId');
+  console.log('userId:', userId); // In ra giá trị của userId để kiểm tra
+  console.log('files:', files);
+  console.log('files.length:', files.length);
+
+
+
+  if (files && files.length > 0 && userId) {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('userId', userId);
+
+    console.log('userId is not null or undefined'); // Kiểm tra nếu userId có giá trị
+    try {
+      const res = await fetch('http://localhost:8080/api/images/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${access_token.value}`,
+        },
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error(`Server responded with status code ${res.status}`);
+      }
+
+      // Handle successful upload
+      toast.add({severity: 'success', summary: 'Success', detail: 'File uploaded successfully', life: 3000, contentStyleClass: 'gap-3', closable: false,});
+
+      // Prevent clearing the selected file
+      event.files.clear = false;
+
+      // Fetch the updated user images after a successful upload
+      fetchUserImage();
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      toast.add({severity: 'error', summary: 'Error', detail: 'Failed to upload file', life: 3000, contentStyleClass: 'gap-3', closable: false,});
+    }
+  } else {
+    console.error('No file or userId provided');
+    toast.add({severity: 'error', summary: 'Error', detail: 'No file or userId provided', life: 3000, contentStyleClass: 'gap-3', closable: false,});
+  }
+};
 const logouts = async () => {
   const authStore = useAuthStore();
   await authStore.logout();
