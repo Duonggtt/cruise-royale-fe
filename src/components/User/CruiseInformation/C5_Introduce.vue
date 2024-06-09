@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-screen-xl shadow-1 px-10  py-5 rounded-3xl my-16 ">
+  <div class=" max-w-screen-xl py-5  my-16 ">
     <h1>Giới thiệu</h1>
     <h2>Giới thiệu về du thuyền</h2>
     <p>Du thuyền Heritage Cruises Bình Chuẩn có kiến trúc độc đáo, thiết kế mang đậm nét truyền thống và lịch sử. Với 20 phòng rộng rãi và tất cả các cabin có bồn tắm cạnh cửa kính lớn,có ban công với tầm nhìn toàn cảnh vịnh Lan Hạ. Trên du thuyền nhiều tiện nghi nổi bật mà du thuyền thường không có
