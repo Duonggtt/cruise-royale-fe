@@ -62,7 +62,7 @@ const onSubmit = () => {
           toast.add({severity: 'success', summary: 'Login Thành Công', detail: `Xin chào ${user.username}`, life: 1500, contentStyleClass: 'gap-3', closable: false});
           emit('updateVisible', false);
           emit('visible', 'false');
-          showMenu.value = false;
+          // showMenu.value = false;
         }, 1);
       } else {
         console.log('Login Failed');

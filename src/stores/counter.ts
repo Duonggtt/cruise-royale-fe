@@ -57,6 +57,8 @@ export const useAuthStore = defineStore({
                 // Remove the stored URL
                 localStorage.removeItem('redirectUrl');
                 // Redirect to the stored URL if it exists, otherwise to the default returnUrl
+
+                await this.fetchUserImage();
                 await router.push(redirectUrl || this.returnUrl);
                 return true;
             }
@@ -93,6 +95,28 @@ export const useAuthStore = defineStore({
                 // await router.replace("/");
                 console.log("Error fetching user by username!", error);
 
+            }
+        },
+        async fetchUserImage() {
+            const userId = localStorage.getItem('userId');
+            const url = `http://localhost:8080/api/images/?userId=${userId}`;
+            const access_token = localStorage.getItem('access_token');
+            try {
+                const res = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${access_token}`
+                    },
+                });
+
+                if (!res.ok) {
+                    throw new Error(`Server responded with status code ${res.status}`);
+                }
+
+                const data = await res.json();
+                localStorage.setItem('userImage', JSON.stringify(data));
+            } catch (error) {
+                console.log("Error fetching user image!", error);
             }
         },
 
@@ -147,6 +171,7 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('userInfo');
             localStorage.removeItem('userId')
+            localStorage.removeItem('userImage')
             // setTimeout(() => {
             //     router.push('/').then(r => r);
             // }, 500);

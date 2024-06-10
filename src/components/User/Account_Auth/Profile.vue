@@ -176,7 +176,7 @@ interface UserImage {
 }
 
 const toast = useToast();
-const userImage = ref<UserImage[]>([]);
+const userImage = ref<UserImage[]>(JSON.parse(localStorage.getItem('userImage') || '[]'));
 const user = ref<any>({});
 const originalUser = ref<any>({});
 const access_token = ref(localStorage.getItem('access_token') || '');
@@ -207,7 +207,6 @@ const fetchUserInfo = () => {
     originalUser.value = {...user.value}; // Lưu trữ thông tin người dùng ban đầu
   }
   console.log("user: ", user.value);
-  fetchUserImage();
 };
 
 
@@ -251,8 +250,6 @@ const onAdvancedUpload = async (event: any) => {
       // Prevent clearing the selected file
       event.files.clear = false;
 
-      // Fetch the updated user images after a successful upload
-      fetchUserImage();
     } catch (error) {
       console.error('Error uploading file:', error);
       toast.add({severity: 'error', summary: 'Error', detail: 'Failed to upload file', life: 3000, contentStyleClass: 'gap-3', closable: false,});
@@ -307,26 +304,7 @@ const updateUser = async () => {
   toast.add({severity: 'success', summary: 'Success', detail: 'Cập nhật thông tin thành công !', closable: false, life: 3000, contentStyleClass: 'gap-3'});
 };
 
-const fetchUserImage = async () => {
-  const userId = localStorage.getItem('userId');
-  const url = `http://localhost:8080/api/images/?userId=${userId}`;
-  try {
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${access_token.value}`,
-      },
-    });
-    // If the token has expired
-    if (!res.ok) {
-      throw new Error(`Server responded with status code ${res.status}`);
-    }
-    const data = await res.json();
-    userImage.value = data;
-  } catch (error) {
-    console.log("Error updating user information!", error);
-  }
-};
+
 
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);

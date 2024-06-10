@@ -6,15 +6,12 @@ import LoginView from '@/views/UserView/LoginView.vue';
 import HomeView from '@/views/UserView/HomeView.vue';
 import ProfileView from '@/views/UserView/ProfileView.vue';
 import CruiseDetailsView from '@/views/UserView/CruiseDetailsView.vue';
+import SearchCuiseView from '@/views/UserView/SearchCuiseView.vue';
 
 
 
 import Dashboard from '@/components/Admin/Dashboard.vue';
-import cruises from '@/components/Admin/CruiseManagement.vue';
-import cabins from '@/components/Admin/CabinManagement.vue';
-import bookings from '@/components/Admin/BookingManagement.vue';
-import Reviews from '@/components/Admin/ReviewManagement.vue';
-import Users from '@/components/Admin/UserManagement.vue';
+
 
 import AdminView from '@/views/AdminView/AdminView.vue';
 
@@ -29,11 +26,6 @@ import dashboardView from '@/views/AdminView/DashboardView.vue';
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
-        // {
-        //     path: '/FogotPassword',
-        //     name: 'FogotPassword',
-        //     component: FogotPassword
-        // },
         {
             path: '/profile',
             name: 'ProfileView',
@@ -93,6 +85,11 @@ const router = createRouter({
             path: '/dashboardView',
             name: 'dashboardView',
             component: dashboardView
+        },
+        {
+            path: '/SearchCuiseView',
+            name: 'SearchCuiseView',
+            component: SearchCuiseView
         },
 
 

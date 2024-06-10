@@ -1,6 +1,4 @@
 <template>
-
-
   <div class="   xl:max-w-7xl xl:mx-auto m-auto  ">
     <div class="flex justify-between items-center py-4  ">
       <div>

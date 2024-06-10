@@ -2,8 +2,8 @@
   <h1 class="text-xxl font-bold mb-4 mt-10">Các loại phòng & giá</h1>
   <div class="mx-auto max-w-screen-xl shadow-1 px-10  py-5 rounded-3xl ">
 
-    <div class="text-right mb-5" >
-      <Button label="Xoá lựa chọn" icon="pi pi-spin pi-times " class="px-4 bg-indigo-300 border-none focus:shadow-none"  style="transform: scale(0.8);"/>
+    <div class="text-right mb-5">
+      <Button label="Xoá lựa chọn" icon="pi pi-spin pi-times " class="px-4 bg-indigo-300 border-none focus:shadow-none" style="transform: scale(0.8);"/>
     </div>
     <div v-for="(room, index) in rooms" :key="index" class="flex justify-between items-center mb-4 p-4 border  shadow-3 rounded-3xl " style=" font-size: 1rem; ">
       <img :src="room.image" alt="Room Image" class="w-20 h-20 object-cover rounded-2xl">
@@ -28,20 +28,26 @@
         </div>
       </div>
     </div>
-  <div class="flex items-center gap-5 mt-6">
-    <div class=" "> <p class="text-xl font-bold">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p>  </div>
-    <div class="text-right  ml-auto">
-      <Button label="Thuê trọn tàu" class="px-4  border-none focus:shadow-none mx-3" />
-      <Button label="Đặt ngay" icon="pi pi-arrow-right" iconPos="right"  class="px-5 border-none focus:shadow-none" />
+    <div class="flex items-center gap-5 mt-6">
+      <div class=" "><p class="text-xl font-bold">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p></div>
+      <div class="text-right  ml-auto">
+        <Button label="Thuê trọn tàu" class="px-4  border-none focus:shadow-none mx-3" @click="showDialog = true"/>
+        <Button label="Đặt ngay" icon="pi pi-arrow-right" iconPos="right" class="px-5 border-none focus:shadow-none" @click="showDialog = true"/>
+      </div>
+      <Dialog v-model:visible="showDialog" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }">
+        <OderForm/>
+      </Dialog>
     </div>
-  </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {computed, ref} from 'vue';
+import OderForm from "@/components/User/CruiseInformation/OderForm.vue";
 
 const value = ref(0);
+
+const showDialog = ref(false);
 
 interface Room {
   name: string;

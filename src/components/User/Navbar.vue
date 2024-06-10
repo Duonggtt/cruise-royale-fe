@@ -14,7 +14,7 @@
         <div class="flex items-center end-0 gap-2 w-full min-w-50 " @click="showMenu = false">
           <i class="pi pi-phone"></i>
           <span class=" font-bold pr-3 hover:text-green-500 cursor-pointer"> Liên Hệ: 0123456789</span>
-          <Avatar class="h-2rem w-2rem border-2 hover:border-green-100 cursor-pointer" image="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" shape="circle"
+          <Avatar class="h-2rem w-2rem border-2 hover:border-green-100 cursor-pointer" :image="avatarImage" shape="circle"
                   @mouseover="showMenu = true" @click="handleAvatarClick"/>
           <div v-if="showMenu && authStore.user &&router.currentRoute.value.path !=='/profile'" class="absolute top-16 right-44 bg-white rounded shadow p-2" @mouseover="showMenu = true"
                @mouseleave="showMenu = false">
@@ -37,10 +37,8 @@
 </template>
 
 
-
 <script setup lang="ts">
-import Toast from "primevue/toast";
-import {ref} from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
 import {useToast} from "primevue/usetoast";
@@ -60,32 +58,56 @@ const handleAvatarClick = () => {
   }
 };
 
+const AnhDuPhong = ref('https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com');
+const avatarImage = AnhDuPhong;
+
 const handleVisibleChange = (newVisible: boolean) => {
   visible.value = newVisible;
+  if (authStore.user) {
+    // Fetch the user image from localStorage
+    const userImage = JSON.parse(localStorage.getItem('userImage') || '[]');
+    // If the user has an image, update the avatarImage ref
+    if (userImage.length > 0) {
+      avatarImage.value = `data:image/jpeg;base64,${userImage[0].data}`;
+      console.log(avatarImage.value);
+    }
+  }
 };
 
+onMounted(() => {
+  if (authStore.user) {
+    const userImage = JSON.parse(localStorage.getItem('userImage') || '[]');
+    if (userImage.length > 0) {
+      avatarImage.value = `data:image/jpeg;base64,${userImage[0].data}`;
+    }
+  }
+});
 const visible = ref(false);
 const dialogState = ref('login');
 const handleStateChange = (newState: string) => {
   dialogState.value = newState;
   visible.value = true;
+
 };
 
 const toast = useToast();
-
 const logout = () => {
   const authStore = useAuthStore();
   authStore.logout();
-  toast.add({severity: 'error', summary: 'Đã đăng xuuất', detail: ` Đã đăng xuuất `, life: 500 , contentStyleClass: 'gap-3' , closable: false });
+  avatarImage.value = AnhDuPhong.value;
+  toast.add({severity: 'error', summary: 'Đã đăng xuuất', detail: ` Đã đăng xuuất `, life: 500, contentStyleClass: 'gap-3', closable: false});
 };
 
 const showMenu = ref(false);
-
 const items = ref<MenuItem[]>([
-  {label: 'Tìm du thuyền', link: 'CruiseDetails'},
-  {label: 'Doanh nghiệp', link: '/'},
+  {label: 'Tìm du thuyền', link: 'SearchCuiseView'},
+  {label: 'Doanh nghiệp', link: 'CruiseDetails'},
   {label: 'Blog', link: 'profile'}
 ]);
+
+
+
+
 
 </script>
 
