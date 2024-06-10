@@ -15,7 +15,10 @@
           <span class="px-1 font-medium">Đăng xuất</span>
         </span>
       </p>
+
+
     </section>
+
     <div class="rounded-3xl flex-col dark:bg-slate-900/70 bg-white flex mb-6 shadow-2">
       <div class="flex-1 p-6">
         <div class="md:flex justify-center  block ">
@@ -47,6 +50,20 @@
           </div>
         </div>
       </div>
+      <div class="card mb-5">
+        <Steps :model="itemspi" class="custom-steps" :readonly="false">
+          <template #item="{ item, active }">
+                <span :class="['inline-flex align-items-center justify-content-center align-items-center border-circle border-primary border-1 h-3rem w-3rem z-1 cursor-pointer', { 'bg-primary': active, 'surface-overlay text-primary': !active }]">
+                    <i :class="[item.icon, 'text-xl']"/>
+                </span>
+          </template>
+        </Steps>
+      </div>
+
+      <div class="card mb-5">
+        <Steps :model="items2" :readonly="false" />
+      </div>
+
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <form class="rounded-2xl bg-white shadow-2" @submit.prevent="updateUser">
@@ -55,7 +72,7 @@
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
               <FileUpload
-                 url="/api/images/upload/17"
+                  url="/api/images/upload/17"
                   @uploader="onAdvancedUpload"
                   :multiple="false"
                   accept="image/*"
@@ -183,7 +200,7 @@ const access_token = ref(localStorage.getItem('access_token') || '');
 const checked = ref(false);
 
 
-const customBase64Uploader = async (event:any) => {
+const customBase64Uploader = async (event: any) => {
   const file = event.files[0];
   const reader = new FileReader();
   let blob = await fetch(file.objectURL).then((r) => r.blob()); //blob:url
@@ -222,7 +239,6 @@ const onAdvancedUpload = async (event: any) => {
   console.log('userId:', userId); // In ra giá trị của userId để kiểm tra
   console.log('files:', files);
   console.log('files.length:', files.length);
-
 
 
   if (files && files.length > 0 && userId) {
@@ -305,7 +321,6 @@ const updateUser = async () => {
 };
 
 
-
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   return date.toLocaleDateString();
@@ -316,5 +331,30 @@ const getImageUrl = (imageData: string): string => {
 };
 
 
+const itemspi = ref([
+  {
+    icon: 'pi pi-user'
+  },
+  {
+    icon: 'pi pi-calendar'
+  },
+  {
+    icon: 'pi pi-check'
+  }
+]);
+
+
+
+const items2 = ref([
+  {
+    label: 'Personal Info'
+  },
+  {
+    label: 'Reservation'
+  },
+  {
+    label: 'Review'
+  }
+]);
 </script>
 
