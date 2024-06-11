@@ -17,7 +17,7 @@
           <p class=" font-semibold text-sm text-green-950"> /Khách</p>
         </div>
         <div class="flex items-center shadow-1 rounded-4xl px-2">
-          <InputNumber v-model=" room.count " showButtons buttonLayout="horizontal" :min="0" :max="50">
+          <InputNumber v-model=" room.count " showButtons buttonLayout="horizontal" :min="0" :max="50" class="">
             <template #incrementbuttonicon>
               <span class="pi pi-plus"/>
             </template>

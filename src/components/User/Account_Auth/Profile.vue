@@ -24,10 +24,8 @@
         <div class="md:flex justify-center  block ">
           <div class="flex  mb-6 md:mb-0">
             <div class="mx-12 ">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type"
-                   class="h-15rem w-15rem  rounded-full object-cover shadow-1"/>
-              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com"
-                   alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10 shadow-1"/>
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="h-15rem w-15rem  rounded-full object-cover shadow-1"/>
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10 shadow-1"/>
             </div>
           </div>
           <div class="flex items-center justify-center">
@@ -50,20 +48,17 @@
           </div>
         </div>
       </div>
-      <div class="card mb-5">
-        <Steps :model="itemspi" class="custom-steps" :readonly="false">
-          <template #item="{ item, active }">
-                <span :class="['inline-flex align-items-center justify-content-center align-items-center border-circle border-primary border-1 h-3rem w-3rem z-1 cursor-pointer', { 'bg-primary': active, 'surface-overlay text-primary': !active }]">
-                    <i :class="[item.icon, 'text-xl']"/>
-                </span>
-          </template>
-        </Steps>
+      <div class="card flex mx-auto mb-5">
+        <!--        <Steps :model="LichTrinh" class="custom-steps" :readonly="false">-->
+        <!--          <template #item="{ item, active }">-->
+        <!--            <div class="flex flex-col items-center">-->
+        <!--              <span :class="[  'inline-flex justify-center items-center border-circle border-primary border-1 h-3rem w-3rem z-1 cursor-pointer',   { 'bg-primary': active, 'surface-overlay text-primary': !active }, ]">   <i :class="[item.icon, 'text-xl']"/>   </span>-->
+        <!--              <p :class="['    ' , { 'text-primary': active, 'surface-overlay text-black ': !active },] "> {{ item.label }} </p>-->
+        <!--            </div>-->
+        <!--          </template>-->
+        <!--        </Steps>-->
+        <Tour class=" "/>
       </div>
-
-      <div class="card mb-5">
-        <Steps :model="items2" :readonly="false" />
-      </div>
-
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <form class="rounded-2xl bg-white shadow-2" @submit.prevent="updateUser">
@@ -180,10 +175,11 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, defineAsyncComponent} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
 import {useToast} from 'primevue/usetoast';
+import Tour from "@/components/User/Account_Auth/Tour.vue";
 
 interface UserImage {
   id: number;
@@ -331,30 +327,21 @@ const getImageUrl = (imageData: string): string => {
 };
 
 
-const itemspi = ref([
+const LichTrinh = ref([
   {
-    icon: 'pi pi-user'
+    icon: 'pi pi-user',
+    label: 'Hạ Long'
   },
   {
-    icon: 'pi pi-calendar'
+    icon: 'pi pi-calendar',
+    label: 'Lịch trình'
   },
   {
-    icon: 'pi pi-check'
-  }
-]);
-
-
-
-const items2 = ref([
-  {
-    label: 'Personal Info'
-  },
-  {
-    label: 'Reservation'
-  },
-  {
+    icon: 'pi pi-check',
     label: 'Review'
   }
 ]);
+
+
 </script>
 

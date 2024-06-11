@@ -9,7 +9,7 @@
 
       <div>
         <label class="block mb-2">Số lượng khách</label>
-        <div class="bg-white rounded-lg border py-2.5 px-3 cursor-pointer shadow-1 w-full ">
+        <div class="bg-white rounded-lg border-1 border-gray-300 py-2.5 px-3 cursor-pointer   w-full ">
 
           <span class="SoLuong "  @click="showGuestSelection = !showGuestSelection">{{ adults || 0 }} Người lớn - {{ children || 0 }} Trẻ em</span>
 
