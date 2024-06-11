@@ -1,7 +1,7 @@
 <template>
 
-  <div class="mx-auto max-w-screen-xl ">
-    <div class=" mt-24 bg-white ">
+  <div class=" w-full ">
+    <div class="  bg-white ">
       <div class="card mx-5">
         <DataView :value="products" dataKey="id">
           <template #list="slotProps">

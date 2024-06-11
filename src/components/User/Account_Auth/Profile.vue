@@ -15,8 +15,6 @@
           <span class="px-1 font-medium">Đăng xuất</span>
         </span>
       </p>
-
-
     </section>
 
     <div class="rounded-3xl flex-col dark:bg-slate-900/70 bg-white flex mb-6 shadow-2">

@@ -112,7 +112,7 @@ import Profile from "@/components/User/Account_Auth/Profile.vue";
 import SearchYachts from "@/components/User/Home/H1_SearchYachts.vue";
 import ListCruiseView from "@/components/User/Home/H2_ListCruiseView.vue";
 
-import BreadcrumbDetail  from "@/components/User/CruiseInformation/C1_BreadcrumbDetail.vue";
+import BreadcrumbDetail from "@/components/User/CruiseInformation/C1_BreadcrumbDetail.vue";
 import YachtTitle from "@/components/User/CruiseInformation/C2_YachtTitle.vue";
 import  Highlight from "@/components/User/CruiseInformation/C3_Highlight.vue";
 import RomCruise from "@/components/User/CruiseInformation/C4_RomCruise.vue";
