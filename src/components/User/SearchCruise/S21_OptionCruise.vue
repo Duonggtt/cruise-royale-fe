@@ -1,24 +1,78 @@
 <template>
-  <div class="  ">
-    <div class="my-5">
-      <h3 class="font-bold">Lọc kết quả</h3>
+  <div class="   w-full">
+
+
+    <div class="flex justify-between my-3  border-bottom-1 border-gray-300 pl-4 pr-3 pb-2">
+      <h3 class="font-bold  ">Lọc kết quả</h3>
+      <h5 class="font-medium cursor-pointer" @click="resetSelection">Đặt lại</h5>
     </div>
-    <div class="flex flex-column gap-3">
-      <div v-for="category of categories" :key="category.key" class="flex align-items-center gap-3">
-        <Checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name"/>
-        <label :for="category.key">{{ category.name }}</label>
+
+    <div class="flex flex-column gap-3 pl-4">
+      <p class="font-bold">Xếp hạng sao</p>
+      <div class="flex flex-column gap-2 " style="transform: scale(0.95);">
+        <div v-for="category of categories" :key="category.key" class="flex align-items-center gap-2">
+          <Checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name"/>
+          <label :for="category.key" class="text-sm">{{ category.name }}</label>
+        </div>
       </div>
-    </div>
+
+      <p class=" border-top-1 border-gray-300 pt-3  font-bold" >Tiện ích</p>
+      <div class="flex flex-column gap-2 -mt-3" style="transform: scale(0.95);">
+        <div v-for="utilitie of utilities" :key="utilitie.key" class="flex align-items-center gap-2" >
+          <Checkbox v-model="selectedCategories" :inputId="utilitie.key" name="category" :value="utilitie.name"/>
+          <label :for="utilitie.key" class="text-sm">{{ utilitie.name }}</label>
+        </div>
+      </div>
+      </div>
+
+
+
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from 'vue';
 
+const selectedCategories = ref(['3 sao']);
+
 const categories = ref([
-  {name: "3 sao", key: "A"},
-  {name: "4 sao", key: "M"},
-  {name: "5 sao", key: "P"}
+  {name: "3 sao", key: "3S"},
+  {name: "4 sao", key: "4S"},
+  {name: "5 sao", key: "5S"}
 ]);
-const selectedCategories = ref(['Marketing']);
+
+const utilities = ref([
+  {name: "Phòng gia đình", key: "PGD"},
+  {name: "Có bể sục", key: "CBS"},
+
+  {name: "Bao gồm tất cả các bữa ăn", key: "BGTA"},
+  {name: "Giáp biển", key: "GB"},
+  {name: "Quầy bar", key: "QB"},
+  {name: "Lễ tân 24 giờ", key: "LT"},
+  {name: "Khu vực bãi tắm riêng", key: "KBT"},
+  {name: "Nhà hàng", key: "NH"},
+  {name: "Trung tâm thể dục", key: "TTTD"},
+  {name: "Phòng có bồn tắm", key: "PCBT"},
+  {name: "Wi-Fi miễn phí", key: "WIFI"},
+
+  {name: "Miễn phí kayaking", key: "MPK"},
+  {name: "Trung tâm Spa & chăm sóc sức khoẻ", key: "TTSS"},
+  {name: "Chỗ đỗ xe miễn phí", key: "CDX"},
+  {name: "Miễn phí xe đưa đón", key: "MPX"},
+  {name: "Có bể bơi ngoài trời", key: "CBNT"},
+  {name: "Đi tuyến Lan Hạ", key: "DTLH"},
+  {name: "Phòng không hút thuốc", key: "PKHT"},
+  {name: "Bể bơi ngoài trời", key: "BBNT"},
+  {name: "Du thuyền 5 sao", key: "DTS"},
+  {name: "Chỗ đỗ xe", key: "CDX"},
+  {name: "Trà/cà phê trong tất cả các phòng", key: "TCTCP"},
+  {name: "Nhìn ra biển", key: "NRB"},
+  {name: "Điều hòa", key: "DH"},
+  {name: "Cửa sổ từ sàn đến trần", key: "CSDT"},
+  {name: "Sạc điện thoại", key: "SDT"},
+  {name: "Hồ bơi có tầm nhìn", key: "HBCTN"},
+  {name: "Ban công riêng", key: "BCR"},
+  {name: "Wi-Fi", key: "WIFI"},
+  {name: "Két an toàn", key: "KAT"}
+]);
 </script>

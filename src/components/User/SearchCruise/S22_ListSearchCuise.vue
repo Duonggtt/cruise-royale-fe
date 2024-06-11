@@ -3,7 +3,7 @@
   <div class=" w-full ">
     <div class="  bg-white ">
       <div class="card mx-5" v-animateonscroll="{ enterClass: 'fadeinright', leaveClass: 'fadeoutright' }">
-        <DataView :value="products" dataKey="id">
+        <DataView :value="products" dataKey="id" paginator :rows="4">
           <template #list="slotProps">
             <div class="grid grid-nogutter   ">
               <div v-for="(item, index) in slotProps.items" :key="index" class="col-12">
@@ -89,7 +89,6 @@ class Product {
 
 class ProductService {
   static async getProductsSmall(): Promise<Product[]> {
-
     return [
       {
         id: '1',
@@ -99,13 +98,38 @@ class ProductService {
         image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
         price: '3,550,000',
         category: 'Vịnh hạ long',
-        quantity: 10,
+        quantity: 2,
         inventoryStatus: 'Xu hướng',
         rating: 4,
-      }, {
+      },
+      {
         id: '2',
         code: 'Cruise02',
-        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà',
+        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà2',
+        description: 'Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu  Xem bản đồ và lịch trình',
+        image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
+        price: '3,550,000',
+        category: 'Vịnh hạ long',
+        quantity: 3,
+        inventoryStatus: 'Xu hướng',
+        rating: 4,
+      },
+      {
+        id: '3',
+        code: 'Cruise03',
+        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà3',
+        description: 'Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu  Xem bản đồ và lịch trình',
+        image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
+        price: '3,550,000',
+        category: 'Vịnh hạ long',
+        quantity: 4,
+        inventoryStatus: 'Xu hướng',
+        rating: 4,
+      },
+      {
+        id: '4',
+        code: 'Cruise04',
+        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà4',
         description: 'Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu  Xem bản đồ và lịch trình',
         image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
         price: '3,550,000',
@@ -114,14 +138,49 @@ class ProductService {
         inventoryStatus: 'Xu hướng',
         rating: 4,
       },
-
+      {
+        id: '5',
+        code: 'Cruise05',
+        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà5',
+        description: 'Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu  Xem bản đồ và lịch trình',
+        image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
+        price: '3,550,000',
+        category: 'Vịnh hạ long',
+        quantity: 10,
+        inventoryStatus: 'Xu hướng',
+        rating: 4,
+      },
+      {
+        id: '6',
+        code: 'Cruise06',
+        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà6',
+        description: 'Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu  Xem bản đồ và lịch trình',
+        image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
+        price: '3,550,000',
+        category: 'Vịnh hạ long',
+        quantity: 10,
+        inventoryStatus: 'Xu hướng',
+        rating: 4,
+      },
+      {
+        id: '7',
+        code: 'Cruise07',
+        name: 'Du thuyền Heritage  Bình Chuẩn Cát Bà 7',
+        description: 'Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu  Xem bản đồ và lịch trình',
+        image: 'https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/thumbnail/no53ab0y526yl825.webp',
+        price: '3,550,000',
+        category: 'Vịnh hạ long',
+        quantity: 10,
+        inventoryStatus: 'Xu hướng',
+        rating: 4,
+      },
     ];
   }
 }
 
 
 onMounted(() => {
-  ProductService.getProductsSmall().then((data: Product[]) => (products.value = data.slice(0, 5)));
+  ProductService.getProductsSmall().then((data: Product[]) => (products.value = data.slice(0, 100)));
 });
 
 const products = ref();
