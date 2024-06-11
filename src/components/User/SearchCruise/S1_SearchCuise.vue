@@ -1,7 +1,7 @@
 
 <template>
   <div class="mx-auto max-w-screen-xl px-4 py-10 ">
-    <div class=" mt-24 bg-white rounded-3xl shadow-5 flex flex-col items-center w-11/12 mx-auto p-5 ">
+    <div class=" mt-24 bg-white rounded-3xl shadow-1 flex flex-col items-center w-11/12 mx-auto p-5 ">
       <h2 class="text-3xl font-bold mb-2">Bạn lựa chọn du thuyền Hạ Long nào?</h2>
       <p class="text-gray-600 mb-4">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
       <div class="lg:flex space-x-3 w-full text-sm">

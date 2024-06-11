@@ -74,9 +74,10 @@ body {
 .p-input-icon {
     margin-top: -0.4rem;
     margin-right: 0.6rem;
-
 }
-
+.p-tag-value {
+    white-space: nowrap;
+}
 .p-inputnumber-input, .p-inputnumber-input:focus {
     border: none;
     width: 3rem;
