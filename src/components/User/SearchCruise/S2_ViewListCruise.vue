@@ -19,7 +19,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Splitter :layout="layout" class="mx-auto max-w-screen-xl " >
+  <Splitter :layout="layout" class="mx-auto max-w-screen-xl border-none " >
     <SplitterPanel class="flex m-3 " :size="15" :minSize="10">   <OptionCruise/> </SplitterPanel>
     <SplitterPanel class="flex align-items-center justify-content-center" :size="80" :minSize="60">   <ListSearchCruise/> </SplitterPanel>
   </Splitter>
