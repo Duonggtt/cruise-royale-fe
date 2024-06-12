@@ -53,7 +53,7 @@
       <Textarea placeholder="Nhập yêu cầu của bạn" rows="3"/>
     </div>
     <div class="flex items-center gap-5 mt-6">
-      <div><p class="text-xl font-bold">Tổng tiền: đ</p></div>
+      <div><p class="text-xl font-bold">Tổng tiền: {{ totalPrice ? totalPrice.toLocaleString() : '0' }} đ</p></div>
       <div class="text-right ml-auto">
         <Button label="Đăng ký tư vấn" class="px-4 border-none focus:shadow-none mx-3"/>
         <Button label="Đặt ngay" class=" text-white"/>
@@ -63,7 +63,8 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {inject, ref} from 'vue';
+const totalPrice = inject<number>('totalPrice');
 
 const date = ref(new Date('2024-06-10'));
 const adults = ref(1);

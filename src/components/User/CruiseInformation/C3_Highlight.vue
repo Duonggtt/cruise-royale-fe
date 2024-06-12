@@ -2,11 +2,11 @@
   <div class="mx-auto max-w-screen-xl px-4 py-10 ">
     <footer class="  ">
         <!-- Tabs -->
-        <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full"/>
+      <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full"/>
         <!-- Main content -->
         <div class="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
           <!-- Left Column -->
-          <div class="col-8 bg-white p-6 rounded-4xl ">
+          <div id="features" class="section col-8 bg-white p-6 rounded-4xl ">
             <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div v-for="feature in features" :key="feature.label" class="feature-item flex items-center space-x-2">
@@ -21,10 +21,10 @@
             </div>
 
 
-            <RomCruise />
+            <RomCruise  id="prices" class="section"/>
             <Introduce />
-            <Rules />
-            <Evaluate />
+            <Rules id="rules" class="section" />
+            <Evaluate  id="reviews" class="section"/>
 
           </div>
 
@@ -50,11 +50,13 @@ import Footer from "@/components/User/Footer.vue";
 
 
 const itemsMenu = ref([
-  {label: 'Đặc điểm',},
-  {label: 'Phòng & giá',},
-  {label: 'Quy định',},
-  {label: 'Đánh giá',}
+  {label: 'Đặc điểm', to: '#features'},
+  {label: 'Phòng & giá', to: '#prices'},
+  {label: 'Quy định', to: '#rules'},
+  {label: 'Đánh giá', to: '#reviews'}
 ]);
+
+
 
 
 const props = defineProps({

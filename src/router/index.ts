@@ -80,10 +80,18 @@ const router = createRouter({
             name: 'CruiseDetails',
             component: () => import('@/components/User/CruiseInformation/C0_CruiseDetailsView.vue')
         },
-
-
-
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve) => {
+            if (to.hash) {
+                resolve({ el: to.hash });
+            } else if (savedPosition) {
+                resolve(savedPosition);
+            } else {
+                resolve({ left: 0, top: 0 });
+            }
+        });
+    }
 });
 
 export default router;

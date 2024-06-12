@@ -11,7 +11,7 @@
     </div>
     <div v-for="(item, index) in items" :key="index" class="flex items-center mb-2">
       <span class="w-16  text-sm">{{ item.label }}</span>
-      <ProgressBar :value="item.value" :showValue="false" class="w-3/4" :style="{ backgroundColor: item.color }"/>
+      <ProgressBar :value="item.value" :showValue="false" class="w-3/4 h-1rem" :style="{ backgroundColor: item.color }"/>
       <span class="ml-2 text-sm">{{ item.count }} đánh giá </span>
     </div>
 
