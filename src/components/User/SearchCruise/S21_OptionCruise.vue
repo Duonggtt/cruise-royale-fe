@@ -1,8 +1,8 @@
 <template>
-  <div class="   w-full">
+  <div class="   w-full ">
 
 
-    <div class="flex justify-between my-3  border-bottom-1 border-gray-300 pl-4 pr-3 pb-2">
+    <div class="flex justify-between my-3  border-bottom-1 border-gray-300 pl-4 pr-3 pb-2 mx-5">
       <h3 class="font-bold  ">Lọc kết quả</h3>
       <h5 class="font-medium cursor-pointer" @click="resetSelection">Đặt lại</h5>
     </div>
@@ -75,4 +75,9 @@ const utilities = ref([
   {name: "Wi-Fi", key: "WIFI"},
   {name: "Két an toàn", key: "KAT"}
 ]);
+
+const resetSelection = () => {
+  selectedCategories.value = [];
+};
+
 </script>

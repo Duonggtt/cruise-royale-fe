@@ -5,7 +5,6 @@
         <div class="col-5 w-3/4">
           <h1 class="text-3xxl font-bold mb-3 ">
             Du thuyền mới và phổ biến nhất
-
           </h1>
           <img src="/heading-border.webp" alt="">
         </div>
@@ -15,7 +14,7 @@
       </div>
 
       <div class="cruise-card-container  cursor-pointer grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6 ">
-        <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 hover:shadow-5" @click="() => CruiseInformationView(cruise)">
+        <div v-for="cruise in cruises" :key="cruise.id" class="cruise-card max-w-md rounded-3xl shadow-1 m-3 p-3 hover:shadow-5" @click="goToCruise(cruise.id)">
           <div class="cruise-card-header relative">
             <img :src="cruise.imageUrl" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
             <div class="rating-badge absolute top-3 left-3 bg-yellow-300 text-orange-900 px-3 py-1 rounded-2xl text-sm flex align-content-center gap-1 opacity-85">
@@ -23,7 +22,7 @@
             </div>
             <div class="location-badge flex gap-1 h-5 bg-gray-100 rounded-full px-2 py-1 align-items-center absolute bottom--7 left-3">
               <span class="pi pi-flag text-xs"></span>
-              <p class="text-xs font-medium">Vịnh Hạ Long</p>
+              <p class="text-xs font-medium"> {{ cruise.location?.address }}</p>
             </div>
           </div>
           <div class="cruise-card-title pt-5 pl-2">
@@ -52,17 +51,18 @@
   </div>
   <div class="flex justify-center mt-10 relative">
     <Button class="view-all-button align-items-center rounded-full p-3 bg-transparent border-none text-black shadow-2"
-            icon="pi pi-chevron-right" label="Xem tất cả Du thuyền" iconPos="right"/>
+            icon="pi pi-chevron-right" label="Xem tất cả Du thuyền" iconPos="right"  @click="router.push('/SearchCuiseView')"/>
   </div>
 
 
 </template>
+
+
 <script setup lang="ts">
 import {useAuthStore} from '@/stores/counter';
-import {ref,watchEffect} from "vue";
+import {ref} from "vue";
 import {useToast} from "primevue/usetoast";
 import router from "@/router";
-import { nextTick } from 'vue';
 
 
 const access_token = ref(localStorage.getItem('access_token') || '');
@@ -77,17 +77,23 @@ interface Cruise {
   launchedYear: number;
   material: string;
   cabinQuantity: number;
+  locationId: number;
+  location?: Location; // Thêm thuộc tính location
 }
+
+interface Location {
+  id: number;
+  routeName: string;
+  address: string;
+  city: string;
+}
+
 
 const cruises = ref<Cruise[]>([]);
 
 const fetchCruiseFeatured = async () => {
   const url = `http://localhost:8080/api/cruises/featured`;
-  const response = await fetch(url, {
-    // headers: {
-    //   'Authorization': `Bearer ${access_token.value}`,
-    // },
-  });
+  const response = await fetch(url);
 
   if (response.status === 403) {
     useAuthStore().logout();
@@ -96,21 +102,27 @@ const fetchCruiseFeatured = async () => {
 
   const data = await response.json();
   cruises.value = data;
-
+  console.log(cruises.value);
   for (const cruise of cruises.value) {
-    const imageResponse = await fetch(`http://localhost:8080/api/cruise/images/${cruise.id}`, {
-      // headers: {
-      //   'Authorization': `Bearer ${access_token.value}`,
-      // },
-    });
+    const imageResponse = await fetch(`http://localhost:8080/api/cruise/images/${cruise.id}`);
     const imageBlob = await imageResponse.blob();
     cruise.imageUrl = URL.createObjectURL(imageBlob);
+
+    await fetchLocation(cruise); // Gọi hàm fetchLocation để lấy thông tin location
   }
 };
+const fetchLocation = async (cruise: Cruise) => {
+  const url = `http://localhost:8080/api/locations/${cruise.locationId}`;
+  const response = await fetch(url);
 
+  if (!response.ok) {
+    throw new Error(`Server responded with status code ${response.status}`);
+  }
+
+  const data: Location = await response.json();
+  cruise.location = data; // Gán thông tin location cho đối tượng cruise
+};
 fetchCruiseFeatured();
-
-
 const formattedCruiseDescription = (cruise: Cruise) => {
   return `Hạ thuỷ ${cruise.launchedYear} - ${cruise.material} - ${cruise.cabinQuantity} Phòng`;
 };
@@ -118,4 +130,10 @@ const formattedCruiseDescription = (cruise: Cruise) => {
 const CruiseInformationView = (cruise: Cruise) => {
   router.push(`/cruise/${cruise.id}`);
 };
+
+const goToCruise = (id: number) => {
+  router.push({ name: 'CruiseDetails', params: { id } });
+};
+
+
 </script>

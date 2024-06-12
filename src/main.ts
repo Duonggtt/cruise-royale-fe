@@ -129,7 +129,7 @@ import SlideBar  from "@/components/Admin/SlideBar.vue";
 import ProfileView from "@/views/UserView/ProfileView.vue";
 import HomeView from "@/views/UserView/HomeView.vue";
 import LoginView from "@/views/UserView/LoginView.vue";
-import CruiseDetailsView from "@/views/UserView/CruiseDetailsView.vue";
+import CruiseDetailsView from "@/components/User/CruiseInformation/C0_CruiseDetailsView.vue";
 
 //#endregion Import Custom Components
 

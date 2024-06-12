@@ -101,7 +101,7 @@ const logout = () => {
 const showMenu = ref(false);
 const items = ref<MenuItem[]>([
   {label: 'Tìm du thuyền', link: 'SearchCuiseView'},
-  {label: 'Doanh nghiệp', link: 'CruiseDetails'},
+  {label: 'Doanh nghiệp', link: '/'},
   {label: 'Blog', link: 'profile'}
 ]);
 

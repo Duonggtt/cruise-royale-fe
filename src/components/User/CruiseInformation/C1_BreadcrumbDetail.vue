@@ -10,19 +10,15 @@
 
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'CruiseDetailComponent',
-  data() {
-    return {
-      items: [
-        {label: 'Tìm du thuyền'},
-        {label: 'Du Thuyền Stellar of the Seas'}
-      ],
-
-    };
-  }
+const props = defineProps({
+  cruiseName: String
 });
+
+const items = ref([
+  { label: 'Tìm du thuyền' },
+  { label: props.cruiseName }
+]);
 </script>

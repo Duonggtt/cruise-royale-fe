@@ -1,10 +1,8 @@
 <template>
-
-
   <div class="mx-auto max-w-screen-xl px-4 py-10 ">
     <footer class="  ">
         <!-- Tabs -->
-        <Menubar :model="itemsmenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full"/>
+        <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full"/>
         <!-- Main content -->
         <div class="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
           <!-- Left Column -->
@@ -47,19 +45,26 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import Footer from "@/components/User/Footer.vue";
 
-const itemsmenu = ref([
+
+const itemsMenu = ref([
   {label: 'Đặc điểm',},
   {label: 'Phòng & giá',},
   {label: 'Quy định',},
   {label: 'Đánh giá',}
 ]);
+
+
+const props = defineProps({
+  cruise: Object
+});
+
 const shipDetails = {
-  'Hạ thủy': '2019',
-  Cabin: '20',
-  'Thân vỏ': 'Kim loại',
+  'Hạ thủy': props.cruise?.launchedYear,
+  Cabin: props.cruise?.cabinQuantity,
+  'Thân vỏ': props.cruise?.material,
   'Hành trình': 'Vịnh Lan Hạ - Bãi tắm Ba Trái Đào - Hang Sáng Tối',
   'Điều hành': 'Công ty cổ phần Heritage Cruises',
 };

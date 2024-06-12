@@ -29,6 +29,8 @@
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl font-medium"> Xin Chào! <b class="font-bold">{{ user.name }}</b></h1>
+              <h6 class="text-xl font-medium">  <b class="font-bold">{{ user.username }}</b></h6>
+
               <p v-if="userImage.length > 0">Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>
               <div class="flex justify-center md:block">
                 <div
@@ -47,6 +49,7 @@
         </div>
       </div>
       <div class="card flex mx-auto mb-5">
+
         <!--        <Steps :model="LichTrinh" class="custom-steps" :readonly="false">-->
         <!--          <template #item="{ item, active }">-->
         <!--            <div class="flex flex-col items-center">-->
@@ -55,6 +58,7 @@
         <!--            </div>-->
         <!--          </template>-->
         <!--        </Steps>-->
+
         <Tour class=" "/>
       </div>
     </div>
@@ -253,11 +257,7 @@ const onAdvancedUpload = async (event: any) => {
       if (!res.ok) {
         throw new Error(`Server responded with status code ${res.status}`);
       }
-
-      // Handle successful upload
       toast.add({severity: 'success', summary: 'Success', detail: 'File uploaded successfully', life: 3000, contentStyleClass: 'gap-3', closable: false,});
-
-      // Prevent clearing the selected file
       event.files.clear = false;
 
     } catch (error) {
