@@ -26,7 +26,7 @@
           <Password id="password" v-model="password" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
           <label for="password" class="pl-3 ">Nhập mật khẩu</label></span>
         <span class="p-float-label mb-4 ">
-           <Password id="passwordCConfirm" v-model="passwordCConfirm" :toggleMask="true" class="" inputClass="p-input-filled pl-3" ></Password>
+           <Password id="passwordCConfirm" v-model="passwordCConfirm" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
            <label for="passwordCConfirm" class="pl-3">Nhập lại mật khẩu</label>
         </span>
 
@@ -62,31 +62,16 @@ const emit = defineEmits();
 
 const register = async () => {
   if (!username.value || !name.value || !phone.value || !email.value || !password.value || !passwordCConfirm.value) {
-    toast.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Vui lòng điền đầy đủ thông tin',
-      life: 3000,
-      contentStyleClass: 'gap-3',
-      closable: false
-    });
+    toast.add({severity: 'error', summary: 'Error', detail: 'Vui lòng điền đầy đủ thông tin', life: 3000, contentStyleClass: 'gap-3', closable: false});
     return;
   }
 
   if (password.value !== passwordCConfirm.value) {
-    toast.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Mật khẩu và mật khẩu xác nhận không khớp',
-      life: 3000,
-      contentStyleClass: 'gap-3',
-      closable: false
-    });
+    toast.add({severity: 'error', summary: 'Error', detail: 'Mật khẩu và mật khẩu xác nhận không khớp', life: 3000, contentStyleClass: 'gap-3', closable: false});
     return;
   }
 
   const url = 'http://localhost:8080/api/user/save';
-
   const user = {
     username: username.value,
     name: name.value,
@@ -107,14 +92,7 @@ const register = async () => {
     });
 
     if (response.status === 400) {
-      toast.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Tên đăng nhập đã tồn tại',
-        life: 3000,
-        contentStyleClass: 'gap-3',
-        closable: false
-      });
+      toast.add({severity: 'error', summary: 'Error', detail: 'Tên đăng nhập đã tồn tại', life: 3000, contentStyleClass: 'gap-3', closable: false});
       return;
     }
 
@@ -124,15 +102,7 @@ const register = async () => {
 
     const data = await response.json();
     console.log('Registration successful:', data);
-
-    toast.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Đăng ký thành công',
-      life: 3000,
-      contentStyleClass: 'gap-3',
-      closable: false
-    });
+    toast.add({severity: 'success', summary: 'Success', detail: 'Đăng ký thành công', life: 3000, contentStyleClass: 'gap-3', closable: false});
 
     emit('updateState', 'login');
   } catch (error) {
