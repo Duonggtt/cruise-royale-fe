@@ -8,7 +8,7 @@ NPM_CONFIG_FUND = 'false' # the fund notification is also pretty useless in a pr
 # download caddy from nix
 [phases.caddy]
 dependsOn = ['setup'] # make sure this phase runs after the default 'setup' phase
-nixpkgsArchive = 'ba913eda2df8eb72147259189d55932012df6301' # Caddy v2.8.4 - https://github.com/NixOS/nixpkgs/commit/ba913eda2df8eb72147259189d55932012df6301
+nixpkgsArchive = '51dbe08c-dade-4f45-9194-e16a5933cb84' # Caddy v2.8.4 - https://github.com/NixOS/nixpkgs/commit/ba913eda2df8eb72147259189d55932012df6301
 nixPkgs = ['caddy'] # install caddy as a nix package
 
 # format the Caddyfile with fmt
