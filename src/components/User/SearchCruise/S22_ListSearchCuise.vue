@@ -5,7 +5,7 @@
         <DataView :value="cruises" dataKey="id" paginator :rows="4">
           <template #list="slotProps">
             <div class="grid grid-nogutter">
-              <div v-for="(cruise, index) in slotProps.items" :key="index" class="col-12">
+              <div v-for="(cruise, index) in slotProps.items" :key="index" class="col-12"  @click="goToCruise(cruise.id)">
                 <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3 my-3 surface-border shadow-2 rounded-3xl">
                   <div class="md:w-20rem relative">
                     <img class="block xl:block mx-auto rounded-2xl w-full" :src="`${cruise.imageUrl}`" :alt="cruise.name"/>
@@ -42,7 +42,7 @@
                       <span class="text-3xl font-bold">{{ cruise.price.toLocaleString('en-US') }}đ</span>
                       <div class="flex flex-row-reverse md:flex-row gap-2 lg:-mb-4" style="transform: scale(0.95);">
                         <Button icon="pi pi-heart" label="Like" outlined></Button>
-                        <Button icon="pi pi-shopping-cart" label="Đặt ngay" :disabled="cruise.inventoryStatus === 'OUTOFSTOCK'" class="flex-auto md:flex-initial white-space-nowrap"></Button>
+                        <Button icon="pi pi-shopping-cart" label="Đặt ngay" :disabled="cruise.inventoryStatus === 'OUTOFSTOCK'" class="flex-auto md:flex-initial white-space-nowrap" @click="router.push('/SearchCuiseView')" ></Button>
                       </div>
                     </div>
                   </div>
@@ -138,7 +138,8 @@ const formattedCruiseDescription = (cruise: Cruise) => {
   return `Hạ thuỷ ${cruise.launchedYear} - ${cruise.material} - ${cruise.cabinQuantity} Phòng`;
 };
 
-const CruiseInformationView = (cruise: Cruise) => {
-  router.push(`/cruise/${cruise.id}`);
+const goToCruise = (id: number) => {
+  router.push({ name: 'CruiseDetails', params: { id } });
 };
+
 </script>

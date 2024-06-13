@@ -127,12 +127,10 @@ const formattedCruiseDescription = (cruise: Cruise) => {
   return `Hạ thuỷ ${cruise.launchedYear} - ${cruise.material} - ${cruise.cabinQuantity} Phòng`;
 };
 
-const CruiseInformationView = (cruise: Cruise) => {
-  router.push(`/cruise/${cruise.id}`);
-};
 
 const goToCruise = (id: number) => {
   router.push({ name: 'CruiseDetails', params: { id } });
+
 };
 
 
