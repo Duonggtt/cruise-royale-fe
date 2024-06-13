@@ -2,29 +2,36 @@
   <div class="   w-full ">
 
 
-    <div class="flex justify-between my-3  border-bottom-1 border-gray-300 pl-4 pr-3 pb-2 mx-5">
-      <h3 class="font-bold  ">Lọc kết quả</h3>
-      <h5 class="font-medium cursor-pointer" @click="resetSelection">Đặt lại</h5>
+    <div class="border-bottom-1 border-gray-300 py-3  mb-5">
+      <div class="flex justify-between items-center  px-3">
+        <h3 class="font-bold  ">Lọc kết quả</h3>
+        <h5 class="font-black cursor-pointer hover:text-emerald-500" @click="resetSelection">Đặt lại</h5></div>
     </div>
 
-    <div class="flex flex-column gap-3 pl-4">
-      <p class="font-bold">Xếp hạng sao</p>
-      <div class="flex flex-column gap-2 " style="transform: scale(0.95);">
-        <div v-for="category of categories" :key="category.key" class="flex align-items-center gap-2">
-          <Checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name"/>
-          <label :for="category.key" class="text-sm">{{ category.name }}</label>
+    <div class="flex flex-column gap-3 ">
+
+      <div class="px-3 ">
+        <p class="font-bold pb-2">Xếp hạng sao</p>
+        <div class="flex flex-column gap-2 " style="transform: scale(0.95);">
+          <div v-for="category of categories" :key="category.key" class="flex align-items-center gap-2">
+            <Checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name"/>
+            <label :for="category.key" class="text-sm">{{ category.name }}</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-top-1 border-gray-300 pt-3 px-3">
+        <p class="font-bold pb-2">Tiện ích</p>
+        <div class="flex flex-column gap-2 -mt-3" style="transform: scale(0.95);">
+          <div v-for="utilitie of utilities" :key="utilitie.key" class="flex align-items-center gap-2">
+            <Checkbox v-model="selectedCategories" :inputId="utilitie.key" name="category" :value="utilitie.name"/>
+            <label :for="utilitie.key" class="text-sm">{{ utilitie.name }}</label>
+          </div>
         </div>
       </div>
 
-      <p class=" border-top-1 border-gray-300 pt-3  font-bold" >Tiện ích</p>
-      <div class="flex flex-column gap-2 -mt-3" style="transform: scale(0.95);">
-        <div v-for="utilitie of utilities" :key="utilitie.key" class="flex align-items-center gap-2" >
-          <Checkbox v-model="selectedCategories" :inputId="utilitie.key" name="category" :value="utilitie.name"/>
-          <label :for="utilitie.key" class="text-sm">{{ utilitie.name }}</label>
-        </div>
-      </div>
-      </div>
-
+    </div>
 
 
   </div>

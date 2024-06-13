@@ -1,9 +1,16 @@
+// import 'tailwindcss/tailwind.css';
+// import 'tailwindcss/base.css';
+
+
 import "primevue/resources/themes/lara-light-green/theme.css"
+import 'primevue/resources/primevue.css';
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import 'primeflex/primeflex.css';
-import './assets/main.css'
 
+import './assets/main.css'
+import 'tailwindcss/components.css';
+import 'tailwindcss/utilities.css';
 
 //#region Import Components Primevue
 
@@ -114,7 +121,7 @@ import ListCruiseView from "@/components/User/Home/H2_ListCruiseView.vue";
 
 import BreadcrumbDetail from "@/components/User/CruiseInformation/C1_BreadcrumbDetail.vue";
 import YachtTitle from "@/components/User/CruiseInformation/C2_YachtTitle.vue";
-import  Highlight from "@/components/User/CruiseInformation/C3_Highlight.vue";
+import Highlight from "@/components/User/CruiseInformation/C3_Highlight.vue";
 import RomCruise from "@/components/User/CruiseInformation/C4_RomCruise.vue";
 import Introduce from "@/components/User/CruiseInformation/C5_Introduce.vue";
 import Rules from "@/components/User/CruiseInformation/C6_Rules.vue";
@@ -122,8 +129,7 @@ import Evaluate from "@/components/User/CruiseInformation/C7_Evaluate.vue";
 
 import Dashboard from "@/components/Admin/Dashboard.vue";
 import AdminView from "@/views/AdminView/AdminView.vue";
-import SlideBar  from "@/components/Admin/SlideBar.vue";
-
+import SlideBar from "@/components/Admin/SlideBar.vue";
 
 
 import ProfileView from "@/views/UserView/ProfileView.vue";
@@ -135,7 +141,7 @@ import CruiseDetailsView from "@/components/User/CruiseInformation/C0_CruiseDeta
 
 
 import {createApp} from 'vue'
-import { createPinia } from 'pinia'
+import {createPinia} from 'pinia'
 import App from './App.vue'
 import router from './router'
 
@@ -145,9 +151,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(ToastService)
-app.use(PrimeVue, { ripple: true });
-
-
+app.use(PrimeVue, {ripple: true});
 
 
 //#region Components Primevue
@@ -261,12 +265,9 @@ app.component("Rules", Rules)
 app.component("Evaluate", Evaluate)
 
 
-
-
 app.component("Dashboard", Dashboard)
 app.component("AdminView", AdminView)
 app.component("SlideBar", SlideBar)
-
 
 
 app.mount('#app')

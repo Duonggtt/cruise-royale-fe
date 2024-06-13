@@ -22,7 +22,7 @@
         <div class="md:flex justify-center  block ">
           <div class="flex  mb-6 md:mb-0">
             <div class="mx-12 ">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="h-15rem w-15rem  rounded-4xll object-cover shadow-1"/>
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="h-15rem w-15rem  rounded-full object-cover shadow-1"/>
               <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10 shadow-1"/>
             </div>
           </div>
