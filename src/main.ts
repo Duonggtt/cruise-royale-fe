@@ -2,15 +2,15 @@
 // import 'tailwindcss/base.css';
 
 
-import "primevue/resources/themes/lara-light-green/theme.css"
-import 'primevue/resources/primevue.css';
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
-import 'primeflex/primeflex.css';
+// import "primevue/resources/themes/lara-light-green/theme.css"
+// import 'primevue/resources/primevue.css';
+// import "primevue/resources/primevue.min.css";
+// import "primeicons/primeicons.css";
+// import 'primeflex/primeflex.css';
 
 import './assets/main.css'
-import 'tailwindcss/components.css';
-import 'tailwindcss/utilities.css';
+// import 'tailwindcss/components.css';
+// import 'tailwindcss/utilities.css';
 
 //#region Import Components Primevue
 
@@ -41,7 +41,6 @@ import ConfirmPopup from "primevue/confirmpopup";
 import ContextMenu from "primevue/contextmenu";
 import DataTable from "primevue/datatable";
 import DataView from "primevue/dataview";
-import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import DeferredContent from "primevue/deferredcontent";
 import Dialog from "primevue/dialog";
 import Divider from "primevue/divider";
@@ -101,7 +100,6 @@ import ToggleButton from "primevue/togglebutton";
 import Tree from "primevue/tree";
 import TreeSelect from "primevue/treeselect";
 import TreeTable from "primevue/treetable";
-import TriStateCheckbox from "primevue/tristatecheckbox";
 
 //#endregion Import Components Primevue
 
@@ -144,13 +142,30 @@ import {createApp} from 'vue'
 import {createPinia} from 'pinia'
 import App from './App.vue'
 import router from './router'
-
+import Aura from '@primevue/themes/aura';
+import Lara from '@primevue/themes/lara';
+import Nora from '@primevue/themes/nora';
 import ToastService from "primevue/toastservice";
 
 const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(ToastService)
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura,
+        options: {
+            cssLayer: {
+                name: 'primevue',
+                order: ' primevue ',
+                darkModeSelector: 'system',
+                cssLayer: false,
+            },
+
+        }
+    }
+});
+
 app.use(PrimeVue, {ripple: true});
 
 
@@ -181,7 +196,6 @@ app.component("ConfirmPopup", ConfirmPopup);
 app.component("ContextMenu", ContextMenu);
 app.component("DataTable", DataTable);
 app.component("DataView", DataView);
-app.component("DataViewLayoutOptions", DataViewLayoutOptions);
 app.component("DeferredContent", DeferredContent);
 app.component("Dialog", Dialog);
 app.component("Divider", Divider);
@@ -239,7 +253,6 @@ app.component("ToggleButton", ToggleButton);
 app.component("Tree", Tree);
 app.component("TreeSelect", TreeSelect);
 app.component("TreeTable", TreeTable);
-app.component("TriStateCheckbox", TriStateCheckbox);
 //#endregion   Components Primevue
 
 

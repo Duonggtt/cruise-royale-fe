@@ -8,7 +8,7 @@
         <InputText type="text " class="w-auto  text-sm rounded-3xl pl-4" placeholder="Nhập tên du thuyền"/>
         <Dropdown class="w-auto rounded-3xl pi pi-flag flex align-items-center px-3" :options="locations" optionLabel="name" placeholder="Tất cả địa điểm" scroll-height="1"/>
         <Dropdown class="w-auto  rounded-3xl pi pi-money-bill flex align-items-center px-3" :options="prices" optionLabel="range" placeholder="Tất cả mức giá" scroll-height="1"/>
-        <Button label="Tìm kiếm" class="bg-teal-500 text-white w-full  rounded-3xl"/>
+        <Button label="Tìm kiếm" class=""/>
       </div>
     </div>
   </div>

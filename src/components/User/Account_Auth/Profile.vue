@@ -3,7 +3,7 @@
     <section class="mb-6 flex items-center justify-between">
       <div class="flex items-center justify-start">
         <span
-            class="inline-flex justify-center items-center w-3rem h-3rem rounded-full bg-white text-black dark:bg-slate-900/70 dark:text-white mr-3">
+            class="inline-flex justify-center items-center w-3rem h-3rem rounded-full text-black dark:bg-slate-900/70 dark:text-white mr-3">
           <i class="pi pi-user" style="color: black"></i>
         </span>
         <span class="text-3xl font-bold">Profile</span>
@@ -17,7 +17,7 @@
       </p>
     </section>
 
-    <div class="rounded-3xl flex-col dark:bg-slate-900/70 bg-white flex mb-6 shadow-2">
+    <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-2">
       <div class="flex-1 p-6">
         <div class="md:flex justify-center  block ">
           <div class="flex  mb-6 md:mb-0">
@@ -33,8 +33,7 @@
 
               <p v-if="userImage.length > 0">Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>
               <div class="flex justify-center md:block">
-                <div
-                    class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-white">
+                <div   class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 ">
                   <span class="inline-flex justify-center items-center w- h-4 mr-2">
                     <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
                       <path fill="currentColor"
@@ -63,7 +62,7 @@
       </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <form class="rounded-2xl bg-white shadow-2" @submit.prevent="updateUser">
+      <form class="rounded-2xl dark:bg-slate-900/70 shadow-2" @submit.prevent="updateUser">
         <div class="flex-1 p-6 ">
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
@@ -131,7 +130,7 @@
         </footer>
       </form>
 
-      <form class="rounded-2xl bg-white shadow-2">
+      <form class="rounded-2xl dark:bg-slate-900/70  bg-gray-200 shadow-2">
         <div class="flex-1 p-6">
           <div class="py-5">
             <InputGroup class="">

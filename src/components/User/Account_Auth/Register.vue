@@ -1,38 +1,39 @@
 <template>
-  <div class="regitser-container  flex align-items-center justify-content-center bg-white-alpha-100  ">
-    <form @submit.prevent="register" class="px-20 py-10  border-round-3xl w-auto bg-white opacity-95">
-      <div class="card-container w-30rem">
+  <div class=" flex align-items-center justify-content-center w-auto">
+    <form @submit.prevent="register" class="px-20 py-10  border-round-3xl w-auto ">
+      <div class="card-container ">
         <div class="welcome-message text-center mb-5">
-          <h2 class="font-bold pt-2"><i class="pi pi-spin pi-sparkles text-5xl"></i> Đăng ký </h2>
+          <b class="font-bold pt-2 "> Đăng ký </b>
         </div>
-        <span class="p-float-label mb-4 ">
+        <FloatLabel class="p-float-label mb-4 ">
           <InputText id="username" v-model="username" class="p-input-filled w-full pl-3"/>
           <label for="username" class="pl-3">Tên đăng nhập</label>
-        </span>
-        <span class="p-float-label mb-4 ">
+        </FloatLabel>
+        <FloatLabel class="p-float-label mb-4 ">
          <InputText id="email" v-model="email" class="p-input-filled w-full pl-3"/>
           <label for="email" class="pl-3">Email</label>
-        </span>
-        <span class="p-float-label mb-4">
+        </FloatLabel>
+        <FloatLabel class="p-float-label mb-4">
          <InputText id="phone" v-model="phone" class="p-input-filled w-full pl-3"/>
           <label for="phone" class="pl-3">Số điện thoại</label>
-        </span>
-        <span class="p-float-label mb-4">
+        </FloatLabel>
+        <FloatLabel class="p-float-label mb-4">
           <InputText id="name" v-model="name" class="p-input-filled w-full pl-3"/>
           <label for="name" class="pl-3">Tên</label>
-        </span>
+        </FloatLabel>
 
-        <span class="p-float-label mb-4 ">
+        <FloatLabel class="p-float-label mb-4 ">
           <Password id="password" v-model="password" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
-          <label for="password" class="pl-3 ">Nhập mật khẩu</label></span>
-        <span class="p-float-label mb-4 ">
+          <label for="password" class="pl-3 ">Nhập mật khẩu</label></FloatLabel>
+        <FloatLabel class="p-float-label mb-4 ">
            <Password id="passwordCConfirm" v-model="passwordCConfirm" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
            <label for="passwordCConfirm" class="pl-3">Nhập lại mật khẩu</label>
-        </span>
+        </FloatLabel>
 
       </div>
       <div class="link-container mb-3">
-        <Button label="Đăng Ký" severity="Primary" class="signup-button  mt-1 w-full  " @click="register"/>
+        <Button label="Đăng Ký" severity="Primary" class=" bg-primary-200 mt-1 w-full  " @click="register"/>
+
       </div>
       <div class="link-container flex ">
         <Button icon="pi pi-arrow-left" label=" &nbsp; Quay lại" class="p-button-text button-with-icon flex  font-italic " @click="Back"/>
