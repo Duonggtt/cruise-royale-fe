@@ -1,17 +1,18 @@
 <template>
-  <form @submit.prevent="onSubmit" class="p-5 border-round-3xl  w-auto  ">
+  <form @submit.prevent="onSubmit" class="p-5 border-round-3xl  bg-transparent w-auto animate-duration-1000 animate-ease-in-out -mt-8 "
+        v-animateonscroll="{ enterClass: 'animate-flipleft'}">
     <div class="card-container  w-30rem w-96">
-      <div class="welcome-message text-center  align-items-center mb-3">
+      <div class="welcome-message text-center align-items-center mb-3 ">
         <img :src="userImage" alt="User Image" class="user-image  w-32 mx-auto"/>
         <h2 class="pt-3 font-bold">Welcome, Cruise Royal</h2>
       </div>
-      <div class="input-group flex-column align-items-center mb-4">
+      <div class="input-group flex-column align-items-center mb-6">
         <FloatLabel class="p-float-label ">
-          <InputText id="username" v-model="user.username" class="p-input-filled  w-full h-3rem pl-3 "/>
+          <InputText id="username" v-model="user.username" class="p-input-filled w-full h-3rem pl-3 "/>
           <label for="username" class="pl-2">Username</label>
         </FloatLabel>
       </div>
-      <FloatLabel class="input-group flex-column align-items-center mb-4 h-">
+      <FloatLabel class="input-group flex-column align-items-center mb-6 h-">
         <InputText id="password" v-model="user.password" type="password" class="p-input-filled  w-full h-3rem pl-3"/>
         <label for="password" class="pl-2">Password</label>
       </FloatLabel>

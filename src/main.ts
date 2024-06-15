@@ -14,25 +14,23 @@ import './assets/main.css'
 
 //#region Import Components Primevue
 
+import AnimateOnScroll from 'primevue/animateonscroll';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import FloatLabel from 'primevue/floatlabel';
 import PrimeVue from "primevue/config";
 import AutoComplete from "primevue/autocomplete";
 import Accordion from "primevue/accordion";
-import AccordionTab from "primevue/accordiontab";
 import Avatar from "primevue/avatar";
 import AvatarGroup from "primevue/avatargroup";
 import Badge from "primevue/badge";
 import BlockUI from "primevue/blockui";
 import Button from "primevue/button";
 import Breadcrumb from "primevue/breadcrumb";
-import Calendar from "primevue/calendar";
 import Card from "primevue/card";
 import CascadeSelect from "primevue/cascadeselect";
 import Carousel from "primevue/carousel";
 import Checkbox from "primevue/checkbox";
 import Chip from "primevue/chip";
-import Chips from "primevue/chips";
 import ColorPicker from "primevue/colorpicker";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup";
@@ -44,13 +42,10 @@ import DataView from "primevue/dataview";
 import DeferredContent from "primevue/deferredcontent";
 import Dialog from "primevue/dialog";
 import Divider from "primevue/divider";
-import Dropdown from "primevue/dropdown";
 import Fieldset from "primevue/fieldset";
 import FileUpload from "primevue/fileupload";
 import Galleria from "primevue/galleria";
-import InlineMessage from "primevue/inlinemessage";
 import Inplace from "primevue/inplace";
-import InputSwitch from "primevue/inputswitch";
 import InputText from "primevue/inputtext";
 import InputMask from "primevue/inputmask";
 import InputNumber from "primevue/inputnumber";
@@ -63,7 +58,6 @@ import Message from "primevue/message";
 import MultiSelect from "primevue/multiselect";
 import OrderList from "primevue/orderlist";
 import OrganizationChart from "primevue/organizationchart";
-import OverlayPanel from "primevue/overlaypanel";
 import Paginator from "primevue/paginator";
 import Panel from "primevue/panel";
 import PanelMenu from "primevue/panelmenu";
@@ -80,7 +74,6 @@ import ScrollPanel from "primevue/scrollpanel";
 import ScrollTop from "primevue/scrolltop";
 import Skeleton from "primevue/skeleton";
 import Slider from "primevue/slider";
-import Sidebar from "primevue/sidebar";
 import SplitButton from "primevue/splitbutton";
 import Splitter from "primevue/splitter";
 import SplitterPanel from "primevue/splitterpanel";
@@ -91,7 +84,6 @@ import Textarea from "primevue/textarea";
 import Toast from "primevue/toast";
 
 import Toolbar from "primevue/toolbar";
-import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
 import Tag from "primevue/tag";
 import Terminal from "primevue/terminal";
@@ -157,7 +149,7 @@ app.use(PrimeVue, {
         options: {
             cssLayer: {
                 name: 'primevue',
-                order: ' primevue ',
+                order: 'tailwind-base, primevue, tailwind-utilities',
                 darkModeSelector: 'system',
                 cssLayer: false,
             },
@@ -165,7 +157,7 @@ app.use(PrimeVue, {
         }
     }
 });
-
+app.directive('animateonscroll', AnimateOnScroll);
 app.use(PrimeVue, {ripple: true});
 
 
@@ -173,7 +165,6 @@ app.use(PrimeVue, {ripple: true});
 app.component("InputGroupAddon", InputGroupAddon);
 app.component("FloatLabel", FloatLabel);
 app.component("Accordion", Accordion);
-app.component("AccordionTab", AccordionTab);
 app.component("AutoComplete", AutoComplete);
 app.component("Avatar", Avatar);
 app.component("AvatarGroup", AvatarGroup);
@@ -181,13 +172,11 @@ app.component("Badge", Badge);
 app.component("BlockUI", BlockUI);
 app.component("Breadcrumb", Breadcrumb);
 app.component("Button", Button);
-app.component("Calendar", Calendar);
 app.component("Card", Card);
 app.component("Carousel", Carousel);
 app.component("CascadeSelect", CascadeSelect);
 app.component("Checkbox", Checkbox);
 app.component("Chip", Chip);
-app.component("Chips", Chips);
 app.component("ColorPicker", ColorPicker);
 app.component("Column", Column);
 app.component("ColumnGroup", ColumnGroup);
@@ -199,14 +188,11 @@ app.component("DataView", DataView);
 app.component("DeferredContent", DeferredContent);
 app.component("Dialog", Dialog);
 app.component("Divider", Divider);
-app.component("Dropdown", Dropdown);
 app.component("Fieldset", Fieldset);
 app.component("FileUpload", FileUpload);
-app.component("InlineMessage", InlineMessage);
 app.component("Inplace", Inplace);
 app.component("InputMask", InputMask);
 app.component("InputNumber", InputNumber);
-app.component("InputSwitch", InputSwitch);
 app.component("InputText", InputText);
 app.component("Galleria", Galleria);
 app.component("Knob", Knob);
@@ -218,7 +204,6 @@ app.component("Message", Message);
 app.component("MultiSelect", MultiSelect);
 app.component("OrderList", OrderList);
 app.component("OrganizationChart", OrganizationChart);
-app.component("OverlayPanel", OverlayPanel);
 app.component("Paginator", Paginator);
 app.component("Panel", Panel);
 app.component("PanelMenu", PanelMenu);
@@ -233,14 +218,12 @@ app.component("SelectButton", SelectButton);
 app.component("ScrollPanel", ScrollPanel);
 app.component("ScrollTop", ScrollTop);
 app.component("Slider", Slider);
-app.component("Sidebar", Sidebar);
 app.component("Skeleton", Skeleton);
 app.component("SplitButton", SplitButton);
 app.component("Splitter", Splitter);
 app.component("SplitterPanel", SplitterPanel);
 app.component("Steps", Steps);
 app.component("TabMenu", TabMenu);
-app.component("TabView", TabView);
 app.component("TabPanel", TabPanel);
 app.component("Tag", Tag);
 app.component("Textarea", Textarea);
