@@ -1,19 +1,19 @@
 <template>
-  <form @submit.prevent="onSubmit" class="p-5 border-round-3xl  bg-transparent w-auto animate-duration-1000 animate-ease-in-out -mt-8 "
-        v-animateonscroll="{ enterClass: 'animate-flipleft'}">
+  <form @submit.prevent="onSubmit" class="px-20 py-10 border-round-3xl  bg-transparent w-auto animate-duration-1000 animate-ease-in-out -mt-8 "
+        v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
     <div class="card-container  w-30rem w-96">
       <div class="welcome-message text-center align-items-center mb-3 ">
-        <img :src="userImage" alt="User Image" class="user-image  w-32 mx-auto"/>
-        <h2 class="pt-3 font-bold">Welcome, Cruise Royal</h2>
+        <img :src="userImage" alt="User Image" class="user-image w-32 mx-auto"/>
+<!--        <h2 class="pt-3 font-bold">Welcome, Cruise Royal</h2>-->
       </div>
       <div class="input-group flex-column align-items-center mb-6">
         <FloatLabel class="p-float-label ">
-          <InputText id="username" v-model="user.username" class="p-input-filled w-full h-3rem pl-3 "/>
+          <InputText id="username" v-model="user.username" class="w-full h-3rem pl-3 rounded-3xl "/>
           <label for="username" class="pl-2">Username</label>
         </FloatLabel>
       </div>
-      <FloatLabel class="input-group flex-column align-items-center mb-6 h-">
-        <InputText id="password" v-model="user.password" type="password" class="p-input-filled  w-full h-3rem pl-3"/>
+      <FloatLabel class="input-group flex-column align-items-center mb-6">
+        <InputText id="password" v-model="user.password" type="password" class="w-full h-3rem pl-3 rounded-3xl"/>
         <label for="password" class="pl-2">Password</label>
       </FloatLabel>
     </div>
@@ -22,14 +22,13 @@
         <Checkbox v-model="checked" inputId="ingredient1" name="pizza" value="Cheese"/>
         <label for="ingredient1" class="ml-1.5 text-purple-800 cursor-pointer"> Lưu cho lần sau </label>
       </div>
-      <a @click="handleForgotPassword" class="font-medium  ml-2 pr-2  cursor-pointer text-purple-800">Quên mật khẩu
-        ?</a>
+      <a @click="handleForgotPassword" class="font-medium ml-auto pr-2 cursor-pointer text-purple-800">Quên mật khẩu ?</a>
     </div>
     <div class="link-container flex align-items-center">
-      <Button label="Đăng nhập" severity="primary" class="login-button  w-full  mt-5" type="submit"/>
+      <Button label="Đăng nhập" severity="primary" class="login-button w-full mt-5 rounded-3xl" type="submit"/>
     </div>
 
-    <div class="welcome-message text-center mb-3 pt-3">
+    <div class="welcome-message text-center -mb-5 pt-5">
       <a @click="handleSignUp" class="font-normal  ml-2  cursor-pointer text-green-500">Chưa có tài khoản? Đăng ký</a>
     </div>
   </form>

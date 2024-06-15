@@ -1,42 +1,42 @@
 <template>
-  <div class=" flex align-items-center justify-content-center w-auto">
+  <div class=" flex align-items-center justify-content-center w-auto animate-duration-1000 animate-ease-in-out"
+       v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
     <form @submit.prevent="register" class="px-20 py-10  border-round-3xl w-auto ">
-      <div class="card-container ">
-        <div class="welcome-message text-center mb-5">
-          <b class="font-bold pt-2 "> Đăng ký </b>
-        </div>
+      <div class="text-2xl text-center mb-12">
+        <b class="font-bold "> Đăng ký </b>
+      </div>
+      <div class="card-container grid grid-cols-2 gap-4">
+
         <FloatLabel class="p-float-label mb-4 ">
-          <InputText id="username" v-model="username" class="p-input-filled w-full pl-3"/>
+          <InputText id="username" v-model="username" class="rounded-3xl w-full pl-3"/>
           <label for="username" class="pl-3">Tên đăng nhập</label>
         </FloatLabel>
         <FloatLabel class="p-float-label mb-4 ">
-         <InputText id="email" v-model="email" class="p-input-filled w-full pl-3"/>
+          <InputText id="email" v-model="email" class="rounded-3xl w-full pl-3"/>
           <label for="email" class="pl-3">Email</label>
         </FloatLabel>
         <FloatLabel class="p-float-label mb-4">
-         <InputText id="phone" v-model="phone" class="p-input-filled w-full pl-3"/>
+          <InputText id="phone" v-model="phone" class="rounded-3xl w-full pl-3"/>
           <label for="phone" class="pl-3">Số điện thoại</label>
         </FloatLabel>
         <FloatLabel class="p-float-label mb-4">
-          <InputText id="name" v-model="name" class="p-input-filled w-full pl-3"/>
+          <InputText id="name" v-model="name" class="rounded-3xl w-full pl-3"/>
           <label for="name" class="pl-3">Tên</label>
         </FloatLabel>
 
         <FloatLabel class="p-float-label mb-4 ">
-          <Password id="password" v-model="password" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
+          <Password id="password" v-model="password" :toggleMask="true" inputClass="rounded-3xl pl-3"></Password>
           <label for="password" class="pl-3 ">Nhập mật khẩu</label></FloatLabel>
         <FloatLabel class="p-float-label mb-4 ">
-           <Password id="passwordCConfirm" v-model="passwordCConfirm" :toggleMask="true" class="" inputClass="p-input-filled pl-3"></Password>
-           <label for="passwordCConfirm" class="pl-3">Nhập lại mật khẩu</label>
+          <Password id="passwordCConfirm" v-model="passwordCConfirm" :toggleMask="true" inputClass="rounded-3xl pl-3"></Password>
+          <label for="passwordCConfirm" class="pl-3">Nhập lại mật khẩu</label>
         </FloatLabel>
-
       </div>
       <div class="link-container mb-3">
-        <Button label="Đăng Ký" severity="Primary" class=" bg-primary-200 mt-1 w-full  " @click="register"/>
-
+        <Button label="Đăng Ký" severity="Primary" class="mt-1 w-full rounded-3xl " @click="register"/>
       </div>
       <div class="link-container flex ">
-        <Button icon="pi pi-arrow-left" label=" &nbsp; Quay lại" class="p-button-text button-with-icon flex  font-italic " @click="Back"/>
+        <Button  label=" Quay lại" class="p-button-text text-sm  " @click="Back"/>
       </div>
     </form>
   </div>
