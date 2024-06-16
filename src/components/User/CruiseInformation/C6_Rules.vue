@@ -8,7 +8,7 @@
       <h1 class="font-bold">Câu hỏi thường gặp</h1>
       <p>Bạn có thể xem Câu hỏi thường gặp: Tại đây</p>
     </div>
-    <Message class="rounded-r-2xl">
+    <Message class="rounded-2xl p-2">
       <h2 class="font-medium">Thông tin cần biết:</h2>
       <p  class="my-2">Du thuyền Du thuyền Heritage Bình Chuẩn Cát Bà xuất phát từ Lux Cruises, Lô 28 Cảng Quốc Tế Tuần Châu</p>
       <p  class="my-2"> Bạn có thể xem chi tiết lịch trình 2 ngày 1 đêm. tại đây.</p>

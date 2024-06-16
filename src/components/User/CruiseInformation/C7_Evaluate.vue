@@ -2,8 +2,8 @@
   <div class="mx-auto max-w-screen-xl px-4 py-10 ">
     <h1 class="font-bold text-xl mb-4">Đánh giá (2)</h1>
     <div class="flex justify-between mb-4">
-      <InputText v-model="searchTerm" placeholder="Tìm đánh giá" class="w-64 rounded-4xl pl-3"/>
-      <Button label="Gửi đánh giá" icon="pi pi-star" class="p-button-outlined "/>
+      <InputText v-model="searchTerm" placeholder="Tìm đánh giá" class="w-64 rounded-3xl pl-3"/>
+      <Button label="Gửi đánh giá" icon="pi pi-star" class="rounded-3xl "/>
     </div>
     <div class="flex items-center mb-2 mr-28 ">
       <Rating v-model="rating" :readonly="true" :cancel="false" class="mr-2 ml-auto  "/>
@@ -15,8 +15,8 @@
       <span class="ml-2 text-sm">{{ item.count }} đánh giá </span>
     </div>
 
-    <div class=" mt-10  ">
-      <div v-for="review in reviews" :key="review.id" class=" rounded-3xl shadow p-4 mt-5">
+    <div class=" mt-10   ">
+      <div v-for="review in reviews" :key="review.id" class=" rounded-3xl border-2 shadow p-4 mt-5">
         <div class="flex items-center mb-2 ">
           <Rating :modelValue="review.rating" :readonly="true" :cancel="false" class="mr-2"/>
           <span class="font-semibold">{{ review.name }}</span>
@@ -39,24 +39,24 @@
         </div>
         <div class="w-1/2 pl-2">
           <label class="block font-semibold mb-2">Họ và tên *</label>
-          <InputText v-model="name" placeholder="Nhập họ và tên" class="w-full rounded-4xl pl-3"/>
+          <InputText v-model="name" placeholder="Nhập họ và tên" class="w-full rounded-3xl pl-3"/>
         </div>
       </div>
       <div class="flex mb-4">
         <div class="w-1/2 pr-2">
           <label class="block font-semibold mb-2">Số điện thoại *</label>
-          <InputText v-model="phoneNumber" placeholder="Nhập số điện thoại" class="w-full rounded-4xl pl-3"/>
+          <InputText v-model="phoneNumber" placeholder="Nhập số điện thoại" class="w-full rounded-3xl pl-3"/>
         </div>
         <div class="w-1/2 pl-2">
           <label class="block font-semibold mb-2">Địa chỉ email *</label>
-          <InputText v-model="email" placeholder="Nhập email" class="w-full rounded-4xl pl-3"/>
+          <InputText v-model="email" placeholder="Nhập email" class="w-full rounded-3xl pl-3"/>
         </div>
       </div>
       <div class="mb-4">
         <label class="block font-semibold mb-2">Đánh giá của bạn *</label>
         <Textarea v-model="review" rows="3" placeholder="Nhập đánh giá của bạn" class="w-full rounded-2xl pl-3"/>
       </div>
-      <Button label="Gửi" class="w-full   text-white font-semibold py-2 px-4 rounded"/>
+      <Button label="Gửi" class="w-full   text-white font-semibold py-2 px-4 rounded-3xl"/>
     </div>
 
 

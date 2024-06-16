@@ -128,35 +128,51 @@
 
       <form class="rounded-2xl dark:bg-slate-900/70  bg-gray-100 shadow-2">
         <div class="flex-1 p-6">
-          <div class="py-5">
-            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
-              <label class="block mb-1 pl-2">Mật khẩu hiện tại</label>
-              <InputText class="rounded-3xl w-full pl-4"/>
-            </FloatLabel>
+          <div class="mb-12">
+            <div class="overflow-hidden rounded-full bg-gray-200">
+              <div class="h-2 w-1/2 rounded-full bg-blue-500"></div>
+            </div>
+
+            <ol class="mt-4 grid grid-cols-3 text-sm font-medium text-gray-500">
+              <li class="flex items-center justify-start text-blue-600 sm:gap-1.5">
+                <span class="hidden sm:inline"> Details </span>
+                <span class="scale-75 material-symbols-outlined">contact_emergency</span>
+              </li>
+
+              <li class="flex items-center justify-center text-blue-600 sm:gap-1.5">
+                <span class="hidden sm:inline"> Address </span>
+                <span class="scale-75 material-symbols-outlined">location_on</span>
+              </li>
+
+              <li class="flex items-center justify-end sm:gap-1.5">
+                <span class="hidden sm:inline"> Payment </span>
+                <span class="scale-75 material-symbols-outlined">payments</span>
+              </li>
+            </ol>
           </div>
-          <hr class="my-6 -mx-6 border-b-gray-100">
-          <div class="mb-3">
-            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
-              <label class="block mb-1 pl-2">Mật khẩu mới</label>
-              <InputText class="rounded-3xl w-full pl-4"/>
-            </FloatLabel>
-          </div>
-          <div class="mb-2">
-            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
-              <label class="block mb-1 pl-2">Xác nhận mật khẩu</label>
-              <InputText class="rounded-3xl w-full pl-4"/>
-            </FloatLabel>
-          </div>
+
+<!--          <div class="py-5">-->
+<!--            <FloatLabel class="input-group flex-column align-items-center mb-6 ">-->
+<!--              <label class="block mb-1 pl-2">Mật khẩu hiện tại</label>-->
+<!--              <InputText class="rounded-3xl w-full pl-4"/>-->
+<!--            </FloatLabel>-->
+<!--          </div>-->
+<!--          <hr class="my-6 -mx-6 border-b-gray-100">-->
+<!--          <div class="mb-3">-->
+<!--            <FloatLabel class="input-group flex-column align-items-center mb-6 ">-->
+<!--              <label class="block mb-1 pl-2">Mật khẩu mới</label>-->
+<!--              <InputText class="rounded-3xl w-full pl-4"/>-->
+<!--            </FloatLabel>-->
+<!--          </div>-->
+<!--          <div class="mb-2">-->
+<!--            <FloatLabel class="input-group flex-column align-items-center mb-6 ">-->
+<!--              <label class="block mb-1 pl-2">Xác nhận mật khẩu</label>-->
+<!--              <InputText class="rounded-3xl w-full pl-4"/>-->
+<!--            </FloatLabel>-->
+<!--          </div>-->
         </div>
 
-        <footer class="px-6">
-          <button class="p-button py-2 px-3 mr-3 mb-3" type="button">
-            <span class="px-2">Cập nhật</span>
-          </button>
-          <button class="p-button py-2 px-3 mr-3 mb-3" type="button">
-            <span class="px-2">Tuỳ chọn</span>
-          </button>
-        </footer>
+
       </form>
     </div>
   </section>
