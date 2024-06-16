@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
 import OptionCruise from "@/components/User/SearchCruise/S21_OptionCruise.vue";
 import ListSearchCruise from "@/components/User/SearchCruise/S22_ListSearchCuise.vue";
 
@@ -19,8 +19,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Splitter :layout="layout"   :gutterSize="0" class="mx-auto max-w-screen-xl border-none" >
-    <SplitterPanel class="flex border-1 border-gray-200  rounded-3xl h-auto " :size="20" :minSize="15">   <OptionCruise/> </SplitterPanel>
-    <SplitterPanel class="flex  justify-content-center " :size="80" :minSize="15">   <ListSearchCruise/> </SplitterPanel>
+  <Splitter :layout="layout" :gutterSize="0" class="mx-auto max-w-screen-xl border-none mt-10">
+    <SplitterPanel class="flex  h-auto " :size="20" :minSize="15">
+      <OptionCruise/>
+    </SplitterPanel>
+    <SplitterPanel class="flex  justify-content-center " :size="80" :minSize="15">
+      <ListSearchCruise/>
+    </SplitterPanel>
   </Splitter>
 </template>
