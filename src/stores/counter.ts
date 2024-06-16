@@ -1,6 +1,8 @@
 import {defineStore} from 'pinia';
 import router from '../router';
+import { API_URL } from './config';
 
+const api_url = API_URL;
 
 interface AuthState {
     user: string | null;
@@ -22,8 +24,8 @@ export const useAuthStore = defineStore({
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
-            const url = 'http://localhost:8080/api/login';
-            let response = await fetch(url, {
+            const url = `${api_url}/login`;
+                let response = await fetch(url, {
                 method: 'POST',
                 body: formData,
             });
@@ -67,7 +69,7 @@ export const useAuthStore = defineStore({
         async fetchUserInfo() {
             const username = localStorage.getItem('user');
             const access_token = localStorage.getItem('access_token');
-            const url = `http://localhost:8080/api/user?username=${username}`;
+            const url = `${api_url}/user?username=${username}`;
 
             try {
                 const res = await fetch(url, {
@@ -99,7 +101,7 @@ export const useAuthStore = defineStore({
         },
         async fetchUserImage() {
             const userId = localStorage.getItem('userId');
-            const url = `http://localhost:8080/api/images/?userId=${userId}`;
+            const url = `${api_url}/images/?userId=${userId}`;
             const access_token = localStorage.getItem('access_token');
             try {
                 const res = await fetch(url, {
@@ -124,7 +126,7 @@ export const useAuthStore = defineStore({
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
-            const url = 'http://localhost:8080/api/register'; // replace with your register endpoint
+            const url = '${api_url}/register'; // replace with your register endpoint
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -141,7 +143,7 @@ export const useAuthStore = defineStore({
         },
 
         async refreshToken() {
-            const response = await fetch('http://localhost:8080/api/token/refresh', {
+            const response = await fetch('${api_url}/api/token/refresh', {
                 // replace with your refresh token endpoint
                 method: 'GET',
                 headers: {

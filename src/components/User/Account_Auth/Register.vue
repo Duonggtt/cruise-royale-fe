@@ -72,7 +72,7 @@ const register = async () => {
     return;
   }
 
-  const url = 'http://localhost:8080/api/user/save';
+  const url = '${api_url}/user/save';
   const user = {
     username: username.value,
     name: name.value,

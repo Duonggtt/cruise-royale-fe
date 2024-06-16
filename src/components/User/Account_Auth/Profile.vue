@@ -178,9 +178,12 @@
 <script setup lang="ts">
 import {ref, onMounted, defineAsyncComponent} from 'vue';
 import {useAuthStore} from '@/stores/counter';
+
 import router from "@/router";
 import {useToast} from 'primevue/usetoast';
 import Tour from "@/components/User/Account_Auth/Tour.vue";
+import {API_URL} from '@/stores/config';
+const api_url = API_URL;
 
 interface UserImage {
   id: number;
@@ -245,7 +248,7 @@ const onAdvancedUpload = async (event: any) => {
 
     console.log('userId is not null or undefined'); // Kiểm tra nếu userId có giá trị
     try {
-      const res = await fetch('http://localhost:8080/api/images/upload', {
+      const res = await fetch('${api_url}/api/images/upload', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${access_token.value}`,
@@ -279,7 +282,7 @@ const logouts = async () => {
 
 const updateUser = async () => {
   const username = localStorage.getItem('user');
-  const url = `http://localhost:8080/api/user/update?username=${username}`;
+  const url = `${api_url}/user/update?username=${username}`;
 
   // Create an object with all fields
   const updatedFields = {

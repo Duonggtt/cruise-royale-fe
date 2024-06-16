@@ -58,9 +58,13 @@
 
 <script setup lang="ts">
 import {ref, onMounted} from "vue";
+import {API_URL} from '@/stores/config';
 import {useAuthStore} from "@/stores/counter";
 import {useToast} from "primevue/usetoast";
 import router from "@/router";
+
+const api_url = API_URL;
+
 
 interface Cruise {
   id: number;
@@ -87,7 +91,7 @@ interface Location {
 const cruises = ref<Cruise[]>([]);
 
 const fetchCruiseFeatured = async () => {
-  const url = `http://localhost:8080/api/cruises/featured`;
+  const url = `${api_url}/cruises/featured`;
   const response = await fetch(url);
 
   if (response.status === 403) {
@@ -99,7 +103,7 @@ const fetchCruiseFeatured = async () => {
   cruises.value = data;
 
   for (const cruise of cruises.value) {
-    const imageResponse = await fetch(`http://localhost:8080/api/cruise/images/${cruise.id}`);
+    const imageResponse = await fetch(`${api_url}/cruise/images/${cruise.id}`);
     const imageBlob = await imageResponse.blob();
     cruise.imageUrl = URL.createObjectURL(imageBlob);
 
@@ -108,7 +112,7 @@ const fetchCruiseFeatured = async () => {
 };
 
 const fetchLocation = async (cruise: Cruise) => {
-  const url = `http://localhost:8080/api/locations/${cruise.locationId}`;
+  const url = `${api_url}/locations/${cruise.locationId}`;
   const response = await fetch(url);
 
   if (!response.ok) {

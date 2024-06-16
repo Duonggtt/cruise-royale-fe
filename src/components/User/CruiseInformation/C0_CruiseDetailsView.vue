@@ -11,6 +11,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import {API_URL} from '@/stores/config';
+const api_url = API_URL;
 
 const route = useRoute();
 const cruiseId = route.params.id;
@@ -67,7 +69,7 @@ interface CruiseCabinType {
 }
 
 onMounted(async () => {
-  const response = await fetch(`http://localhost:8080/api/cabins?cruiseId=${cruiseId}`);
+  const response = await fetch(`${api_url}/cabins?cruiseId=${cruiseId}`);
 
   if (!response.ok) {
     throw new Error(`Server responded with status code ${response.status}`);
