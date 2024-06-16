@@ -153,11 +153,13 @@ const handleStateChange = (newState: string) => {
 };
 
 const toast = useToast();
-const logout = () => {
+const logout = async () => {
   const authStore = useAuthStore();
-  authStore.logout();
-  avatarImage.value = AnhDuPhong.value;
-  toast.add({severity: 'error', summary: 'Đã đăng xuuất', detail: ` Đã đăng xuuất `, life: 500, contentStyleClass: 'gap-3', closable: false});
+  await authStore.logout();
+  toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuất`, life: 500, contentStyleClass: 'gap-3', closable: false});
+  setTimeout(() => {
+    router.push('/home')
+  }, 500);
 };
 
 const showMenu = ref(false);

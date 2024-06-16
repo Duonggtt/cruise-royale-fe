@@ -10,31 +10,31 @@
       </div>
       <p class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 cursor-pointer"
          @click="logouts">
-        <span class="inline-flex justify-center items-center ">
-
+        <span class="inline-flex justify-center items-center gap-2">
           <span class="px-1 font-medium">Đăng xuất</span>
+            <span class="material-symbols-outlined">logout</span>
         </span>
       </p>
     </section>
 
-    <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-2 "  >
+    <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-md border-2 border-gray-100">
       <div class="flex-1 p-6">
-        <div class="md:flex justify-center  block ">
+        <div class="md:flex   block ">
           <div class="flex  mb-6 md:mb-0">
             <div class="mx-12 ">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="w-24 h-24 object-cover rounded-full"/>
-              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="w-24 h-24 object-cover rounded-full"/>
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="w-48 h-48 object-cover rounded-full"/>
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="w-48 h-48 object-cover rounded-full"/>
             </div>
           </div>
           <div class="flex items-center justify-center">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl font-medium"> Xin Chào! <b class="font-bold">{{ user.name }}</b></h1>
-              <h6 class="text-xl font-medium">  <b class="font-bold">{{ user.username }}</b></h6>
+              <h6 class="text-xl font-medium"><b class="font-bold">{{ user.username }}</b></h6>
 
               <p v-if="userImage.length > 0">Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>
               <div class="flex justify-center md:block">
-                <div   class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 ">
-                  <span class="inline-flex justify-center items-center w- h-4 mr-2">
+                <div class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-fuchsia-50 ">
+                  <span class="inline-flex justify-center items-center w- h-4 mr-2 ">
                     <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
                       <path fill="currentColor"
                             d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
@@ -47,34 +47,17 @@
           </div>
         </div>
       </div>
-      <div class="card flex mx-auto mb-5">
-
-        <!--        <Steps :model="LichTrinh" class="custom-steps" :readonly="false">-->
-        <!--          <template #item="{ item, active }">-->
-        <!--            <div class="flex flex-col items-center">-->
-        <!--              <span :class="[  'inline-flex justify-center items-center border-circle border-primary border-1 h-3rem w-3rem z-1 cursor-pointer',   { 'bg-primary': active, 'surface-overlay text-primary': !active }, ]">   <i :class="[item.icon, 'text-xl']"/>   </span>-->
-        <!--              <p :class="['    ' , { 'text-primary': active, 'surface-overlay text-black ': !active },] "> {{ item.label }} </p>-->
-        <!--            </div>-->
-        <!--          </template>-->
-        <!--        </Steps>-->
-
-        <Tour class=" "/>
-      </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <form class="rounded-2xl dark:bg-slate-900/70 shadow-2" @submit.prevent="updateUser">
+      <form class="rounded-2xl dark:bg-slate-900/70  bg-gray-100 shadow-2" @submit.prevent="updateUser">
         <div class="flex-1 p-6 ">
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
               <FileUpload
-                  url="/api/images/upload/17"
-                  @uploader="onAdvancedUpload"
-                  :multiple="false"
-                  accept="image/*"
-                  :auto="true"
-                  :maxFileSize="1000000"
-              >
+                  url="/api/images/upload/17" @uploader="onAdvancedUpload"
+                  :multiple="false" accept="image/*"
+                  :auto="true" :maxFileSize="1000000">
                 <template #empty>
                   <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>
                 </template>
@@ -83,82 +66,59 @@
           </div>
 
           <div class="mb-3">
-            <InputGroup class="">
-              <label class="block font-bold mb-2 pl-2">Tên</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.name"/>
-              </div>
-              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Tên của bạn</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <InputText class="rounded-3xl w-full pl-4" v-model="user.name"/>
+              <label class="block mb-2 pl-2">Tên</label>
+            </FloatLabel>
           </div>
 
           <div class="mb-3">
-            <InputGroup class="">
-              <label class="block font-bold mb-2 pl-2">Email</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.email"/>
-              </div>
-              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Email của bạn</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <label class="block mb-2 pl-2">Email</label>
+              <InputText class="rounded-3xl w-full pl-4" v-model="user.email"/>
+            </FloatLabel>
           </div>
 
           <div class="mb-3">
-            <InputGroup class="">
-              <label class="block font-bold mb-2 pl-2">Số điện thoại</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.phone"/>
-              </div>
-              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Số điện thoại của bạn</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <label class="block mb-2 pl-2">Số điện thoại</label>
+              <InputText class="rounded-3xl w-full pl-4" v-model="user.phone"/>
+            </FloatLabel>
           </div>
 
           <div class="mb-3">
-            <InputGroup class="">
-              <label class="block font-bold mb-2 pl-2">Địa chỉ</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user" v-model="user.address"/>
-              </div>
-              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Địa chỉ của bạn</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <label class="block mb-2 pl-2">Địa chỉ</label>
+              <InputText class="rounded-3xl w-full pl-4" v-model="user.address"/>
+            </FloatLabel>
           </div>
         </div>
 
         <footer class="px-6">
-          <button class="p-button py-2 px-3 mr-3 mb-3">
-            <span class="px-2">Cập nhật</span>
-          </button>
+          <Button label="Cập nhật" severity="primary" class="w-full mt-5 mb-5 rounded-3xl" type="submit"/>
         </footer>
       </form>
 
-      <form class="rounded-2xl dark:bg-slate-900/70  bg-gray-200 shadow-2">
+      <form class="rounded-2xl dark:bg-slate-900/70  bg-gray-100 shadow-2">
         <div class="flex-1 p-6">
           <div class="py-5">
-            <InputGroup class="">
-              <label class="block font-bold mb-1 pl-2">Mật khẩu hiện tại</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user"/>
-              </div>
-              <div class="text-xs text-gray-500 pl-2">Yêu cầu. Mật khẩu hiện tại của bạn</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <label class="block mb-1 pl-2">Mật khẩu hiện tại</label>
+              <InputText class="rounded-3xl w-full pl-4"/>
+            </FloatLabel>
           </div>
           <hr class="my-6 -mx-6 border-b-gray-100">
           <div class="mb-3">
-            <InputGroup class="">
-              <label class="block font-bold mb-1 pl-2">Mật khẩu mới</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user"/>
-              </div>
-              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Mật khẩu mới</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <label class="block mb-1 pl-2">Mật khẩu mới</label>
+              <InputText class="rounded-3xl w-full pl-4"/>
+            </FloatLabel>
           </div>
           <div class="mb-2">
-            <InputGroup class="">
-              <label class="block font-bold mb-1 pl-2">Xác nhận mật khẩu</label>
-              <div class="card flex md:flex-row align-items-center gap-3 pb-2">
-                <InputText class="rounded-2xl w-full pl-4" content="pi pi-user"/>
-              </div>
-              <div class="text-xs text-gray-500 dark:text-slate-40 pl-2">Yêu cầu. Mật khẩu mới một lần nữa</div>
-            </InputGroup>
+            <FloatLabel class="input-group flex-column align-items-center mb-6 ">
+              <label class="block mb-1 pl-2">Xác nhận mật khẩu</label>
+              <InputText class="rounded-3xl w-full pl-4"/>
+            </FloatLabel>
           </div>
         </div>
 
@@ -182,7 +142,10 @@ import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
 import {useToast} from 'primevue/usetoast';
 import Tour from "@/components/User/Account_Auth/Tour.vue";
+
+
 import {API_URL} from '@/stores/config';
+
 const api_url = API_URL;
 
 interface UserImage {
