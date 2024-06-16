@@ -1,7 +1,7 @@
 <template>
-  <section class="xl:max-w-6xl xl:mx-auto pt-24 ">
+  <section class="xl:max-w-6xl xl:mx-auto pt-6 ">
     <section class="mb-6 flex items-center justify-between">
-      <div class="flex items-center justify-start">
+      <div class="flex items-center justify-start ">
         <span
             class="inline-flex justify-center items-center w-3rem h-3rem rounded-full text-black dark:bg-slate-900/70 dark:text-white mr-3">
           <i class="pi pi-user" style="color: black"></i>
@@ -10,20 +10,20 @@
       </div>
       <p class="inline-flex justify-center items-center no-underline whitespace-nowrap rounded-full bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 cursor-pointer"
          @click="logouts">
-        <span class="inline-flex justify-center items-center w-6 h-6">
-          <i class="pi pi-sign-out" style="color: white"></i>
+        <span class="inline-flex justify-center items-center ">
+
           <span class="px-1 font-medium">Đăng xuất</span>
         </span>
       </p>
     </section>
 
-    <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-2">
+    <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-2 "  >
       <div class="flex-1 p-6">
         <div class="md:flex justify-center  block ">
           <div class="flex  mb-6 md:mb-0">
             <div class="mx-12 ">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="h-15rem w-15rem  rounded-full object-cover shadow-1"/>
-              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="max-h-15rem max-w-15rem  rounded-full w-10 shadow-1"/>
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="w-24 h-24 object-cover rounded-full"/>
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="w-24 h-24 object-cover rounded-full"/>
             </div>
           </div>
           <div class="flex items-center justify-center">
