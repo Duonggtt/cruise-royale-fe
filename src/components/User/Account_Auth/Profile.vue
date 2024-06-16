@@ -19,8 +19,8 @@
 
     <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-md border-2 border-gray-100">
       <div class="flex-1 p-6">
-        <div class="md:flex   block ">
-          <div class="flex  mb-6 md:mb-0">
+        <div class="md:flex block ">
+          <div class="flex mb-6 md:mb-0">
             <div class="mx-12 ">
               <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="w-48 h-48 object-cover rounded-full"/>
               <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="w-48 h-48 object-cover rounded-full"/>
@@ -44,6 +44,33 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="w-96">
+            <div>
+              <div class="overflow-hidden rounded-full bg-gray-200">
+                <div class="h-2 w-1/2 rounded-full bg-blue-500"></div>
+              </div>
+
+              <ol class="mt-4 grid grid-cols-3 text-sm font-medium text-gray-500">
+                <li class="flex items-center justify-start text-blue-600 sm:gap-1.5">
+                  <span class="hidden sm:inline"> Details </span>
+                  <span class="scale-75 material-symbols-outlined">contact_emergency</span>
+                </li>
+
+                <li class="flex items-center justify-center text-blue-600 sm:gap-1.5">
+                  <span class="hidden sm:inline"> Address </span>
+                  <span class="scale-75 material-symbols-outlined">location_on</span>
+                </li>
+
+                <li class="flex items-center justify-end sm:gap-1.5">
+                  <span class="hidden sm:inline"> Payment </span>
+                  <span class="scale-75 material-symbols-outlined">payments</span>
+                </li>
+              </ol>
+            </div>
+
+
           </div>
         </div>
       </div>

@@ -21,9 +21,9 @@ onUnmounted(() => {
 <template>
   <Splitter :layout="layout" :gutterSize="0" class="mx-auto max-w-screen-xl border-none mt-10">
     <SplitterPanel class="flex  h-auto " :size="20" :minSize="15">
-      <OptionCruise/>
+      <OptionCruise />
     </SplitterPanel>
-    <SplitterPanel class="flex  justify-content-center " :size="80" :minSize="15">
+    <SplitterPanel class="flex justify-content-center " :size="80" :minSize="15">
       <ListSearchCruise/>
     </SplitterPanel>
   </Splitter>

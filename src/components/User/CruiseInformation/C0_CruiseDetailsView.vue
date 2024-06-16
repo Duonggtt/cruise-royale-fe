@@ -1,17 +1,17 @@
 <template>
-  <Navbar class="w-screen z-50"/>
-  <BreadcrumbDetail v-if="cruise" :cruiseName="cruise.name" class="w-screen relative top-20 "  />
-  <YachtTitle  v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName" class="w-screen relative top-20 "/>
-  <Highlight class="w-screen relative top-20 "  v-if="cruise" :cruise="cruise"/>
+  <Navbar class=" z-50"/>
+  <BreadcrumbDetail v-if="cruise" :cruiseName="cruise.name" class="  "/>
+  <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName" class="  "/>
+  <Highlight  v-if="cruise" :cruise="cruise"/>
   <Footer/>
 </template>
 
 
-
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import {ref, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
 import {API_URL} from '@/stores/config';
+
 const api_url = API_URL;
 
 const route = useRoute();
@@ -20,7 +20,6 @@ const cruiseId = route.params.id;
 const cruise = ref<Cruise | null>(null);
 const location = ref<Location | null>(null);
 const cabinTypes = ref<CabinType[]>([]);
-
 
 
 interface CabinType {
@@ -84,7 +83,6 @@ onMounted(async () => {
     cabinTypes.value = data.map(item => item.cabinType);
   }
 });
-
 
 
 </script>

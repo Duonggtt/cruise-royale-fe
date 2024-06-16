@@ -1,9 +1,9 @@
 <template>
   <main>
     <Toast class="z-50 inline-block"/>
-    <Navbar class="w-screen "/>
+    <Navbar/>
 
-    <SearchCuise/>
+    <SearchCuise class="animate-duration-[1000ms] animate-ease-in-out" v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"/>
     <ViewListCruise/>
 
     <Footer/>

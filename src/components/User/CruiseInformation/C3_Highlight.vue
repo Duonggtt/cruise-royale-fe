@@ -1,44 +1,46 @@
 <template>
-  <div class="mx-auto max-w-screen-xl px-4 py-10 ">
-    <footer class="  ">
-        <!-- Tabs -->
-      <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full"/>
-        <!-- Main content -->
-        <div class="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
-          <!-- Left Column -->
-          <div id="features" class="section col-8 bg-white p-6 rounded-4xl ">
-            <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div v-for="feature in features" :key="feature.label" class="feature-item flex items-center space-x-2">
-                <div class="icon text-color-secondary " v-html="feature.svgIcon"></div>
-                <span>{{ feature.label }}</span>
-              </div>
-            </div>
-            <div class=" list-disc space-y-2">
-              <p v-for="highlight in highlights" :key="highlight">
-                <i class="fas fa-star"></i> {{ highlight }}
-              </p>
-            </div>
+  <div class="mx-auto max-w-screen-xl px-4 py-10 mt-5">
 
-
-            <RomCruise  id="prices" class="section"/>
-            <Introduce />
-            <Rules id="rules" class="section" />
-            <Evaluate  id="reviews" class="section"/>
-
-          </div>
-
-          <!-- Right Column -->
-          <div class="col-4 bg-white px-5 py-4 rounded-4xl shadow h-3/6">
-            <h2 class="text-xl font-bold pb-3 border-bottom-1 border-gray-200">Thông tin du thuyền</h2>
-            <div v-for="(value, key) in shipDetails" :key="key" class="flex items-center pt-2  ">
-              <span class="col-6 w-24  font-medium">{{ key }}:</span>
-              <span class="col">{{ value }}</span>
-            </div>
+    <!-- Tabs -->
+    <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full font-medium"/>
+    <!-- Main content -->
+    <div class="grid grid-cols-12 gap-4 justify-center space-y-4 lg:space-y-0 lg:space-x-4">
+      <!-- Left Column -->
+      <div id="features" class="section col-span-8 bg-white p-6 rounded-3xl">
+        <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div v-for="feature in features" :key="feature.label" class="feature-item flex items-center space-x-2">
+            <div class="icon text-color-secondary " v-html="feature.svgIcon"></div>
+            <span>{{ feature.label }}</span>
           </div>
         </div>
+        <div class=" list-disc space-y-2">
+          <p v-for="highlight in highlights" :key="highlight">
+            <i class="fas fa-star">v</i> {{ highlight }}
+          </p>
+        </div>
 
-    </footer>
+
+        <RomCruise id="prices" class="section"/>
+        <Introduce/>
+        <Rules id="rules" class="section"/>
+        <Evaluate id="reviews" class="section"/>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-span-4 bg-white px-5 py-4 rounded-3xl h-auto">
+        <div class="shadow-xl rounded-3xl p-5 border-2">
+          <h2 class="text-xl font-bold pb-3 border-bottom-1 border-gray-200">Thông tin du thuyền</h2>
+          <div v-for="(value, key) in shipDetails" :key="key" class="grid grid-cols-12 gap-4 items-center pt-2  ">
+            <span class="col-span-4  font-medium">{{ key }}:</span>
+            <span class="col-span-8">{{ value }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 
 
@@ -55,8 +57,6 @@ const itemsMenu = ref([
   {label: 'Quy định', to: '#rules'},
   {label: 'Đánh giá', to: '#reviews'}
 ]);
-
-
 
 
 const props = defineProps({

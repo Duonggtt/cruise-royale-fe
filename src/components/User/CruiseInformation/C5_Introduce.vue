@@ -1,7 +1,7 @@
 <template>
   <div class=" max-w-screen-xl py-5  my-16 ">
-    <h1>Giới thiệu</h1>
-    <h2>Giới thiệu về du thuyền</h2>
+    <h1 class="text-xl  font-bold">Giới thiệu</h1>
+    <h2 class="text-xl  font-medium">Giới thiệu về du thuyền</h2>
     <p>Du thuyền Heritage Cruises Bình Chuẩn có kiến trúc độc đáo, thiết kế mang đậm nét truyền thống và lịch sử. Với 20 phòng rộng rãi và tất cả các cabin có bồn tắm cạnh cửa kính lớn,có ban công với tầm nhìn toàn cảnh vịnh Lan Hạ. Trên du thuyền nhiều tiện nghi nổi bật mà du thuyền thường không có
       như phòng tranh, thư viện, gian hàng bán đồ lưu niệm, quầy bar liền kề hồ bơi.</p>
     <img src="https://minio.fares.vn/mixivivu-dev/tour/du-thuyen-heritage-binh-chuan-cat-ba/blog/iv9fjnleft3mnbuo.webp" width="100%" height="100%">

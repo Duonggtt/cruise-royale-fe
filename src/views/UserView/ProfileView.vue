@@ -1,7 +1,7 @@
 <template>
   <main>
-    <Toast  class="z-50 inline-block"  />
-    <Navbar class="w-screen "/>
+    <Toast class="z-50 inline-block"/>
+    <Navbar/>
     <Profile/>
     <Footer/>
   </main>

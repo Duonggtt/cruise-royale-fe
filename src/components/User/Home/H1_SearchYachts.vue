@@ -7,22 +7,22 @@
 
     </div>
 
-
     <div class=" w-4/5 overflow-hidden ">
       <video ref="videoElement" :src="currentVideo.src" @ended="onVideoEnded" :autoplay="true"
              class="w-full object-cover h-5/6 rounded-3xl animation-linear animate-duration-500">
       </video>
     </div>
 
-    <S1_SearchCuise class="absolute items-center top-3/4 w-3/4 max-w-5xl animate-duration-[2400ms] animate-ease-in-out "
-                    v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"/>
+    <SearchCuise
+        class="absolute items-center top-3/4 w-3/4 max-w-5xl animate-duration-[2400ms] animate-ease-in-out "
+        v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"/>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import {computed, ref} from 'vue';
-import S1_SearchCuise from "@/components/User/SearchCruise/S1_SearchCuise.vue";
+import SearchCuise from "@/components/User/SearchCruise/S1_SearchCuise.vue";
 
 
 const images = ref([

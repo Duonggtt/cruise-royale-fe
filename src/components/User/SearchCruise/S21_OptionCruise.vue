@@ -1,9 +1,9 @@
 <template>
-  <div class="   w-full pt-5">
-    <div class="border-2 border-gray-200  rounded-3xl h-auto">
-      <div class="border-bottom-1 border-gray-300 py-3  mb-5">
+  <div class=" w-full pt-5 " >
+    <div class="border-2 border-gray-200 rounded-3xl h-auto ">
+      <div class="border-b-2 border-gray-300 py-3  mb-5">
         <div class="flex justify-between items-center  px-3">
-          <h3 class="font-bold  ">Lọc kết quả</h3>
+          <h3 class="font-bold pl-2  ">Lọc kết quả</h3>
           <h5 class="font-bold cursor-pointer hover:text-emerald-500" @click="resetSelection">Đặt lại</h5></div>
       </div>
 
@@ -18,10 +18,10 @@
           </div>
         </div>
 
-        <div class="border-top-1 border-gray-300 pt-3 px-3">
+        <div class="border-t-2 border-gray-300 pt-3 px-3">
           <p class="font-bold pb-2">Tiện ích</p>
           <div class="flex flex-col gap-2 -mt-3" style="transform: scale(0.95);">
-            <div v-for="utilitie of utilities" :key="utilitie.key" class="flex items-center gap-2">
+            <div v-for="(utilitie, index) in utilities" :key="utilitie.key" class="flex items-center gap-2 ">
               <Checkbox v-model="selectedCategories" :inputId="utilitie.key" name="category" :value="utilitie.name"/>
               <label :for="utilitie.key" class="text-sm">{{ utilitie.name }}</label>
             </div>
@@ -30,7 +30,6 @@
 
       </div>
     </div>
-
 
 
   </div>
