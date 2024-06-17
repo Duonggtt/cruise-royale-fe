@@ -27,7 +27,7 @@
     </div>
 
 
-    <div class="mt-10 mx-auto p-4 bg-white rounded-md ">
+    <div class="mt-10 mx-auto p-4  rounded-md ">
       <h2 class="text-lg font-semibold mb-4">Đánh giá của bạn</h2>
       <div class="flex mb-4">
         <div class="w-1/2 pr-2 flex items-center">
@@ -73,6 +73,7 @@ const email = ref('');
 const name = ref(''); // Add this line
 const rating = ref(4.5);
 const searchTerm = ref('');
+
 const items = ref([
   {label: '1 sao', value: 1, count: 1, color: '#ccc'},
   {label: '2 sao', value: 1, count: 2, color: '#ccc'},

@@ -1,16 +1,15 @@
 <template>
   <Navbar class=" z-50"/>
   <BreadcrumbDetail v-if="cruise" :cruiseName="cruise.name" class="  "/>
-  <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName" class="  "/>
-  <Highlight  v-if="cruise" :cruise="cruise"/>
+  <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName"  class="  "/>
+  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags" />
   <Footer/>
 </template>
 
-
 <script setup lang="ts">
-import {ref, onMounted} from 'vue';
-import {useRoute} from 'vue-router';
-import {API_URL} from '@/stores/config';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { API_URL } from '@/stores/config';
 
 const api_url = API_URL;
 
@@ -19,8 +18,13 @@ const cruiseId = route.params.id;
 
 const cruise = ref<Cruise | null>(null);
 const location = ref<Location | null>(null);
-const cabinTypes = ref<CabinType[]>([]);
+const cabins = ref<Cabin[]>([]);
+const tags = ref<Tag[]>([]);
 
+interface Tag {
+  id: number;
+  name: string;
+}
 
 interface CabinType {
   id: number;
@@ -29,7 +33,12 @@ interface CabinType {
   maxGuests: number;
   description: string;
   price: number;
-  tags: string[];
+  tags: Tag[];
+}
+
+interface Cabin {
+  id: number;
+  cabinType: CabinType;
 }
 
 interface Location {
@@ -56,33 +65,29 @@ interface Cruise {
   departureTime: string;
   arrivalTime: string;
   rules: any[];
-  tags: any[];
+  tags: Tag[];
   location: Location;
   owner: Owner;
 }
 
-interface CruiseCabinType {
-  id: number;
-  cabinType: CabinType;
-  cruise: Cruise;
-}
-
 onMounted(async () => {
-  const response = await fetch(`${api_url}/cabins?cruiseId=${cruiseId}`);
-
-  if (!response.ok) {
-    throw new Error(`Server responded with status code ${response.status}`);
+  // Fetch cruise data
+  const cruiseResponse = await fetch(`${api_url}/cruises/${cruiseId}`);
+  if (!cruiseResponse.ok) {
+    throw new Error(`Server responded with status code ${cruiseResponse.status}`);
   }
+  const cruiseData: Cruise = await cruiseResponse.json();
+  cruise.value = cruiseData;
+  location.value = cruiseData.location;
 
-  const data: CruiseCabinType[] = await response.json();
-
-  // Assign data to the constants
-  if (data.length > 0) {
-    cruise.value = data[0].cruise;
-    location.value = data[0].cruise.location;
-    cabinTypes.value = data.map(item => item.cabinType);
+  // Fetch cabin data
+  const cabinResponse = await fetch(`${api_url}/cabins?cruiseId=${cruiseId}`);
+  if (!cabinResponse.ok) {
+    throw new Error(`Server responded with status code ${cabinResponse.status}`);
   }
+  const cabinData: Cabin[] = await cabinResponse.json();
+  cabins.value = cabinData;
+
+
 });
-
-
 </script>

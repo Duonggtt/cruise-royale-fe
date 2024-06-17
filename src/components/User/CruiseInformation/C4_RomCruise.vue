@@ -1,8 +1,8 @@
 <template>
-  <h1 class="text-xxl font-bold mb-4 mt-10">Các loại phòng & giá</h1>
+  <h1 class="text-xxl font-bold mb-4 mt-10 ">Các loại phòng & giá</h1>
   <div class="shadow-lg border-2 px-10  py-5 rounded-3xl ">
     <div class=" flex justify-end my-5">
-      <div class="flex items-center rounded-full bg-indigo-500 text-white shadow-lg px-4 py-2 cursor-pointer border-2 border-gray-100 hover:scale-110 duration-[400ms]"
+      <div class="flex items-center rounded-full bg-indigo-500 text-white shadow-lg px-4 py-2 cursor-pointer  hover:scale-110 duration-[400ms]"
            @click="resetCounts">
         <Button class=" bg-transparent border-none p-0" label="Xoá lựa chọn"/>
         <span class="scale-75 material-symbols-outlined">close</span>
@@ -21,24 +21,23 @@
           <p class="font-semibold text-sm text-green-950"> /Khách</p>
         </div>
         <div class="flex items-center shadow-1 rounded-3xl px-2 ">
-<!--          <InputNumber v-model="room.count" inputId="minmax-buttons" mode="decimal" showButtons :min="0" :max="room.maxCount" />-->
-          <InputNumber v-model="room.count" showButtons buttonLayout="horizontal" :min="0" :max="room.maxCount" class="rounded-3xl">
-            <template #incrementbuttonicon>
-              <span class="scale-75 material-symbols-outlined">add</span>
-            </template>
-            <template #decrementbuttonicon>
-              <span class="scale-75 material-symbols-outlined">remove</span>
-            </template>
-          </InputNumber>
-
+          <div class="    bg-white border-2 rounded-full shadow-sm  flex items-center space-x-4 px-4 pb-2 pt-1">
+            <button @click="decreaseRoomCount(index)" class="text-3xl text-gray-800 font-semibold focus:outline-none">-</button>
+            <span class="text-xl text-gray-800 font-semibold">{{ room.count }}</span>
+            <button @click="increaseRoomCount(index)" class="text-3xl text-gray-800 font-semibold focus:outline-none">+</button>
+          </div>
         </div>
       </div>
     </div>
     <div class="flex items-center gap-5 mt-6">
-      <div class=" "><p class="text-xl font-bold">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p></div>
-      <div class="text-right ml-auto">
-        <Button label="Thuê trọn tàu" class="px-4 rounded-3xl border-none focus:shadow-none mx-3" @click="rentWholeShip"/>
-        <Button label="Đặt ngay" icon="pi pi-arrow-right" iconPos="right" class="px-5 rounded-3xl border-none focus:shadow-none" @click="showDialog = true"/>
+      <div class=" "><p class=" text-2xl font-bold  colo">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p></div>
+      <div class="text-right ml-auto flex gap-5">
+        <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]">
+          <Button class=" bg-transparent border-none" label=" Thuê trọn tàu" @click="rentWholeShip"/>
+        </div>
+        <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]">
+          <Button class=" bg-transparent border-none" label=" Đặt ngay" @click="showDialog = true"/>
+        </div>
       </div>
       <Dialog v-model:visible="showDialog" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }">
         <OderForm/>
@@ -50,8 +49,18 @@
 <script setup lang="ts">
 import {computed, provide, ref} from 'vue';
 import OderForm from "@/components/User/CruiseInformation/OderForm.vue";
-import router from "@/router";
 
+
+const increaseRoomCount = (index: number) => {
+  if (rooms.value[index].maxCount && rooms.value[index].count < rooms.value[index].maxCount) {
+    rooms.value[index].count++;
+  }
+};
+const decreaseRoomCount = (index: number) => {
+  if (rooms.value[index].count > 0) {
+    rooms.value[index].count--;
+  }
+};
 
 const rentWholeShip = () => {
   rooms.value.forEach(room => {
@@ -67,7 +76,7 @@ const resetCounts = () => {
   rooms.value.forEach(room => room.count = 0);
 };
 
-const value = ref(0);
+
 
 const showDialog = ref(false);
 
@@ -119,16 +128,6 @@ const rooms = ref<Room[]>([
     image: '/Cruises/Cruise04.webp'
   }
 ]);
-
-const increment = (index: number) => {
-  rooms.value[index].count++;
-};
-
-const decrement = (index: number) => {
-  if (rooms.value[index].count > 0) {
-    rooms.value[index].count--;
-  }
-};
 
 const totalPrice = computed(() => {
   return rooms.value.reduce((acc, room) => acc + room.price * room.count, 0);
