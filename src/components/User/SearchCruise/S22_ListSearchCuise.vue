@@ -1,12 +1,12 @@
 <template>
   <div class="w-full">
-    <div class="bg-white">
+    <div class="">
       <div class="card mx-5">
         <DataView :value="cruises" dataKey="id" paginator :rows="5">
           <template #list="slotProps">
             <div class="grid grid-nogutter">
               <div v-for="(cruise, index) in slotProps.items" :key="index" class="col-12">
-                <div class="flex flex-col sm:flex-row p-4 gap-x-5 my-3 bg-white shadow rounded-xl border border-gray-200 animate-duration-[1500ms] animate-ease-in-out"
+                <div class="flex flex-col sm:flex-row p-4 gap-x-5 my-3  shadow rounded-xl border border-gray-200 animate-duration-[1500ms] animate-ease-in-out"
                      v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
                   <div class="relative w-full sm:w-1/3 ">
                     <img class="rounded-xl w-full shadow-xl" :src="`${cruise.imageUrl}`" :alt="cruise.name"/>

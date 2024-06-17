@@ -52,7 +52,7 @@
   </div>
   <div class="relative flex justify-center mt-10">
     <div class="flex items-center rounded-full shadow-lg px-4 py-2 cursor-pointer border-2 border-gray-100  hover:scale-110 duration-[400ms]">
-      <Button class=" text-black bg-transparent border-none p-0"
+      <Button class=" text-black  dark:text-white bg-transparent border-none p-0"
               label="Xem tất cả Du thuyền" @click="router.push('/SearchCuiseView')"/>
       <span class="scale-75 material-symbols-outlined">arrow_forward</span>
     </div>

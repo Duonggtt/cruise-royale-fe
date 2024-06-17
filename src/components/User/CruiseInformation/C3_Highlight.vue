@@ -1,7 +1,7 @@
 <template>
   <div class=" mx-auto max-w-screen-xl px-4 py-10 mt-5 overscroll-auto ">
     <!-- Tabs -->
-    <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4  p-2 rounded-full font-medium"/>
+    <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212]  "/>
     <!-- Main content -->
     <div class="grid grid-cols-12 gap-4 justify-center space-y-4 lg:space-y-0 lg:space-x-4">
       <!-- Left Column -->
@@ -30,8 +30,8 @@
 
       <!-- Right Column -->
 
-      <div class="col-span-4  px-5 py-4 rounded-3xl h-auto  ">
-        <div class="shadow-xl rounded-3xl p-5 border-2" ref="rightColumn">
+      <div class="col-span-4  px-5 py-4 rounded-3xl h-auto ">
+        <div class="shadow-xl rounded-3xl p-5 border-2  sticky top-[7.5rem]" ref="rightColumn">
           <h2 class="text-xl font-bold pb-3 border-bottom-1 border-gray-200">Thông tin du thuyền</h2>
           <div v-for="(value, key) in shipDetails" :key="key" class="grid grid-cols-12 gap-4 items-center pt-2  ">
             <span class="col-span-4  font-medium">{{ key }}:</span>

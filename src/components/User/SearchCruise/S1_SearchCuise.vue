@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto max-w-screen-xl px-4  ">
-    <div class="bg-white rounded-3xl  flex flex-col items-center lg:w-11/12 mx-auto p-8 shadow-md ">
+    <div class="bg-white dark:bg-[#121212] dark:border-2 rounded-3xl  flex flex-col items-center lg:w-11/12 mx-auto p-8 shadow-md ">
       <h2 class="text-3xl font-bold mb-2">Bạn lựa chọn du thuyền Hạ Long nào?</h2>
       <p class=" mb-4">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
       <div class="flex flex-wrap gap-2">
