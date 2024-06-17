@@ -76,7 +76,7 @@ const resetCounts = () => {
   rooms.value.forEach(room => room.count = 0);
 };
 
-const value = ref(0);
+
 
 const showDialog = ref(false);
 
