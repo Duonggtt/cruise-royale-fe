@@ -1,6 +1,5 @@
 <template>
-  <div class="mx-auto max-w-screen-xl px-4 py-10 mt-5">
-
+  <div class=" mx-auto max-w-screen-xl px-4 py-10 mt-5 overscroll-auto ">
     <!-- Tabs -->
     <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4 bg-white p-2 rounded-full font-medium"/>
     <!-- Main content -->
@@ -26,11 +25,13 @@
         <Rules id="rules" class="section"/>
         <Evaluate id="reviews" class="section"/>
 
+
       </div>
 
       <!-- Right Column -->
-      <div class="col-span-4 bg-white px-5 py-4 rounded-3xl h-auto">
-        <div class="shadow-xl rounded-3xl p-5 border-2">
+
+      <div class="col-span-4 bg-white px-5 py-4 rounded-3xl h-auto  ">
+        <div class="shadow-xl rounded-3xl p-5 border-2" ref="rightColumn">
           <h2 class="text-xl font-bold pb-3 border-bottom-1 border-gray-200">Thông tin du thuyền</h2>
           <div v-for="(value, key) in shipDetails" :key="key" class="grid grid-cols-12 gap-4 items-center pt-2  ">
             <span class="col-span-4  font-medium">{{ key }}:</span>
@@ -42,13 +43,10 @@
 
 
   </div>
-
-
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import Footer from "@/components/User/Footer.vue";
+import {ref} from "vue";
 
 
 const itemsMenu = ref([

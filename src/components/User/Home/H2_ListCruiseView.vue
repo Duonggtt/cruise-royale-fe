@@ -13,9 +13,12 @@
 
       <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6 cruise-card-container">
         <div v-for="cruise in cruises" :key="cruise.id" @click="goToCruise(cruise.id)"  v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"
-             class="m-3 p-3 cursor-pointer max-w-md rounded-3xl shadow-md cruise-card animate-duration-[2000ms] animate-ease-in-out hover:scale-105 duration-[400ms]">
+             class="m-3 p-3 cursor-pointer max-w-md rounded-3xl shadow-md cruise-card animate-duration-[2000ms] animate-ease-in-out">
           <div class="relative cruise-card-header">
-            <img :src="cruise.imageUrl" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
+            <div class="relative hover:scale-105 duration-[400ms]">
+              <img :src="cruise.imageUrl" class="w-full min-h-52 max-h-52 object-cover rounded-3xl " alt=""/>
+              <div class="absolute bottom-0 w-full h-20 bg-gradient-to-t from-black to-transparent rounded-b-2xl"></div>
+            </div>
             <div class="absolute top-3 left-3 px-3 bg-orange-300 text-orange-900 rounded-2xl text-sm font-medium flex align-content-center gap-1 bg-opacity-85">
               <span class="scale-75 material-symbols-outlined">kid_star</span>
               <span class="text-sm">4.5 (2) đánh giá</span>

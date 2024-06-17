@@ -26,6 +26,7 @@
     "vue": "^3.4.21",
     "vue-ripple-directive": "^2.0.1",
     "vue-router": "^4.3.0",
+    "vue-sticky": "^3.3.4",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
