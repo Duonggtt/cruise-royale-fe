@@ -2,21 +2,22 @@
   <div class="relative flex justify-center mt-96 lg:mt-16">
     <div class="w-full max-w-screen-xl">
       <div class="m-10 gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 head-container">
-        <div class="w-3/4 col-5 animate-duration-[2400ms] animate-ease-in-out"  v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
-          <h1 class="mb-3 text-3xl font-bold"> Du thuyền mới và phổ biến nhất </h1>
+        <div class="w-3/4 col-5 animate-duration-[2400ms] animate-ease-in-out" v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
+          <h1 class="mb-3 text-3xl font-bold">Du thuyền mới và phổ biến nhất</h1>
           <img src="/heading-border.webp" alt="">
         </div>
-        <p class="mb-sm font-medium animate-duration-[2000ms] animate-ease-in-out"  v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
-          Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.
+        <p class="mb-sm font-medium animate-duration-[2000ms] animate-ease-in-out" v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
+          Tận hưởng sự xa hoa và đẳng cấp tối đa trên du thuyền mới nhất và phổ biến nhất.
+          Khám phá một hành trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.
         </p>
       </div>
 
       <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xlx:grid-cols-6 cruise-card-container">
-        <div v-for="cruise in cruises" :key="cruise.id" @click="goToCruise(cruise.id)"  v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"
-             class="m-3 p-3 cursor-pointer max-w-md rounded-3xl shadow-md cruise-card animate-duration-[2000ms] animate-ease-in-out">
+        <div v-for="cruise in cruises" :key="cruise.id" v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"
+             class="m-3 p-3 cursor-pointer max-w-md rounded-3xl dark:border shadow-md cruise-card animate-duration-[2000ms] animate-ease-in-out">
           <div class="relative cruise-card-header">
             <div class="relative hover:scale-105 duration-[400ms]">
-              <img :src="cruise.imageUrl" class="w-full min-h-52 max-h-52 object-cover rounded-3xl " alt=""/>
+              <img :src="cruise.imageUrl" class="w-full min-h-52 max-h-52 object-cover rounded-3xl" alt=""/>
               <div class="absolute bottom-0 w-full h-20 bg-gradient-to-t from-black to-transparent rounded-b-2xl"></div>
             </div>
             <div class="absolute top-3 left-3 px-3 bg-orange-300 text-orange-900 rounded-2xl text-sm font-medium flex align-content-center gap-1 bg-opacity-85">
@@ -29,7 +30,7 @@
             </div>
           </div>
           <div class="pt-1 pl-2 cruise-card-title">
-            <FloatLabel class="text-lg text-gray-700 lg:font-bold whitespace-nowrap overflow-hidden">
+            <FloatLabel class="text-lg text-gray-700 dark:text-gray-300 lg:font-bold whitespace-nowrap overflow-hidden" @click="goToCruise(cruise.id)">
               {{ cruise.name }}
             </FloatLabel>
           </div>
@@ -41,9 +42,9 @@
             </p>
           </div>
           <div class="pl-3 pt-4 w-full flex justify-between align-items-center cruise-card-footer ">
-            <p class="text-green-900 font-bold">{{ cruise.price.toLocaleString('en-US') }}đ / Khách</p>
+            <p class="text-green-900 dark:text-primary-500 font-bold">{{ cruise.price.toLocaleString('en-US') }}đ /Khách</p>
             <div class="hover:scale-110 duration-[400ms]">
-              <Button class="px-5 py-2 text-sm text-center shadow-lg rounded-3xl inline-flex items-center " label="Đặt ngay"/>
+              <Button class="px-5 py-2 text-sm text-center shadow-lg rounded-3xl inline-flex items-center " @click="goToCruise(cruise.id)" label="Đặt ngay"/>
             </div>
           </div>
         </div>
@@ -133,7 +134,6 @@ const formattedCruiseDescription = (cruise: Cruise) => {
 
 const goToCruise = (id: number) => {
   router.push({name: 'CruiseDetails', params: {id}});
-
 };
 
 

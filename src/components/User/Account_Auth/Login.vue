@@ -4,7 +4,7 @@
     <div class="card-container  w-30rem w-96">
       <div class="welcome-message text-center align-items-center mb-3 ">
         <img :src="userImage" alt="User Image" class="user-image w-32 mx-auto"/>
-<!--        <h2 class="pt-3 font-bold">Welcome, Cruise Royal</h2>-->
+        <!--        <h2 class="pt-3 font-bold">Welcome, Cruise Royal</h2>-->
       </div>
       <div class="input-group flex-column align-items-center mb-6">
         <FloatLabel class="p-float-label ">
@@ -51,7 +51,7 @@ const userImage = ref('/Logo/Logo-Cruise-Royal.svg');
 const toast = useToast();
 
 const onSubmit = () => {
-  console.log(user);
+  // console.log(user);
   if (user.username !== '' && user.password !== '') {
     const authStore = useAuthStore();
     authStore.login(user.username, user.password).then(state => {

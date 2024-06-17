@@ -6,14 +6,14 @@
         <div class="flex items-center mt-2 pt-2">
           <span class="bg-yellow-300 text-gray-700 rounded-3xl  px-3 py-1 text-sm">5 (0 đánh giá)</span>
           <div class="flex bg-gray-200 rounded-3xl ml-3 px-3">
-            <p class=" ">{{ props.locationRouteName }}</p>
-            <a class="ml-2 text-blue-300">Xem bản đồ và lịch trình</a>
+            <p class="dark:text-black ">{{ props.locationRouteName }}</p>
+            <a class="ml-2 text-blue-500">Xem bản đồ và lịch trình</a>
           </div>
 
         </div>
         <img src="/heading-border.webp" alt="" class="pt-5">
       </div>
-      <div class="text-3xl font-bold text-teal-700">{{ props.cruisePrice ? props.cruisePrice.toLocaleString('en-US') : 'Price not available' }} đ/khách</div>
+      <div class="text-3xl font-bold text-teal-700">{{ props.cruisePrice ? props.cruisePrice.toLocaleString('en-US') : 'Price not available' }}đ /khách</div>
     </div>
 
     <div class="container">

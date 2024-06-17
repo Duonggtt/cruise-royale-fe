@@ -17,8 +17,8 @@
       </div>
       <div class="flex items-center ">
         <div class="mr-3 ">
-          <p class="font-semibold text-sm text-green-950">{{ room.price.toLocaleString() }} </p>
-          <p class="font-semibold text-sm text-green-950"> /Khách</p>
+          <p class="font-semibold text-sm text-green-950 dark:text-green-700">{{ room.price.toLocaleString() }} </p>
+          <p class="font-semibold text-sm text-green-950 dark:text-green-700"> /Khách</p>
         </div>
         <div class="flex items-center shadow-1 rounded-3xl px-2 ">
           <div class="    bg-white border-2 rounded-full shadow-sm  flex items-center space-x-4 px-4 pb-2 pt-1">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="flex items-center gap-5 mt-6">
-      <div class=" "><p class=" text-2xl font-bold  colo">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p></div>
+      <div class=" "><p class=" text-xl font-bold">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p></div>
       <div class="text-right ml-auto flex gap-5">
         <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]">
           <Button class=" bg-transparent border-none" label=" Thuê trọn tàu" @click="rentWholeShip"/>

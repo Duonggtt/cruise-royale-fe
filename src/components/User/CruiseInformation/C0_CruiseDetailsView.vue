@@ -71,7 +71,6 @@ interface Cruise {
 }
 
 onMounted(async () => {
-  // Fetch cruise data
   const cruiseResponse = await fetch(`${api_url}/cruises/${cruiseId}`);
   if (!cruiseResponse.ok) {
     throw new Error(`Server responded with status code ${cruiseResponse.status}`);
@@ -80,14 +79,11 @@ onMounted(async () => {
   cruise.value = cruiseData;
   location.value = cruiseData.location;
 
-  // Fetch cabin data
   const cabinResponse = await fetch(`${api_url}/cabins?cruiseId=${cruiseId}`);
   if (!cabinResponse.ok) {
     throw new Error(`Server responded with status code ${cabinResponse.status}`);
   }
   const cabinData: Cabin[] = await cabinResponse.json();
   cabins.value = cabinData;
-
-
 });
 </script>

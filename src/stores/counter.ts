@@ -40,7 +40,6 @@ export const useAuthStore = defineStore({
                         'Authorization': `Bearer ${this.access_token}`,
                     },
                 });
-
                 return false;
             }
 
@@ -54,11 +53,8 @@ export const useAuthStore = defineStore({
                 this.access_token = access_token;
                 this.refresh_token = refresh_token;
 
-                // Get the stored URL
                 const redirectUrl = localStorage.getItem('redirectUrl');
-                // Remove the stored URL
                 localStorage.removeItem('redirectUrl');
-                // Redirect to the stored URL if it exists, otherwise to the default returnUrl
 
                 await this.fetchUserImage();
                 await router.push(redirectUrl || this.returnUrl);

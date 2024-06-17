@@ -1,14 +1,14 @@
 <template>
   <div class=" mx-auto max-w-screen-xl px-4 py-10 mt-5 overscroll-auto ">
-    <!-- Tabs -->
-    <Menubar :model="itemsMenu" class="flex items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212]  "/>
+
     <!-- Main content -->
     <div class="grid grid-cols-12 gap-4 justify-center space-y-4 lg:space-y-0 lg:space-x-4">
+      <Menubar :model="itemsMenu" class="flex col-span-12 items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212]  "/>
       <!-- Left Column -->
-      <div id="features" class="section col-span-8  p-6 rounded-3xl">
+      <div id="features" class="section col-span-12 lg:col-span-8  p-6 rounded-3xl order-2 md:order-1 ">
         <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div v-for="feature in features" :key="feature.label" class="feature-item flex items-center space-x-2">
+          <div v-for="feature in features" :key="feature.label" class="feature-item flex items-center ">
             <div class="icon text-color-secondary " v-html="feature.svgIcon"></div>
             <span>{{ feature.label }}</span>
           </div>
@@ -19,18 +19,15 @@
           </p>
         </div>
 
-
         <RomCruise id="prices" class="section"/>
         <Introduce/>
         <Rules id="rules" class="section"/>
         <Evaluate id="reviews" class="section"/>
 
-
       </div>
 
       <!-- Right Column -->
-
-      <div class="col-span-4  px-5 py-4 rounded-3xl h-auto ">
+      <div class="lg:col-span-4 col-span-12 px-5 py-4 rounded-3xl h-auto order-1 md:order-2">
         <div class="shadow-xl rounded-3xl p-5 border-2  sticky top-[7.5rem]" ref="rightColumn">
           <h2 class="text-xl font-bold pb-3 border-bottom-1 border-gray-200">Thông tin du thuyền</h2>
           <div v-for="(value, key) in shipDetails" :key="key" class="grid grid-cols-12 gap-4 items-center pt-2  ">
@@ -65,7 +62,7 @@ const props = defineProps({
 
 const shipDetails = {
   'Hạ thủy': props.cruise?.launchedYear,
-   Cabin: props.cruise?.cabinQuantity,
+  Cabin: props.cruise?.cabinQuantity,
   'Thân vỏ': props.cruise?.material,
   'Hành trình': 'Vịnh Lan Hạ - Bãi tắm Ba Trái Đào - Hang Sáng Tối',
   'Điều hành': 'Công ty cổ phần Heritage Cruises',
@@ -77,7 +74,7 @@ const features = [
     svgIcon: 'svg'
   }
 ];
-console.log( props.tags);
+console.log(props.tags);
 
 const highlights = [
   'Du thuyền được thiết kế với phong cách sang trọng và truyền thống',
