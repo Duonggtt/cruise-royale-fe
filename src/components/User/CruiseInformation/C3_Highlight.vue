@@ -8,9 +8,8 @@
       <div id="features" class="section col-span-12 lg:col-span-8  p-6 rounded-3xl order-2 md:order-1 ">
         <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div v-for="feature in features" :key="feature.label" class="feature-item flex items-center ">
-            <div class="icon text-color-secondary " v-html="feature.svgIcon"></div>
-            <span>{{ feature.label }}</span>
+          <div v-for="tag in props.tags" :key="tag.id" class="feature-item flex items-center ">
+            <span>{{ tag.name }}</span>
           </div>
         </div>
         <div class=" list-disc space-y-2">
@@ -19,7 +18,7 @@
           </p>
         </div>
 
-        <RomCruise id="prices" class="section"/>
+        <RomCruise :cabins="cabins" :tags="tags" id="prices" class="section"/>
         <Introduce/>
         <Rules id="rules" class="section"/>
         <Evaluate id="reviews" class="section"/>
@@ -43,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, watchEffect} from "vue";
 
 
 const itemsMenu = ref([
@@ -53,12 +52,17 @@ const itemsMenu = ref([
   {label: 'Đánh giá', to: '#reviews'}
 ]);
 
-
 const props = defineProps({
   cruise: Object,
-  cabins: Object,
+  cabins: Array,
   tags: Object,
 });
+
+//
+// console.log(props.cruise);
+// console.log(props.cabins);
+// console.log(props.tags);
+
 
 const shipDetails = {
   'Hạ thủy': props.cruise?.launchedYear,
@@ -68,13 +72,14 @@ const shipDetails = {
   'Điều hành': 'Công ty cổ phần Heritage Cruises',
 };
 
+
 const features = [
   {
     label: props.tags?.name,
     svgIcon: 'svg'
   }
 ];
-console.log(props.tags);
+
 
 const highlights = [
   'Du thuyền được thiết kế với phong cách sang trọng và truyền thống',

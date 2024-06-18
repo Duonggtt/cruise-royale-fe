@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div v-for="(room, index) in rooms" :key="index" class="flex justify-between items-center mb-4 p-4 border-2    rounded-3xl " style=" font-size: 1rem; ">
+    <div v-for="(room, index) in rooms" :key="index" class="flex justify-between items-center mb-4 p-4 border-2 rounded-3xl " style=" font-size: 1rem;">
       <img :src="room.image" alt="Room Image" class="w-20 h-20 object-cover rounded-2xl">
       <div class="flex flex-col flex-grow mx-4  min-w-48">
         <h2 class=" font-semibold text-lg ">{{ room.name }}</h2>
@@ -61,7 +61,6 @@ const decreaseRoomCount = (index: number) => {
     rooms.value[index].count--;
   }
 };
-
 const rentWholeShip = () => {
   rooms.value.forEach(room => {
     if (room.maxCount) {
@@ -70,64 +69,40 @@ const rentWholeShip = () => {
   });
   showDialog.value = true;
 };
-
-
 const resetCounts = () => {
   rooms.value.forEach(room => room.count = 0);
 };
 
 
-
 const showDialog = ref(false);
 
-interface Room {
-  name: string;
-  size: number;
-  maxGuests: number;
-  price: number;
-  count: number;
-  maxCount?: number;
-  image: string;
+interface Cabin {
+  cabinType: {
+    name: string;
+    roomSize: number;
+    maxGuests: number;
+    price: number;
+  };
 }
 
-const rooms = ref<Room[]>([
-  {
-    name: 'Phòng Delta Suite',
-    size: 33,
-    maxGuests: 2,
-    price: 3550000,
-    count: 0,
-    maxCount: 5,
+const props = defineProps({
+  cabins: {
+    type: Array as () => Cabin[],
+    default: () => [],
+  },
+});
+
+const rooms = computed(() => {
+  return props.cabins.map((cabin: Cabin) => ({
+    name: cabin.cabinType.name,
+    size: cabin.cabinType.roomSize,
+    maxGuests: cabin.cabinType.maxGuests,
+    price: cabin.cabinType.price,
+    count: 1,
+    maxCount: 10,
     image: '/Cruises/Cruise01.webp'
-  },
-  {
-    name: 'Phòng Ocean Suite',
-    size: 33,
-    maxGuests: 2,
-    price: 3700000,
-    count: 0,
-    maxCount: 14,
-    image: '/Cruises/Cruise02.jpg'
-  },
-  {
-    name: 'Phòng Captain Suite',
-    size: 38,
-    maxGuests: 2,
-    price: 3950000,
-    count: 0,
-    maxCount: 32,
-    image: '/Cruises/Cruise03.webp'
-  },
-  {
-    name: 'Phòng Regal Suite',
-    size: 46,
-    maxGuests: 2,
-    price: 4200000,
-    count: 0,
-    maxCount: 12,
-    image: '/Cruises/Cruise04.webp'
-  }
-]);
+  }));
+});
 
 const totalPrice = computed(() => {
   return rooms.value.reduce((acc, room) => acc + room.price * room.count, 0);

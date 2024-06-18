@@ -1,15 +1,15 @@
 <template>
   <Navbar class=" z-50"/>
   <BreadcrumbDetail v-if="cruise" :cruiseName="cruise.name" class="  "/>
-  <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName"  class="  "/>
-  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags" />
+  <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName" class="  "/>
+  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags"/>
   <Footer/>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { API_URL } from '@/stores/config';
+import {ref, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
+import {API_URL} from '@/stores/config';
 
 const api_url = API_URL;
 
@@ -19,6 +19,7 @@ const cruiseId = route.params.id;
 const cruise = ref<Cruise | null>(null);
 const location = ref<Location | null>(null);
 const cabins = ref<Cabin[]>([]);
+const cabinsType = ref<CabinType[]>([]);
 const tags = ref<Tag[]>([]);
 
 interface Tag {
@@ -33,9 +34,8 @@ interface CabinType {
   maxGuests: number;
   description: string;
   price: number;
-  tags: Tag[];
+  tags: Tag[]; // Add this line
 }
-
 interface Cabin {
   id: number;
   cabinType: CabinType;
@@ -85,5 +85,7 @@ onMounted(async () => {
   }
   const cabinData: Cabin[] = await cabinResponse.json();
   cabins.value = cabinData;
+  tags.value = cabinData.flatMap(cabin => cabin.cabinType.tags);
 });
+
 </script>
