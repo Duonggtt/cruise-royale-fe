@@ -1,6 +1,7 @@
 <template>
   <main>
     <!--    <Navbar class="w-screen z-50"/>-->
+
     <Navbar/>
     <Toast class="z-50"/>
 

@@ -3,10 +3,17 @@
 
     <!-- Main content -->
     <div class="grid grid-cols-12 gap-4 justify-center space-y-4 lg:space-y-0 lg:space-x-4">
-      <Menubar :model="itemsMenu" class="flex col-span-12 items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212]  "/>
+      <Menubar :model="itemsMenu" class="flex col-span-12 items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212]  ">
+        <div v-for="item in itemsMenu" :key="item.label" @click="scrollTo(item.to)">
+          {{ item.label }}
+        </div>
+      </Menubar>
       <!-- Left Column -->
       <div id="features" class="section col-span-12 lg:col-span-8  p-6 rounded-3xl order-2 md:order-1 ">
-        <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
+        <h2 class="text-2xl font-bold mb-4" >Đặc điểm nổi bật</h2>
+        <button v-scroll-to="{ element: '#reviews', duration: 5000 }">
+          Scroll to #element
+        </button>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div v-for="tag in props.tags" :key="tag.id" class="feature-item flex items-center ">
             <span>{{ tag.name }}</span>
@@ -42,27 +49,28 @@
 </template>
 
 <script setup lang="ts">
-import {ref, watchEffect} from "vue";
-
+import {ref} from "vue";
+import Vue from 'vue'
+import VueScrollTo from 'vue-scrollto'
 
 const itemsMenu = ref([
-  {label: 'Đặc điểm', to: '#features'},
-  {label: 'Phòng & giá', to: '#prices'},
-  {label: 'Quy định', to: '#rules'},
-  {label: 'Đánh giá', to: '#reviews'}
+  {label: 'Đặc điểm', to: 'features'},
+  {label: 'Phòng & giá', to: 'prices'},
+  {label: 'Quy định', to: 'rules'},
+  {label: 'Đánh giá', to: 'reviews'}
 ]);
 
+const scrollTo = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 const props = defineProps({
   cruise: Object,
   cabins: Array,
   tags: Object,
 });
-
-//
-// console.log(props.cruise);
-// console.log(props.cabins);
-// console.log(props.tags);
-
 
 const shipDetails = {
   'Hạ thủy': props.cruise?.launchedYear,
@@ -88,8 +96,6 @@ const highlights = [
   'Du thuyền có nhiều lịch trình 2 ngày 1 đêm, 3 ngày 2 đêm và 4 ngày 3 đêm cho những ai muốn 1 lịch trình dài hơn trên vịnh Lan Hạ',
 ];
 
-const selectButtonValue1 = ref(null);
-const selectButtonValues1 = ref([{name: 'Đặc điểm'}, {name: 'Phòng & giá'}, {name: 'Quy định'}, {name: 'Đánh giá'}]);
 </script>
 
 

@@ -1,19 +1,19 @@
 <template>
-  <div class=" px-5 bg-white rounded-lg">
+  <div class=" px-5  rounded-lg">
     <h2 class="text-lg font-semibold mb-3">Thuê trọn tàu</h2>
     <div class="grid grid-cols-2 gap-4">
-      <div>
+      <div class="rounded-3xl" >
         <label class="block mb-2">Ngày nhận phòng</label>
-        <Calendar showIcon iconDisplay="input" v-model="date"/>
+        <DatePicker v-model="date" dateFormat="dd/mm/yy" />
       </div>
 
       <div>
         <label class="block mb-2 ">Số lượng khách</label>
-        <div class="bg-white rounded-lg border border-gray-300 py-2 px-3    w-full ">
+        <div class=" rounded-3xl border border-gray-300 dark:border-[#52525b] dark:border-1 py-2 px-3    w-full ">
 
           <span class="SoLuong cursor-pointer" @click="showGuestSelection = !showGuestSelection">{{ adults || 0 }} Người lớn - {{ children || 0 }} Trẻ em</span>
 
-          <div v-if="showGuestSelection" class="LuaChon border absolute bg-white  flex flex-col gap-4 shadow-sm px-3 p-2 mt-3 rounded-3xl">
+          <div v-if="showGuestSelection" class="LuaChon bg-white border absolute z-30  flex flex-col gap-4 shadow-sm px-3 p-2 mt-3 rounded-3xl">
             <div class="flex justify-between items-center border-b ">
               <span class="text-gray-700 mr-5">Người lớn</span>
               <div class="flex items-center ">
