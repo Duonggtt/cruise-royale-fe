@@ -1,21 +1,13 @@
 <template>
-  <div class=" card flex justify-center flex-wrap mt-5 relative">
-    <div class="card">
-      <!--      <Carousel :value="images" class="max-w-7xl rounded-3xl animation-linear animate-duration-500" :autoplay="true" circular :autoplayInterval="3000" :navigation="false">-->
-      <!--        <template #item="slotProps"><img :src="slotProps.data" class="object-cover h-96 w-full rounded-3xl " alt=""></template>-->
-      <!--      </Carousel>-->
-
-    </div>
-
+  <div class=" card flex justify-center flex-wrap mt-3 relative">
     <div class=" w-4/5 overflow-hidden ">
       <video ref="videoElement" :src="currentVideo.src" @ended="onVideoEnded" :autoplay="true"
-             class="w-full object-cover h-5/6 rounded-3xl animation-linear animate-duration-500">
+             class="w-full object-cover lg:h-3/4 rounded-3xl animation-linear animate-duration-500">
       </video>
     </div>
 
-    <SearchCuise
-        class="absolute items-center top-3/4 w-3/4 max-w-5xl animate-duration-[2400ms] animate-ease-in-out "
-        v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"/>
+    <SearchCuise class="absolute items-center top-10 lg:top-2/3 w-3/4 max-w-5xl animate-duration-[2400ms] animate-ease-in-out "
+                 v-animateonscroll="{ enterClass: 'animate-fadeinleft'}"/>
 
   </div>
 </template>

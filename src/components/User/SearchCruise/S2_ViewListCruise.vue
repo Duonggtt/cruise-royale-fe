@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted} from 'vue';
+import {onMounted, onUnmounted, ref} from 'vue';
 import OptionCruise from "@/components/User/SearchCruise/S21_OptionCruise.vue";
 import ListSearchCruise from "@/components/User/SearchCruise/S22_ListSearchCuise.vue";
 

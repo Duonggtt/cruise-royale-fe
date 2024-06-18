@@ -54,16 +54,13 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted} from "vue";
+import {ref} from "vue";
 import {API_URL} from '@/stores/config';
 import {useAuthStore} from "@/stores/counter";
 import {useToast} from "primevue/usetoast";
 import router from "@/router";
-import SearchCuise from "@/components/User/SearchCruise/S1_SearchCuise.vue";
 
 const api_url = API_URL;
-
-
 interface Cruise {
   id: number;
   name: string;

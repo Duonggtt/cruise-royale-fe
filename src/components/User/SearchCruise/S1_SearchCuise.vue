@@ -5,10 +5,6 @@
       <p class=" mb-4">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
       <div class="flex flex-wrap gap-2">
         <InputText type="text" class="lg:min-w-56 w-full lg:w-56 text-sm rounded-3xl pl-4 shrink-0 basis-auto lg:basis-[10rem]" placeholder="Nhập tên du thuyền"/>
-        <!--        <CascadeSelect v-model="selectedLocation" :options="locations" optionLabel="name" optionGroupLabel="name" :optionGroupChildren="['locations']"-->
-        <!--                       placeholder="Chọn địa điểm" class="w-full lg:w-56 lg:min-w-56 rounded-3xl pi pi-flag flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>-->
-        <!--        <CascadeSelect v-model="selectedPrice" :options="prices" optionLabel="range" optionGroupLabel="range" :optionGroupChildren="['prices']"-->
-        <!--                       placeholder="Chọn mức giá" class="w-full lg:w-80 min-w-56 rounded-3xl pi pi-money-bill flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>-->
 
 
         <Select v-model="selectedLocation" :options="locationOptions" optionLabel="name" placeholder="Chọn địa điểm"

@@ -31,7 +31,6 @@ export const useAuthStore = defineStore({
             });
 
             if (response.status === 403) {
-                // localStorage.setItem('redirectUrl', window.location.href);
                 await this.refreshToken();
                 response = await fetch(url, {
                     method: 'POST',
@@ -70,13 +69,11 @@ export const useAuthStore = defineStore({
             try {
                 const res = await fetch(url, {
                     headers: {
-                        'Authorization': `Bearer ${access_token}` // Use the token here
+                        'Authorization': `Bearer ${access_token}`
                     }
                 });
 
-                // If the token has expired
                 if (res.status === 403) {
-                    // toastr.error("Phiên đăng nhập hết hạn.");
                     useAuthStore().logout();
                     return;
                 }
@@ -130,17 +127,14 @@ export const useAuthStore = defineStore({
             });
 
             if (response.status === 201) {
-                // Sử dụng toast để thông báo
                 return true;
             } else {
-                // Sử dụng toast để thông báo
                 return false;
             }
         },
 
         async refreshToken() {
             const response = await fetch('${api_url}/api/token/refresh', {
-                // replace with your refresh token endpoint
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${this.refresh_token}`,
@@ -149,12 +143,9 @@ export const useAuthStore = defineStore({
 
             if (response.status === 200) {
                 const {access_token} = await response.json();
-
-                // adjust if your server returns a different data structure
                 localStorage.setItem('access_token', access_token);
                 this.access_token = access_token;
             } else {
-                // showErrorToast('Failed to refresh token', 'Authentication');
                 this.logout();
             }
         },

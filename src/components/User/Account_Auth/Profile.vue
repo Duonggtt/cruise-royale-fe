@@ -1,5 +1,5 @@
 <template>
-  <section class="xl:max-w-6xl xl:mx-auto pt-6 ">
+  <section class="xl:max-w-6xl xl:mx-auto pt-6 mx-5">
     <section class="mb-6 flex items-center justify-between">
       <div class="flex items-center justify-start ">
         <span
@@ -20,19 +20,19 @@
     <div class="rounded-3xl flex-col dark:bg-slate-900/70 flex mb-6 shadow-md border-2 border-gray-100">
       <div class="flex-1 p-6">
         <div class="md:flex block ">
-          <div class="flex mb-6 md:mb-0">
-            <div class="mx-12 ">
-              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="w-48 h-48 object-cover rounded-full"/>
-              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="w-48 h-48 object-cover rounded-full"/>
+          <div class="flex mb-6 md:mb-0 mx-5">
+            <div class="mx-auto">
+              <img v-if="userImage.length > 0" :src="getImageUrl(userImage[0].data)" :alt="userImage[0].type" class="min-w-24 min-h-24 w-48 h-48 object-cover rounded-full"/>
+              <img v-else src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="Default Avatar" class="min-w-24 min-h-24 w-48 h-48 object-cover rounded-full"/>
             </div>
           </div>
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center mb-5">
             <div class="space-y-3 text-center md:text-left lg:mx-12">
               <h1 class="text-2xl font-medium"> Xin Chào! <b class="font-bold">{{ user.name }}</b></h1>
               <h6 class="text-xl font-medium"><b class="font-bold">{{ user.username }}</b></h6>
 
               <p v-if="userImage.length > 0">Cập nhật ngày: {{ formatDate(userImage[0].createdAt) }}</p>
-              <div class="flex justify-center md:block">
+              <div class="flex justify-center md:block ">
                 <div class="inline-flex items-center capitalize leading-none text-sm border rounded-full py-1.5 px-4 bg-blue-500 border-blue-500 text-fuchsia-50 ">
                   <span class="inline-flex justify-center items-center w- h-4 mr-2 ">
                     <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
@@ -46,7 +46,7 @@
             </div>
           </div>
 
-          <div class="w-96 ml-10">
+          <div class="lg:w-96  ml-10">
             <div>
               <div class="overflow-hidden rounded-full bg-gray-200">
                 <div class="h-2 w-1/2 rounded-full bg-blue-500"></div>
@@ -76,8 +76,8 @@
 
         </div>
         <div class="mt-10">
-          <h1 class="font-bold text-lg text-gray-500 ml-3">Trạng thái: Chuẩn bị đi chơi</h1>
-          <ul class="flex flex-col md:flex-row p-0 m-0 list-none mt-2">
+          <h1 class="font-medium text-md text-gray-500 ml-3">Chuyến du lịch 3 ngày 2 đêm với du thuyền Bình chuẩn cát bà bắt đầu ngày 22/06/2024</h1>
+          <ul class="flex flex-col md:flex-row p-0 m-0 list-none mt-2 gap-5">
 
             <!-- Seat Step -->
             <li class="relative flex-auto mr-0 md:mr-8">
@@ -124,20 +124,11 @@
           <div class="mb-6 ">
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
-              <!--              <FileUpload-->
-              <!--                  url="/api/images/upload/17" @uploader="onAdvancedUpload"-->
-              <!--                  :multiple="false" accept="image/*"-->
-              <!--                  :auto="true" :maxFileSize="1000000">-->
-              <!--                <template #empty>-->
-              <!--                  <p>Kéo thả file vào đây để upload. ( Max 3MB )</p>-->
-              <!--                </template>-->
-              <!--              </FileUpload>-->
-
               <div class="card flex flex-col gap-6 items-center justify-center">
-                <Toast/>
-                <FileUpload ref="fileupload" mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload"/>
+                <FileUpload ref="fileupload" mode="basic" name="demo[]" accept="image/*" :maxFileSize="100000000"    />
                 <Button label="Upload" @click="upload" severity="secondary"/>
               </div>
+
             </div>
           </div>
 
@@ -290,10 +281,6 @@ const upload = () => {
   onAdvancedUpload(fileupload.value);
 };
 
-const onUpload = () => {
-  toast.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000});
-};
-
 const api_url = API_URL;
 
 interface UserImage {
@@ -319,12 +306,12 @@ const fetchUserInfo = () => {
     user.value = JSON.parse(userInfo);
     originalUser.value = {...user.value};
   }
-  console.log("user: ", user.value);
+  // console.log("user: ", user.value);
 };
 
 const onAdvancedUpload = async (event: any) => {
   if (!event.files) {
-    console.error('Chọn file ảnh đã bạn');
+    // console.error('Chọn file ảnh đã bạn');
     toast.add({severity: 'error', summary: 'Error', detail: 'Chọn file ảnh đã bạn', life: 3000, contentStyleClass: 'gap-3', closable: false,});
     return;
   }
@@ -344,19 +331,23 @@ const onAdvancedUpload = async (event: any) => {
         body: formData,
       });
 
-
+      if (!res.ok) {
+        throw new Error(`Server responded with status code ${res.status}`);
+      }
       const data = await res.json();
-      userImage.value = data;
-      // toast.add({severity: 'success', summary: 'Success', detail: 'File uploaded successfully', life: 3000, contentStyleClass: 'gap-3', closable: false,});
+      toast.add({severity: 'success', summary: 'Success', detail: 'File uploaded successfully', life: 3000, contentStyleClass: 'gap-3', closable: false,});
       // // Wait for 2 seconds before updating the image on the user interface
-      setTimeout(() => {
-        // Update the image on the user interface
-        userImage.value = data;
-        toast.add({severity: 'success', summary: 'Success', detail: 'File uploaded successfully', life: 3000, contentStyleClass: 'gap-3', closable: false,});
-      }, 500);
+      // setTimeout(() => {
+      //   // Update the image on the user interface
+      //   userImage.value = data;
+      //   toast.add({severity: 'success', summary: 'Success', detail: 'File uploaded successfully', life: 3000, contentStyleClass: 'gap-3', closable: false,});
+      // }, 500);
+
+      const authStore = useAuthStore();
+      await authStore.fetchUserImage();
+
+
       event.files.clear = false;
-
-
     } catch (error) {
       toast.add({severity: 'error', summary: 'Error', detail: 'Failed to upload file', life: 3000, contentStyleClass: 'gap-3', closable: false,});
     }
@@ -407,7 +398,7 @@ const updateUser = async () => {
   // Store the updated user information in localStorage
   localStorage.setItem('userInfo', JSON.stringify(updatedFields));
 
-  console.log("User information updated successfully!");
+  // console.log("User information updated successfully!");
   toast.add({severity: 'success', summary: 'Success', detail: 'Cập nhật thông tin thành công !', closable: false, life: 3000, contentStyleClass: 'gap-3'});
 };
 

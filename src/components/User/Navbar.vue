@@ -41,7 +41,7 @@
               <MenuButton class="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
                 <span class="absolute -inset-1.5"/>
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" :src="avatarImage" alt="" @click="handleAvatarClick"/>
+                <img class="h-8 w-8 object-cover rounded-full" :src="avatarImage" alt="" @click="handleAvatarClick"/>
               </MenuButton>
             </div>
             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95"
@@ -85,7 +85,7 @@
 <script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline'
-import {onMounted, ref, watch} from 'vue';
+import {onMounted, ref} from 'vue';
 import {useAuthStore} from '@/stores/counter';
 import router from "@/router";
 import {useToast} from "primevue/usetoast";
@@ -129,7 +129,7 @@ const handleVisibleChange = (newVisible: boolean) => {
     const userImage = JSON.parse(localStorage.getItem('userImage') || '[]');
     if (userImage.length > 0) {
       avatarImage.value = `data:image/jpeg;base64,${userImage[0].data}`;
-      console.log(avatarImage.value);
+      // console.log(avatarImage.value);
     }
   }
 };

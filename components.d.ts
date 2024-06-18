@@ -38,7 +38,6 @@ declare module 'vue' {
     H3_Logo_Partner: typeof import('./src/components/User/Home/H3_Logo_Partner.vue')['default']
     InputNumber: typeof import('primevue/inputnumber')['default']
     InputText: typeof import('primevue/inputtext')['default']
-    Listbox: typeof import('primevue/listbox')['default']
     Login: typeof import('./src/components/User/Account_Auth/Login.vue')['default']
     Menubar: typeof import('primevue/menubar')['default']
     Message: typeof import('primevue/message')['default']
@@ -64,7 +63,6 @@ declare module 'vue' {
     SplitterPanel: typeof import('primevue/splitterpanel')['default']
     Textarea: typeof import('primevue/textarea')['default']
     Toast: typeof import('primevue/toast')['default']
-    ToggleButton: typeof import('primevue/togglebutton')['default']
     Tour: typeof import('./src/components/User/Account_Auth/Tour.vue')['default']
     UserManagement: typeof import('./src/components/Admin/UserManagement.vue')['default']
   }

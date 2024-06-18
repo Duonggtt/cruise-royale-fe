@@ -15,7 +15,7 @@
       <span class="ml-2 text-sm">{{ item.count }} đánh giá </span>
     </div>
 
-    <div class=" mt-10   ">
+    <div class=" mt-10">
       <div v-for="review in reviews" :key="review.id" class=" rounded-3xl border-2 shadow p-4 mt-5">
         <div class="flex items-center mb-2 ">
           <Rating :modelValue="review.rating" :readonly="true" :cancel="false" class="mr-2"/>
@@ -25,7 +25,6 @@
         <p class="text-gray-500 text-sm">{{ formatDate(review.date) }}</p>
       </div>
     </div>
-
 
     <div class="mt-10 mx-auto p-4  rounded-md ">
       <h2 class="text-lg font-semibold mb-4">Đánh giá của bạn</h2>
