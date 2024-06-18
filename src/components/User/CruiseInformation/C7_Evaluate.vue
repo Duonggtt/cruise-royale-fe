@@ -57,6 +57,7 @@
         <Textarea v-model="review" rows="3" placeholder="Nhập đánh giá của bạn" class="w-full rounded-2xl pl-3"/>
       </div>
       <Button label="Gửi" class="w-full   text-white font-semibold py-2 px-4 rounded-3xl"/>
+      <ScrollTop class="bg-gray-50 w-full h-10" target="parent" :threshold="100"  :buttonProps="{ severity: 'contrast', raised: true, rounded: true }" />
     </div>
 
 

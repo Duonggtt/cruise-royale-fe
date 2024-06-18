@@ -5,17 +5,24 @@
       <p class=" mb-4">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
       <div class="flex flex-wrap gap-2">
         <InputText type="text" class="lg:min-w-56 w-full lg:w-56 text-sm rounded-3xl pl-4 shrink-0 basis-auto lg:basis-[10rem]" placeholder="Nhập tên du thuyền"/>
-        <CascadeSelect v-model="selectedLocation" :options="locations" optionLabel="name" optionGroupLabel="name" :optionGroupChildren="['locations']"
-                       placeholder="Chọn địa điểm" class="w-full lg:w-56 lg:min-w-56 rounded-3xl pi pi-flag flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>
-        <CascadeSelect v-model="selectedPrice" :options="prices" optionLabel="range" optionGroupLabel="range" :optionGroupChildren="['prices']"
-                       placeholder="Chọn mức giá" class="w-full lg:w-80 min-w-56 rounded-3xl pi pi-money-bill flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>
+        <!--        <CascadeSelect v-model="selectedLocation" :options="locations" optionLabel="name" optionGroupLabel="name" :optionGroupChildren="['locations']"-->
+        <!--                       placeholder="Chọn địa điểm" class="w-full lg:w-56 lg:min-w-56 rounded-3xl pi pi-flag flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>-->
+        <!--        <CascadeSelect v-model="selectedPrice" :options="prices" optionLabel="range" optionGroupLabel="range" :optionGroupChildren="['prices']"-->
+        <!--                       placeholder="Chọn mức giá" class="w-full lg:w-80 min-w-56 rounded-3xl pi pi-money-bill flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>-->
+
+
+        <Select v-model="selectedLocation" :options="locationOptions" optionLabel="name" placeholder="Chọn địa điểm"
+                class="w-full lg:w-56 lg:min-w-56 rounded-3xl pi pi-flag flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>
+        <Select v-model="selectedPrice" :options="priceOptions" optionLabel="range" placeholder="Chọn mức giá"
+                class="w-full lg:w-56 lg:min-w-56 rounded-3xl pi pi-flag flex align-items-center px-3 shrink-0 basis-auto lg:basis-[10rem]"/>
+
         <Button label="Tìm kiếm" class="w-full lg:w-56 lg:min-w-56 rounded-3xl shrink-0 basis-auto lg:basis-[10rem]"/>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, watchEffect} from "vue";
 
 
 const selectedLocation = ref();
@@ -24,13 +31,20 @@ const locations = ref([
   {
     name: 'Tất cả địa điểm',
     code: 'all',
-    locations: [
+    diadiem: [
       {name: 'Vinh Hạ Long', code: 'vhl'},
       {name: 'Vinh Lan Hạ', code: 'vlh'},
       {name: 'Đảo Cát Bà', code: 'dcb'}
     ]
   }
 ]);
+const locationOptions = ref<{ name: string; code: string; }[]>([]);
+
+watchEffect(() => {
+  locationOptions.value = locations.value[0].diadiem.map(location => {
+    return {name: location.name, code: location.code};
+  });
+});
 
 const prices = ref([
   {
@@ -44,6 +58,13 @@ const prices = ref([
   }
 ]);
 
+const priceOptions = ref<{ range: string; code: string; }[]>([]);
+
+watchEffect(() => {
+  priceOptions.value = prices.value[0].prices.map(price => {
+    return {range: price.range, code: price.code};
+  });
+});
 
 const datas = ref({
   popularShips: [

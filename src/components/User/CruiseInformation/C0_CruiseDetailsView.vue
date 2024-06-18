@@ -2,7 +2,7 @@
   <Navbar class=" z-50"/>
   <BreadcrumbDetail v-if="cruise" :cruiseName="cruise.name" class="  "/>
   <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName" class="  "/>
-  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags"/>
+  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags" :owner="owner" :location="location"/>
   <Footer/>
 </template>
 
@@ -17,6 +17,7 @@ const route = useRoute();
 const cruiseId = route.params.id;
 
 const cruise = ref<Cruise | null>(null);
+const owner = ref<Owner | null>(null);
 const location = ref<Location | null>(null);
 const cabins = ref<Cabin[]>([]);
 const cabinsType = ref<CabinType[]>([]);
@@ -24,6 +25,7 @@ const tags = ref<Tag[]>([]);
 
 interface Tag {
   id: number;
+  icon: string;
   name: string;
 }
 
@@ -36,6 +38,7 @@ interface CabinType {
   price: number;
   tags: Tag[]; // Add this line
 }
+
 interface Cabin {
   id: number;
   cabinType: CabinType;
@@ -78,6 +81,7 @@ onMounted(async () => {
   const cruiseData: Cruise = await cruiseResponse.json();
   cruise.value = cruiseData;
   location.value = cruiseData.location;
+  owner.value = cruiseData.owner
 
   const cabinResponse = await fetch(`${api_url}/cabins?cruiseId=${cruiseId}`);
   if (!cabinResponse.ok) {
@@ -86,6 +90,7 @@ onMounted(async () => {
   const cabinData: Cabin[] = await cabinResponse.json();
   cabins.value = cabinData;
   tags.value = cabinData.flatMap(cabin => cabin.cabinType.tags);
+
 });
 
 </script>

@@ -10,13 +10,11 @@
       </Menubar>
       <!-- Left Column -->
       <div id="features" class="section col-span-12 lg:col-span-8  p-6 rounded-3xl order-2 md:order-1 ">
-        <h2 class="text-2xl font-bold mb-4" >Đặc điểm nổi bật</h2>
-        <button v-scroll-to="{ element: '#reviews', duration: 5000 }">
-          Scroll to #element
-        </button>
+        <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div v-for="tag in props.tags" :key="tag.id" class="feature-item flex items-center ">
-            <span>{{ tag.name }}</span>
+            <span class="flex items-center" > <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
           </div>
         </div>
         <div class=" list-disc space-y-2">
@@ -26,7 +24,7 @@
         </div>
 
         <RomCruise :cabins="cabins" :tags="tags" id="prices" class="section"/>
-        <Introduce/>
+<!--        <Introduce/>-->
         <Rules id="rules" class="section"/>
         <Evaluate id="reviews" class="section"/>
 
@@ -50,8 +48,6 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import Vue from 'vue'
-import VueScrollTo from 'vue-scrollto'
 
 const itemsMenu = ref([
   {label: 'Đặc điểm', to: 'features'},
@@ -63,21 +59,24 @@ const itemsMenu = ref([
 const scrollTo = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView({behavior: 'smooth'});
   }
 };
 const props = defineProps({
   cruise: Object,
   cabins: Array,
   tags: Object,
+  location: Object,
+  owner: Object,
+
 });
 
 const shipDetails = {
   'Hạ thủy': props.cruise?.launchedYear,
-  Cabin: props.cruise?.cabinQuantity,
+  'Cabin': props.cruise?.cabinQuantity,
   'Thân vỏ': props.cruise?.material,
-  'Hành trình': 'Vịnh Lan Hạ - Bãi tắm Ba Trái Đào - Hang Sáng Tối',
-  'Điều hành': 'Công ty cổ phần Heritage Cruises',
+  'Hành trình': props.location?.routeName,
+  'Điều hành':  props.owner?.name,
 };
 
 

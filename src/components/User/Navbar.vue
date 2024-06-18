@@ -91,6 +91,7 @@ import router from "@/router";
 import {useToast} from "primevue/usetoast";
 
 
+
 interface NavigationItem {
   name: string;
   href: string;
@@ -117,8 +118,6 @@ const handleAvatarClick = () => {
   } else {
     visible.value = true;
   }
-
-
 };
 
 const AnhDuPhong = ref('https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com');

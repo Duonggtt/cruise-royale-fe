@@ -13,7 +13,7 @@
       <img :src="room.image" alt="Room Image" class="w-20 h-20 object-cover rounded-2xl">
       <div class="flex flex-col flex-grow mx-4  min-w-48">
         <h2 class=" font-semibold text-lg ">{{ room.name }}</h2>
-        <p class="text-gray-600  text-xs">{{ room.size }} m² - Tối đa: {{ room.maxGuests }} <p class="pi pi-user text-xs"></p></p>
+        <p class="text-gray-600  text-xs">{{ room.maxGuests }} m² - Tối đa: {{ room.size }} <p class="pi pi-user text-xs"></p></p>
       </div>
       <div class="flex items-center ">
         <div class="mr-3 ">
@@ -32,14 +32,16 @@
     <div class="flex items-center gap-5 mt-6">
       <div class=" "><p class=" text-xl font-bold">Tổng tiền: {{ totalPrice.toLocaleString() }} đ</p></div>
       <div class="text-right ml-auto flex gap-5">
-        <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]">
-          <Button class=" bg-transparent border-none" label=" Thuê trọn tàu" @click="rentWholeShip"/>
+        <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]"
+             @click="rentWholeShip">
+          <Button class=" bg-transparent border-none" label=" Thuê trọn tàu"/>
         </div>
-        <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]">
-          <Button class=" bg-transparent border-none" label=" Đặt ngay" @click="showDialog = true"/>
+        <div class="flex items-center justify-center rounded-full shadow-lg  cursor-pointer px-3 py-1 border-2  bg-primary hover:scale-110 duration-[400ms]"
+             @click="showDialog = true">
+          <Button class=" bg-transparent border-none" label=" Đặt ngay"/>
         </div>
       </div>
-      <Dialog v-model:visible="showDialog" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }">
+      <Dialog v-model:visible="showDialog" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(10px)'   }  }">
         <OderForm/>
       </Dialog>
     </div>
@@ -47,20 +49,21 @@
 </template>
 
 <script setup lang="ts">
-import {computed, provide, ref} from 'vue';
+import {computed, provide, ref } from 'vue';
 import OderForm from "@/components/User/CruiseInformation/OderForm.vue";
-
 
 const increaseRoomCount = (index: number) => {
   if (rooms.value[index].maxCount && rooms.value[index].count < rooms.value[index].maxCount) {
     rooms.value[index].count++;
   }
 };
+
 const decreaseRoomCount = (index: number) => {
   if (rooms.value[index].count > 0) {
     rooms.value[index].count--;
   }
 };
+
 const rentWholeShip = () => {
   rooms.value.forEach(room => {
     if (room.maxCount) {
