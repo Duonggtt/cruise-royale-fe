@@ -1,5 +1,5 @@
 <template>
-  <div class=" card flex justify-center flex-wrap mt-3 relative">
+  <div class=" card flex justify-center flex-wrap mt-1 relative">
     <div class=" w-4/5 overflow-hidden ">
       <video ref="videoElement" :src="currentVideo.src" @ended="onVideoEnded" :autoplay="true"
              class="w-full object-cover lg:h-3/4 rounded-3xl animation-linear animate-duration-500">

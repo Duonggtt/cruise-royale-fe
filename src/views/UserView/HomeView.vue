@@ -4,10 +4,8 @@
 
     <Navbar/>
     <Toast class="z-50"/>
-
     <SearchYachts/>
-
-    <ListCruiseView/>
+    <ListCruiseView  />
     <Logo_Partner/>
 
     <Footer/>

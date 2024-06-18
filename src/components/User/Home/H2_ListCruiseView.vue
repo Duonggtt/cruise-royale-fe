@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex justify-center mt-52 lg:mt-0">
+  <div class="relative flex justify-center mt-72 md:mt-96 lg:mt-0">
     <div class="w-full max-w-screen-xl">
       <div class="m-10 gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 head-container">
         <div class="w-3/4 col-5 animate-duration-[2400ms] animate-ease-in-out" v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">

@@ -81,7 +81,7 @@
 
             <!-- Seat Step -->
             <li class="relative flex-auto mr-0 md:mr-8">
-              <div class="border border-gray-300 rounded p-3 flex flex-col md:flex-row items-center z-10">
+              <div class="border border-gray-300 rounded p-3 flex flex-col md:flex-row items-center">
                 <span class="material-symbols-outlined text-green-500 mb-2 md:mb-0 mr-0 md:mr-3">task_alt</span>
                 <div>
                   <div class="text-gray-900 dark:text-gray-400 font-medium mb-1 text-xs">Đặt Tour hạ Long</div>
@@ -92,7 +92,7 @@
             </li>
             <!-- Payment Step -->
             <li class="relative bg-white dark:bg-slate-900 flex-auto mr-0 md:mr-8">
-              <div class="border-2 border-blue-500 rounded p-3 flex flex-col md:flex-row items-center z-10">
+              <div class="border-2 border-blue-500 rounded p-3 flex flex-col md:flex-row items-center">
                 <span class="material-symbols-outlined text-blue-600 mb-2 md:mb-0 mr-0 md:mr-3">payments</span>
                 <div>
                   <div class="text-blue-600 font-medium mb-1 text-xs">Thanh Toán</div>
@@ -103,8 +103,8 @@
               <div class="absolute top-1/2 left-full transform -translate-y-1/2 w-full h-0.5 bg-gray-300 hidden md:block"></div>
             </li>
             <!-- Confirmation Step -->
-            <li class="relative bg-white dark:bg-slate-900 flex-auto z-50">
-              <div class="border border-gray-300 rounded p-3 flex flex-col md:flex-row items-center z-10">
+            <li class="relative bg-white dark:bg-slate-900 flex-auto">
+              <div class="border border-gray-300 rounded p-3 flex flex-col md:flex-row items-center">
                 <span class="material-symbols-outlined text-gray-600 mb-2 md:mb-0 mr-0 md:mr-3">task_alt</span>
                 <div>
                   <div class="text-gray-900 dark:text-gray-400 font-medium mb-1 text-xs">Xác nhận</div>
@@ -125,7 +125,7 @@
             <label class="block font-bold mb-2">Avatar</label>
             <div class="card shadow-1 border-round-xl">
               <div class="card flex flex-col gap-6 items-center justify-center">
-                <FileUpload ref="fileupload" mode="basic" name="demo[]" accept="image/*" :maxFileSize="100000000"    />
+                <FileUpload ref="fileupload" mode="basic" name="demo[]" accept="image/*" :maxFileSize="100000000"/>
                 <Button label="Upload" @click="upload" severity="secondary"/>
               </div>
 
@@ -345,8 +345,7 @@ const onAdvancedUpload = async (event: any) => {
 
       const authStore = useAuthStore();
       await authStore.fetchUserImage();
-
-
+      userImage.value = data;
       event.files.clear = false;
     } catch (error) {
       toast.add({severity: 'error', summary: 'Error', detail: 'Failed to upload file', life: 3000, contentStyleClass: 'gap-3', closable: false,});
@@ -361,10 +360,11 @@ const logouts = async () => {
   const authStore = useAuthStore();
   await authStore.logout();
   toast.add({severity: 'error', summary: 'Error', detail: `Đã đăng xuất`, life: 500, contentStyleClass: 'gap-3', closable: false});
-  setTimeout(() => {
-    router.push('/')
-  }, 500);
+  // setTimeout(() => {
+  //   router.push('/home')
+  // }, 500);
 };
+
 
 const updateUser = async () => {
   const username = localStorage.getItem('user');

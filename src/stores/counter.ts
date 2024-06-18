@@ -161,9 +161,9 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('userInfo');
             localStorage.removeItem('userId')
             localStorage.removeItem('userImage')
-            // setTimeout(() => {
-            //     router.push('/').then(r => r);
-            // }, 500);
+            setTimeout(() => {
+                router.push('/').then(r => r);
+            }, 500);
         },
     },
 });
