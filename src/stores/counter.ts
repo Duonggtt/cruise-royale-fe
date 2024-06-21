@@ -24,41 +24,48 @@ export const useAuthStore = defineStore({
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
-            const url = `${api_url}/login`;
+            try {
+                const url = `${api_url}/login`;
                 let response = await fetch(url, {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.status === 403) {
-                await this.refreshToken();
-                response = await fetch(url, {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Authorization': `Bearer ${this.access_token}`,
-                    },
                 });
+
+
+                if (response.status === 403) {
+                    await this.refreshToken();
+                    response = await fetch(url, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Authorization': `Bearer ${this.access_token}`,
+                        },
+                    });
+                    return false;
+                }
+
+                if (response.status === 200) {
+                    const {access_token, refresh_token} = await response.json();
+                    localStorage.setItem('user', username);
+                    localStorage.setItem('access_token', access_token);
+                    localStorage.setItem('refresh_token', refresh_token);
+                    await this.fetchUserInfo();
+                    this.user = username;
+                    this.access_token = access_token;
+                    this.refresh_token = refresh_token;
+
+                    await this.fetchUserImage();
+                    const currentPath = window.location.pathname;
+                    localStorage.setItem('currentPath', currentPath);
+                    await router.push(currentPath);
+                    return true;
+                }
+            }
+            catch (error) {
                 return false;
             }
 
-            if (response.status === 200) {
-                const {access_token, refresh_token} = await response.json();
-                localStorage.setItem('user', username);
-                localStorage.setItem('access_token', access_token);
-                localStorage.setItem('refresh_token', refresh_token);
-                await this.fetchUserInfo();
-                this.user = username;
-                this.access_token = access_token;
-                this.refresh_token = refresh_token;
 
-                const redirectUrl = localStorage.getItem('redirectUrl');
-                localStorage.removeItem('redirectUrl');
-
-                await this.fetchUserImage();
-                await router.push(redirectUrl || this.returnUrl);
-                return true;
-            }
         },
 
         async fetchUserInfo() {
@@ -146,11 +153,11 @@ export const useAuthStore = defineStore({
                 localStorage.setItem('access_token', access_token);
                 this.access_token = access_token;
             } else {
-                this.logout();
+              await  this.logout();
             }
         },
 
-        logout() {
+       async logout() {
 
             this.user = null;
             this.access_token = '';
@@ -161,9 +168,12 @@ export const useAuthStore = defineStore({
             localStorage.removeItem('userInfo');
             localStorage.removeItem('userId')
             localStorage.removeItem('userImage')
+            // const currentPath = window.location.pathname;
+            // localStorage.setItem('currentPath', currentPath);
+            // await router.push(currentPath);
             setTimeout(() => {
                 router.push('/').then(r => r);
-            }, 500);
+            }, 300);
         },
     },
 });

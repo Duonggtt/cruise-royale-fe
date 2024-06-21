@@ -1,11 +1,11 @@
 <template>
   <div class=" px-5  rounded-lg">
-<!--    <h2 class="text-lg font-semibold mb-3">Thuê trọn tàu</h2>-->
+    <!--    <h2 class="text-lg font-semibold mb-3">Thuê trọn tàu</h2>-->
     <div class="grid grid-cols-2 gap-4">
-      <div class="rounded-3xl " >
+      <div class="rounded-3xl ">
         <label class="block mb-2 ml-2">Ngày nhận phòng</label>
-<!--        <DatePicker v-model="date" dateFormat="dd/mm/yy" class="rounded-full" />-->
-        <DatePicker minDate="minDate" v-model="date" />
+        <DatePicker v-model="date" dateFormat="dd/mm/yy" class="rounded-full"/>
+        <!--        <DatePicker minDate="minDate" v-model="date" />-->
       </div>
 
       <div>
@@ -61,7 +61,7 @@
       </div>
       <div class="col-span-2 w-full">
         <label class="block mb-2 ml-2">Yêu cầu của bạn</label>
-        <Textarea placeholder="Nhập yêu cầu của bạn" rows="3" class="w-full rounded-2xl"/>
+        <Textarea v-model="note" placeholder="Nhập yêu cầu của bạn" rows="3" class="w-full rounded-2xl"/>
       </div>
 
     </div>
@@ -70,18 +70,20 @@
       <div><p class="text-xl font-bold">Tổng tiền: {{ totalPrice ? totalPrice.toLocaleString() : '0' }} đ</p></div>
       <div class="text-right ml-auto">
         <Button label="Đăng ký tư vấn" class="px-4 border-none focus:shadow-none mx-3"/>
-        <Button label="Đặt ngay" class=" text-white"/>
+        <Button label="Đặt ngay" class=" text-white" @click="bookNow"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {inject, ref} from 'vue';
+import {inject, ref, toRefs} from 'vue';
+import {API_URL} from '@/stores/config';
 
+const api_url = API_URL;
 const totalPrice = inject<number>('totalPrice');
 
-const minDate= ref(new Date());
+const minDate = ref(new Date());
 const date = ref(new Date('2024-06-10'));
 const adults = ref(1);
 const children = ref(0);
@@ -107,5 +109,43 @@ const decrementChildren = () => {
   }
 };
 
+const props = withDefaults(defineProps<{
+  cruiseId: string
+}>(), {
+  cruiseId: '',
+});
+const note = ref('');
+const {cruiseId} = toRefs(props);
+
+const bookNow = async () => {
+  const url = `${api_url}/bookings/create`;
+
+
+  const bookingData = {
+    bookingDate: new Date().toISOString(),
+    guestQuantity: adults.value + children.value,
+    note: note.value,
+    bookingStatus: 1,
+    paymentStatus: 0,
+    userId: localStorage.getItem('userId'),
+    cabinIds: [2, 3],
+    cruiseId: cruiseId.value,
+  };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    },
+    body: JSON.stringify(bookingData)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Server responded with status code ${response.status}`);
+  }
+  const responseData = await response.json();
+  console.log(responseData);
+};
 
 </script>

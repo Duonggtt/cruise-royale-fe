@@ -2,7 +2,7 @@
   <Navbar class=" z-50"/>
   <BreadcrumbDetail v-if="cruise" :cruiseName="cruise.name" class="  "/>
   <YachtTitle v-if="cruise" :cruisePrice="cruise.price" :cruiseName="cruise.name" :locationRouteName="location?.routeName" class="  "/>
-  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags" :owner="owner" :location="location"/>
+  <Highlight v-if="cruise && cabins && tags" :cruise="cruise" :cabins="cabins" :tags="tags" :owner="owner" :location="location" :cruiseId="cruiseId"/>
   <Footer/>
 </template>
 

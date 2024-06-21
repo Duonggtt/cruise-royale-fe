@@ -23,6 +23,7 @@ import RomCruise from "@/components/User/CruiseInformation/C4_RomCruise.vue";
 import Introduce from "@/components/User/CruiseInformation/C5_Introduce.vue";
 import Rules from "@/components/User/CruiseInformation/C6_Rules.vue";
 import Evaluate from "@/components/User/CruiseInformation/C7_Evaluate.vue";
+import OderForm from "@/components/User/CruiseInformation/OderForm.vue";
 
 import Dashboard from "@/components/Admin/Dashboard.vue";
 import AdminView from "@/views/AdminView/AdminView.vue";
@@ -87,6 +88,7 @@ app.component("RomCruise", RomCruise)
 app.component("Introduce", Introduce)
 app.component("Rules", Rules)
 app.component("Evaluate", Evaluate)
+app.component("OderForm", OderForm)
 
 
 app.component("Dashboard", Dashboard)

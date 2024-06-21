@@ -23,7 +23,7 @@
           </p>
         </div>
 
-        <RomCruise :cabins="cabins" :tags="tags" id="prices" class="section"/>
+        <RomCruise :cruiseId="cruiseId" :cabins="cabins" :tags="tags" id="prices" class="section"/>
 <!--        <Introduce/>-->
         <Rules id="rules" class="section"/>
         <Evaluate id="reviews" class="section"/>
@@ -68,7 +68,7 @@ const props = defineProps({
   tags: Object,
   location: Object,
   owner: Object,
-
+  cruiseId: String,
 });
 
 const shipDetails = {
