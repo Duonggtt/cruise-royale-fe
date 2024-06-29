@@ -3,10 +3,12 @@
 
     <!-- Main content -->
     <div class="grid grid-cols-12 gap-4 justify-center space-y-4 lg:space-y-0 lg:space-x-4">
-      <Menubar :model="itemsMenu" class="flex col-span-12 items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212]  ">
-        <div v-for="item in itemsMenu" :key="item.label" @click="scrollTo(item.to)">
-          {{ item.label }}
-        </div>
+      <Menubar :model="itemsMenu" class="flex col-span-12 items-center justify-start space-x-4  p-2 rounded-full font-medium sticky top-[4rem] dark:bg-[#121212] cursor-pointer  ">
+        <template #item="{ item }">
+          <div @click="scrollTo(item.to)" class="px-1 py-2 mx-5 my-1">
+            {{ item.label }}
+          </div>
+        </template>
       </Menubar>
       <!-- Left Column -->
       <div id="features" class="section col-span-12 lg:col-span-8  p-6 rounded-3xl order-2 md:order-1 ">
@@ -14,7 +16,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div v-for="tag in props.tags" :key="tag.id" class="feature-item flex items-center ">
-            <span class="flex items-center" > <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
+            <span class="flex items-center z-0" > <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
           </div>
         </div>
         <div class=" list-disc space-y-2">
@@ -23,16 +25,16 @@
           </p>
         </div>
 
-        <RomCruise :cabins="cabins" :tags="tags" id="prices" class="section"/>
+        <RomCruise :cabins="cabins" :tags="tags" id="prices" class="section pt-52"/>
 <!--        <Introduce/>-->
-        <Rules id="rules" class="section"/>
-        <Evaluate id="reviews" class="section"/>
+        <Rules id="rules" class="section pt-52"/>
+        <Evaluate id="reviews" class="section pt-52"/>
 
       </div>
 
       <!-- Right Column -->
       <div class="lg:col-span-4 col-span-12 px-5 py-4 rounded-3xl h-auto order-1 md:order-2">
-        <div class="shadow-xl rounded-3xl p-5 border-2  sticky top-[7.5rem]" ref="rightColumn">
+        <div class="shadow-xl rounded-3xl p-5 border-2  sticky top-[8.5rem]" ref="rightColumn">
           <h2 class="text-xl font-bold pb-3 border-bottom-1 border-gray-200">Thông tin du thuyền</h2>
           <div v-for="(value, key) in shipDetails" :key="key" class="grid grid-cols-12 gap-4 items-center pt-2  ">
             <span class="col-span-4  font-medium">{{ key }}:</span>
@@ -47,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {nextTick, ref} from "vue";
 
 const itemsMenu = ref([
   {label: 'Đặc điểm', to: 'features'},
@@ -57,10 +59,19 @@ const itemsMenu = ref([
 ]);
 
 const scrollTo = (id: string) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({behavior: 'smooth'});
-  }
+  nextTick(() => {
+    const element = document.getElementById(id);
+    if (element) {
+      const menubarHeight = 64; // 4rem = 64px
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - menubarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  });
 };
 const props = defineProps({
   cruise: Object,

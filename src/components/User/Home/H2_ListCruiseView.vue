@@ -64,9 +64,10 @@
 <script setup lang="ts">
 import {useAuthStore} from '@/stores/counter';
 import {API_URL} from '@/stores/config';
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useToast} from "primevue/usetoast";
 import router from "@/router";
+import axios from 'axios';
 
 const api_url = API_URL;
 const access_token = ref(localStorage.getItem('access_token') || '');
@@ -74,59 +75,33 @@ const access_token = ref(localStorage.getItem('access_token') || '');
 interface Cruise {
   id: number;
   name: string;
-  image: string;
+  launchedYear: number;
+  cabinQuantity: number;
+  material: string;
+  shortDesc: string[];
   description: string;
   price: number;
-  imageUrl?: string;
-  launchedYear: number;
-  material: string;
-  cabinQuantity: number;
-  locationId: number;
-  location?: Location; // Thêm thuộc tính location
+  ownedDate: string;
+  departureTime: string;
+  arrivalTime: string;
+  rules: { id: number; content: string; }[];
+  tags: { id: number; icon: string; name: string; }[];
+  location: { id: number; routeName: string; address: string; city: string; };
+  owner: { id: number; name: string; };
 }
-
-interface Location {
-  id: number;
-  routeName: string;
-  address: string;
-  city: string;
-}
-
 
 const cruises = ref<Cruise[]>([]);
 
-const fetchCruiseFeatured = async () => {
-  const url = `${api_url}/cruises/featured`;
-  const response = await fetch(url);
-
-  if (response.status === 403) {
-    useAuthStore().logout();
-    useToast().add({severity: 'info', summary: 'Đăng Xuất', detail: 'Hết phiên đăng nhập', life: 3000});
+onMounted(async () => {
+  try {
+    const response = await axios.get(`${api_url}/cruises/`);
+    cruises.value = response.data;
+    console.log('Cruises:', cruises.value);
+  } catch (error) {
+    console.error('Failed to fetch cruises:', error);
   }
+});
 
-  const data = await response.json();
-  cruises.value = data;
-  // console.log(cruises.value);
-  for (const cruise of cruises.value) {
-    const imageResponse = await fetch(`${api_url}/cruise/images/${cruise.id}`);
-    const imageBlob = await imageResponse.blob();
-    cruise.imageUrl = URL.createObjectURL(imageBlob);
-
-    await fetchLocation(cruise); // Gọi hàm fetchLocation để lấy thông tin location
-  }
-};
-const fetchLocation = async (cruise: Cruise) => {
-  const url = `${api_url}/locations/${cruise.locationId}`;
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Server responded with status code ${response.status}`);
-  }
-
-  const data: Location = await response.json();
-  cruise.location = data; // Gán thông tin location cho đối tượng cruise
-};
-fetchCruiseFeatured();
 const formattedCruiseDescription = (cruise: Cruise) => {
   return `Hạ thuỷ ${cruise.launchedYear} - ${cruise.material} - ${cruise.cabinQuantity} Phòng`;
 };

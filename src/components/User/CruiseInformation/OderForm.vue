@@ -4,8 +4,8 @@
     <div class="grid grid-cols-2 gap-4">
       <div class="rounded-3xl " >
         <label class="block mb-2 ml-2">Ngày nhận phòng</label>
-<!--        <DatePicker v-model="date" dateFormat="dd/mm/yy" class="rounded-full" />-->
-        <DatePicker minDate="minDate" v-model="date" />
+        <DatePicker v-model="date" dateFormat="dd/mm/yy" class="rounded-full" />
+<!--        <DatePicker minDate="minDate" v-model="date" />-->
       </div>
 
       <div>
