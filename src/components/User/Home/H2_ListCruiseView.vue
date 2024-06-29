@@ -62,15 +62,12 @@
 
 
 <script setup lang="ts">
-import {useAuthStore} from '@/stores/counter';
 import {API_URL} from '@/stores/config';
 import {onMounted, ref} from "vue";
-import {useToast} from "primevue/usetoast";
 import router from "@/router";
 import axios from 'axios';
 
 const api_url = API_URL;
-const access_token = ref(localStorage.getItem('access_token') || '');
 
 interface Cruise {
   id: number;
@@ -88,6 +85,7 @@ interface Cruise {
   tags: { id: number; icon: string; name: string; }[];
   location: { id: number; routeName: string; address: string; city: string; };
   owner: { id: number; name: string; };
+  imageUrl?: string; // Add this line
 }
 
 const cruises = ref<Cruise[]>([]);
@@ -96,7 +94,15 @@ onMounted(async () => {
   try {
     const response = await axios.get(`${api_url}/cruises/`);
     cruises.value = response.data;
-    console.log('Cruises:', cruises.value);
+
+    const imageFetchPromises = cruises.value.map(async (cruise) => {
+      const response_img = await axios.get(`${api_url}/cruise/images?cruiseId=${cruise.id}`);
+      const imageData = response_img.data[0].data;
+      cruise.imageUrl = `data:image/jpeg;base64,${imageData}`;
+    });
+
+    await Promise.all(imageFetchPromises);
+
   } catch (error) {
     console.error('Failed to fetch cruises:', error);
   }
