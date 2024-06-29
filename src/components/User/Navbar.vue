@@ -86,7 +86,7 @@
                 </MenuItem>
               </MenuItems>
             </transition>
-            <Dialog class="" v-model:visible="visible" :pt="{  root: 'border-none',  mask: {  style: 'backdrop-filter: blur(2px)'   }  }" :destroyOnClose="true">
+            <Dialog v-model:visible="visible" :pt="{root: 'border-none', mask: {style: 'backdrop-filter: blur(2px)'}}" :destroyOnClose="true">
               <Login v-if="dialogState === 'login'" @updateState="handleStateChange" @updateVisible="handleVisibleChange"/>
               <Reg v-else-if="dialogState === 'register'" @updateState="handleStateChange"/>
               <ForgotPassword v-else-if="dialogState === 'ForgotPassword'" @updateState="handleStateChange"/>

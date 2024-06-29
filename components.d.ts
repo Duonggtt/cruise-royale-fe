@@ -20,7 +20,6 @@ declare module 'vue' {
     C7_Evaluate: typeof import('./src/components/User/CruiseInformation/C7_Evaluate.vue')['default']
     CabinManagement: typeof import('./src/components/Admin/CabinManagement.vue')['default']
     Carousel: typeof import('primevue/carousel')['default']
-    CascadeSelect: typeof import('primevue/cascadeselect')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
     Column: typeof import('primevue/column')['default']
     CruiseManagement: typeof import('./src/components/Admin/CruiseManagement.vue')['default']

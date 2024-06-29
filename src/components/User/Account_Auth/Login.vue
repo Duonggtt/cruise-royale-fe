@@ -51,9 +51,9 @@ const userImage = ref('/Logo/Logo-Cruise-Royal.svg');
 const toast = useToast();
 
 const onSubmit = () => {
-  // console.log(user);
+  console.log(user);
   if (user.username !== '' && user.password !== '') {
-    const authStore = useAuthStore();
+    const authStore = useAuthStore( );
     authStore.login(user.username, user.password).then(state => {
       if (state) {
         setTimeout((showMenu: any): void => {
@@ -61,7 +61,7 @@ const onSubmit = () => {
           emit('updateVisible', false);
           emit('visible', 'false');
           // showMenu.value = false;
-        }, 1);
+        }, 10);
       } else {
         console.log('Login Failed');
         toast.add({severity: 'error', summary: 'Error', detail: `Vui lòng kiểm tra lại  ${user.username}`, life: 1500, contentStyleClass: 'gap-3', closable: false});
