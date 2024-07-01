@@ -1,135 +1,177 @@
 <template>
   <div class="w-full">
-    <div class="">
-      <div class="card mx-5">
-        <DataView :value="cruises" dataKey="id" paginator :rows="5">
-          <template #list="slotProps">
-            <div class="grid grid-nogutter">
-              <div v-for="(cruise, index) in slotProps.items" :key="index" class="col-12">
-                <div class="flex flex-col sm:flex-row p-4 gap-x-5 my-3  shadow rounded-xl border border-gray-200 animate-duration-[1500ms] animate-ease-in-out"
-                     v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
-                  <div class="relative w-full sm:w-1/3 ">
-                    <img class="rounded-xl w-full shadow-xl" :src="`${cruise.imageUrl}`" :alt="cruise.name"/>
-                    <div class="absolute top-3 left-3 bg-yellow-300 text-yellow-900 rounded-full px-2 py-1 text-xs font-semibold">
-                      <div class="flex items-center">
-                        <span class="scale-75 material-symbols-outlined">kid_star</span>
-                        <span>{{ cruise.rating}} sao</span>
-                      </div>
+    <div class="card mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <DataView :value="displayedCruises" dataKey="id" :paginator="true" :rows="5" :lazy="true"
+                :totalRecords="totalRecords" @page="onPage" :loading="loading">
+        <template #list="slotProps">
+          <div class="grid grid-cols-1 gap-6 animate-duration-[1500ms] animate-ease-in-out"  v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
+            <div v-for="cruise in slotProps.items" :key="cruise.id"
+                 class="transform transition-all duration-500 ease-out translate-x-0 opacity-100">
+              <div class="flex flex-col lg:flex-row p-4 gap-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="relative w-full lg:w-1/3 h-48 lg:h-auto">
+                  <img v-if="cruise.imageUrl" class="rounded-xl w-full h-full object-cover shadow-xl" :src="cruise.imageUrl" :alt="cruise.name"/>
+                  <div v-else class="rounded-xl w-full h-full bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-500">Loading image...</span>
+                  </div>
+                  <div class="absolute top-3 left-3 bg-emerald-600 text-white rounded-full px-2 py-1 text-xs font-semibold">
+                    <div class="flex items-center">
+                      <span class="material-symbols-outlined text-sm mr-1">star</span>
+                      <span>{{ cruise.rating || 5 }} sao</span>
                     </div>
                   </div>
-                  <div class="flex flex-col justify-between w-full sm:w-2/3">
-                    <div>
-                      <div class="flex items-center text-gray-500 text-xs mb-1">
-                        <span class="scale-50 material-symbols-outlined">pin_drop</span>
-                        <span>{{ cruise.location?.routeName }}</span>
-                      </div>
-                      <div class="text-lg font-bold mb-1">{{ cruise.name }}</div>
-                      <div class="text-sm text-gray-600 mb-4">{{ formattedCruiseDescription(cruise) }}</div>
-                      <div class="flex flex-wrap gap-1 mb-4  ">
-                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Có bể sục</span>
-                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Bao gồm tất cả các bữa ăn</span>
-                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Quầy bar</span>
-                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Lễ tân 24 giờ</span>
-                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Nhà hàng</span>
-                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">+ 10</span>
-                      </div>
+                </div>
+                <div class="flex flex-col justify-between w-full lg:w-2/3">
+                  <div>
+                    <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs mb-1">
+                      <span class="material-symbols-outlined text-sm mr-1">pin_drop</span>
+                      <span>{{ cruise.location.routeName }}</span>
                     </div>
-                    <div class="flex justify-between items-center  pt-5 border-t-2">
-                      <div class="text-2xl font-bold">{{ cruise.price.toLocaleString('en-US') }}đ</div>
-                      <div class="flex gap-2">
-                        <Button class="rounded-3xl" label="Xem chi tiết" outlined></Button>
-                        <Button label="Đặt ngay" :disabled="cruise.inventoryStatus === 'OUTOFSTOCK'"
-                                class="flex-auto md:flex-initial rounded-3xl" @click="goToCruise(cruise.id)"></Button>
-                      </div>
+                    <h2 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">{{ cruise.name }}</h2>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">{{ formattedCruiseDescription(cruise) }}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span v-for="tag in cruise.tags" :key="tag.id" class="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 text-xs px-2 py-1 rounded-full">
+                        {{ tag.name }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col sm:flex-row justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-2 sm:mb-0">{{ formatPrice(cruise.price) }}đ</div>
+                    <div class="flex gap-2">
+                      <button class="px-4 py-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900 rounded-full hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors duration-300">
+                        Xem chi tiết
+                      </button>
+                      <button @click="goToCruise(cruise.id)" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-full hover:bg-emerald-700 transition-colors duration-300">
+                        Đặt ngay
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </template>
-        </DataView>
-      </div>
+          </div>
+        </template>
+      </DataView>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
-import {API_URL} from '@/stores/config';
-import {useAuthStore} from "@/stores/counter";
-import {useToast} from "primevue/usetoast";
-import router from "@/router";
+import { ref, onMounted, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import { API_URL } from '@/stores/config';
 
-const api_url = API_URL;
+const props = defineProps(['filters']);
+
+const router = useRouter();
+const displayedCruises = ref<Cruise[]>([]);
+const totalRecords = ref(0);
+const loading = ref(false);
+const nextPageCruises = ref<Cruise[]>([]);
+const currentPage = ref(0);
+
 interface Cruise {
   id: number;
   name: string;
-  description: string;
-  imageUrl: string;
-  price: number;
   launchedYear: number;
-  material: string;
   cabinQuantity: number;
-  locationId: number;
-  location?: Location;
-  inventoryStatus: string;
-  rating: number;
+  material: string;
+  shortDesc: string[];
+  description: string;
+  price: number;
+  ownedDate: string;
+  departureTime: string;
+  arrivalTime: string;
+  rules: { id: number; content: string }[];
+  tags: { id: number; icon: string; name: string }[];
+  location: { id: number; routeName: string; address: string; city: string };
+  owner: { id: number; name: string };
+  imageUrl?: string;
+  rating?: number;
 }
 
-interface Location {
-  id: number;
-  routeName: string;
-  address: string;
-  city: string;
-}
-
-const cruises = ref<Cruise[]>([]);
-
-const fetchCruiseFeatured = async () => {
-  const url = `${api_url}/cruises/featured`;
-  const response = await fetch(url);
-
-  if (response.status === 403) {
-    useAuthStore().logout();
-    useToast().add({severity: 'info', summary: 'Đăng Xuất', detail: 'Hết phiên đăng nhập', life: 3000});
+const fetchCruiseImage = async (cruiseId: number) => {
+  try {
+    const response = await axios.get(`${API_URL}/cruise/images?cruiseId=${cruiseId}&limit=1`);
+    if (response.data && response.data.length > 0) {
+      return `data:image/jpeg;base64,${response.data[0].data}`;
+    }
+  } catch (error) {
+    console.error('Error fetching cruise image:', error);
   }
+  return null;
+};
 
-  const data = await response.json();
-  cruises.value = data;
-
-  for (const cruise of cruises.value) {
-    const imageResponse = await fetch(`${api_url}/cruise/images/${cruise.id}`);
-    const imageBlob = await imageResponse.blob();
-    cruise.imageUrl = URL.createObjectURL(imageBlob);
-
-    await fetchLocation(cruise);
+const fetchCruiseDetails = async (cruise: Cruise) => {
+  try {
+    const updatedCruise = { ...cruise };
+    updatedCruise.imageUrl = await fetchCruiseImage(cruise.id);
+    return updatedCruise;
+  } catch (error) {
+    console.error('Error fetching cruise details:', error);
+    return cruise;
   }
 };
 
-const fetchLocation = async (cruise: Cruise) => {
-  const url = `${api_url}/locations/${cruise.locationId}`;
-  const response = await fetch(url);
+const fetchCruises = async (page = 0) => {
+  try {
+    loading.value = true;
+    const { tagIds } = props.filters;
 
-  if (!response.ok) {
-    throw new Error(`Server responded with status code ${response.status}`);
+    let url = tagIds && tagIds.length > 0
+        ? `${API_URL}/cruises/filter/tags`
+        : `${API_URL}/cruises/`;
+
+    let response;
+    if (tagIds && tagIds.length > 0) {
+      const params = new URLSearchParams();
+      tagIds.forEach(id => params.append('tagIds', id));
+      response = await axios.get(`${url}?${params.toString()}`);
+    } else {
+      response = await axios.get(url);
+    }
+
+    const allCruises = response.data;
+    totalRecords.value = allCruises.length;
+
+    const start = page * 5;
+    const end = start + 5;
+    const currentPageCruises = allCruises.slice(start, end);
+
+    // Fetch and display cruises for the current page
+    displayedCruises.value = currentPageCruises;
+    currentPageCruises.forEach((cruise, index) => {
+      fetchCruiseDetails(cruise).then(updatedCruise => {
+        displayedCruises.value[index] = updatedCruise;
+      });
+    });
+
+    // Pre-fetch next page cruises
+    const nextPageStart = end;
+    const nextPageEnd = nextPageStart + 5;
+    nextPageCruises.value = allCruises.slice(nextPageStart, nextPageEnd);
+    nextPageCruises.value.forEach((cruise, index) => {
+      fetchCruiseDetails(cruise).then(updatedCruise => {
+        nextPageCruises.value[index] = updatedCruise;
+      });
+    });
+
+    currentPage.value = page;
+  } catch (error) {
+    console.error('Error fetching cruises:', error);
+  } finally {
+    loading.value = false;
   }
-
-  const data: Location = await response.json();
-  cruise.location = data;
 };
 
-fetchCruiseFeatured();
-
-const getSeverity = (cruise: Cruise) => {
-  switch (cruise.inventoryStatus) {
-    case 'INSTOCK':
-      return 'success';
-    case 'LOWSTOCK':
-      return 'warning';
-    case 'OUTOFSTOCK':
-      return 'danger';
-    default:
-      return 'info';
+const onPage = (event: { page: number, rows: number }) => {
+  if (event.page === currentPage.value + 1) {
+    // Move to next page
+    displayedCruises.value = nextPageCruises.value;
+    fetchCruises(event.page);
+  } else {
+    // For any other page change, fetch new data
+    fetchCruises(event.page);
   }
 };
 
@@ -137,8 +179,20 @@ const formattedCruiseDescription = (cruise: Cruise) => {
   return `Hạ thuỷ ${cruise.launchedYear} - ${cruise.material} - ${cruise.cabinQuantity} Phòng`;
 };
 
-const goToCruise = (id: number) => {
-  router.push({name: 'CruiseDetails', params: {id}});
+const formatPrice = (price: number) => {
+  return price.toLocaleString('en-US');
 };
 
+const goToCruise = (id: number) => {
+  router.push({ name: 'CruiseDetails', params: { id: id.toString() } });
+};
+
+onMounted(() => {
+  fetchCruises();
+});
+
+watch(() => props.filters, () => {
+  displayedCruises.value = [];
+  fetchCruises();
+}, { deep: true });
 </script>

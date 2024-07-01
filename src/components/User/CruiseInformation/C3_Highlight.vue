@@ -15,18 +15,19 @@
         <h2 class="text-2xl font-bold mb-4">Đặc điểm nổi bật</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div v-for="tag in props.tags" :key="tag.id" class="feature-item flex items-center ">
-            <span class="flex items-center z-0" > <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
+          <div v-for="tag in props.cruise?.tags" :key="tag.id" class="feature-item flex items-center ">
+            <span class="flex items-center z-0"> <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
           </div>
         </div>
         <div class=" list-disc space-y-2">
-          <p v-for="highlight in highlights" :key="highlight">
-            <i class="fas fa-star">v</i> {{ highlight }}
+          <p v-for="shortDesc in props.cruise?.shortDesc" :key="shortDesc">
+            <i class="fas fa-star">icon ____</i> {{ shortDesc }}
           </p>
         </div>
 
-        <RomCruise :cabins="cabins" :tags="tags" id="prices" class="section pt-52"/>
-<!--        <Introduce/>-->
+        <!--        <RomCruise :cabins="props.cruise?.cabins" :tags="props.cruise?.tags" id="prices" class="section pt-52" cruise-id=""/>-->
+        <C4_RomCruise :cruiseId="props.cruise?.id" />
+        <!--        <Introduce/>-->
         <Rules id="rules" class="section pt-52"/>
         <Evaluate id="reviews" class="section pt-52"/>
 
@@ -75,10 +76,10 @@ const scrollTo = (id: string) => {
 };
 const props = defineProps({
   cruise: Object,
-  cabins: Array,
-  tags: Object,
-  location: Object,
-  owner: Object,
+  // cabins: Array,
+  // tags: Object,
+  // location: Object,
+  // owner: Object,
 
 });
 
@@ -86,25 +87,10 @@ const shipDetails = {
   'Hạ thủy': props.cruise?.launchedYear,
   'Cabin': props.cruise?.cabinQuantity,
   'Thân vỏ': props.cruise?.material,
-  'Hành trình': props.location?.routeName,
-  'Điều hành':  props.owner?.name,
+  'Hành trình': props.cruise?.location?.routeName,
+  'Điều hành': props.cruise?.owner?.name,
 };
 
-
-const features = [
-  {
-    label: props.tags?.name,
-    svgIcon: 'svg'
-  }
-];
-
-
-const highlights = [
-  'Du thuyền được thiết kế với phong cách sang trọng và truyền thống',
-  'Phòng ngủ tiện nghi sang trọng mang phong cách Á Đông đều có bồn tắm cạnh cửa kính lớn view vịnh',
-  'Đặc biệt hơn, du thuyền thiết kế bể bơi 4 mùa to rộng là địa điểm check-in yêu thích của mọi du khách',
-  'Du thuyền có nhiều lịch trình 2 ngày 1 đêm, 3 ngày 2 đêm và 4 ngày 3 đêm cho những ai muốn 1 lịch trình dài hơn trên vịnh Lan Hạ',
-];
 
 </script>
 

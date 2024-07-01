@@ -26,7 +26,7 @@
             </div>
             <div class="absolute bottom-3 right-3 pl-1 pr-3 py-2 h-5 rounded-full flex items-center bg-gray-200 text-surface-800 bg-opacity-60">
               <span class="scale-50 material-symbols-outlined">pin_drop</span>
-              <p class="text-xs font-medium"> {{ cruise.location?.address }}</p>
+              <p class="text-xs font-medium"> {{ cruise.location?.city }}</p>
             </div>
           </div>
           <div class="pt-1 pl-2 cruise-card-title">
