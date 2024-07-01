@@ -19,14 +19,17 @@
             <span class="flex items-center z-0"> <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
           </div>
         </div>
-        <div class=" list-disc space-y-2">
+        <div class=" list-disc space-y-2 pt-5">
           <p v-for="shortDesc in props.cruise?.shortDesc" :key="shortDesc">
-            <i class="fas fa-star">icon ____</i> {{ shortDesc }}
+              <span class=" flex items-center">
+                <span class="material-symbols-outlined text-primary mr-2"> check </span>
+                <span>{{ shortDesc }}</span>
+              </span>
           </p>
         </div>
 
         <!--        <RomCruise :cabins="props.cruise?.cabins" :tags="props.cruise?.tags" id="prices" class="section pt-52" cruise-id=""/>-->
-        <C4_RomCruise :cruiseId="props.cruise?.id" />
+        <C4_RomCruise :cruiseId="props.cruise?.id"/>
         <!--        <Introduce/>-->
         <Rules id="rules" class="section pt-52"/>
         <Evaluate id="reviews" class="section pt-52"/>

@@ -29,7 +29,7 @@
                     <h2 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">{{ cruise.name }}</h2>
                     <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">{{ formattedCruiseDescription(cruise) }}</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                      <span v-for="tag in cruise.tags" :key="tag.id" class="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 text-xs px-2 py-1 rounded-full">
+                      <span v-for="tag in cruise.tags" :key="tag.id" class="bg-gray-100  dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 text-xs px-2 py-1 rounded-full">
                         {{ tag.name }}
                       </span>
                     </div>
