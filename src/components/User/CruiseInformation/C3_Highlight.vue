@@ -16,7 +16,10 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div v-for="tag in props.cruise?.tags" :key="tag.id" class="feature-item flex items-center ">
-            <span class="flex items-center"> <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
+            <span class=" flex items-center">
+                <span class="text-primary material-symbols-outlined mr-2"> {{ tag.icon }} </span>
+                <span> {{ tag.name }}</span>
+              </span>
           </div>
         </div>
         <div class=" list-disc space-y-2 pt-5">
@@ -30,7 +33,7 @@
 
         <!--        <RomCruise :cabins="props.cruise?.cabins" :tags="props.cruise?.tags" id="prices" class="section pt-52" cruise-id=""/>-->
         <C4_RomCruise :cruiseId="props.cruise?.id"/>
-        <!--        <Introduce/>-->
+        <Introduce/>
         <Rules id="rules" class="section pt-52"/>
         <Evaluate id="reviews" class="section pt-52"/>
 

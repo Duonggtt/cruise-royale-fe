@@ -93,15 +93,17 @@ const cruises = ref<Cruise[]>([]);
 onMounted(async () => {
   try {
     const response = await axios.get(`${api_url}/cruises/`);
-    cruises.value = response.data;
+    cruises.value = response.data.slice(0, 6);
 
-    const imageFetchPromises = cruises.value.map(async (cruise) => {
-      const response_img = await axios.get(`${api_url}/cruise/images?cruiseId=${cruise.id}`);
-      const imageData = response_img.data[0].data;
-      cruise.imageUrl = `data:image/jpeg;base64,${imageData}`;
+    cruises.value.forEach(async (cruise) => {
+      try {
+        const response_img = await axios.get(`${api_url}/cruise/images?cruiseId=${cruise.id}`);
+        const imageData = response_img.data[0].data;
+        cruise.imageUrl = `data:image/jpeg;base64,${imageData}`;
+      } catch (error) {
+        console.error(`Failed to fetch image for cruise ${cruise.id}:`, error);
+      }
     });
-
-    await Promise.all(imageFetchPromises);
 
   } catch (error) {
     console.error('Failed to fetch cruises:', error);

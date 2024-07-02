@@ -51,6 +51,7 @@
           </div>
         </template>
       </DataView>
+
     </div>
   </div>
 </template>
@@ -61,8 +62,12 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { API_URL } from '@/stores/config';
 
-const props = defineProps(['filters']);
+const props = defineProps<{
+  filters: unknown;
+  searchResult: string;
+}>();
 
+const searchResult = ref('');
 const router = useRouter();
 const displayedCruises = ref<Cruise[]>([]);
 const totalRecords = ref(0);
@@ -118,18 +123,18 @@ const fetchCruises = async (page = 0) => {
     loading.value = true;
     const { tagIds } = props.filters;
 
-    let url = tagIds && tagIds.length > 0
-        ? `${API_URL}/cruises/filter/tags`
-        : `${API_URL}/cruises/`;
+    let url = `${API_URL}/cruises/`;
+    const params = new URLSearchParams();
 
-    let response;
     if (tagIds && tagIds.length > 0) {
-      const params = new URLSearchParams();
+      url += 'filter/tags';
       tagIds.forEach(id => params.append('tagIds', id));
-      response = await axios.get(`${url}?${params.toString()}`);
-    } else {
-      response = await axios.get(url);
+    } else if (searchResult.value) {
+      url += 'filter';
+      params.append('name', searchResult.value);
     }
+
+    const response = await axios.get(`${url}?${params.toString()}`);
 
     const allCruises = response.data;
     totalRecords.value = allCruises.length;
@@ -191,8 +196,9 @@ onMounted(() => {
   fetchCruises();
 });
 
-watch(() => props.filters, () => {
+watch([() => props.filters, () => props.searchResult], () => {
   displayedCruises.value = [];
+  searchResult.value = props.searchResult;
   fetchCruises();
 }, { deep: true });
 </script>

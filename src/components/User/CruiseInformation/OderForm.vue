@@ -106,9 +106,8 @@ const createOrder = async () => {
     if (response.data && response.data.redirect_url) {
       orderData = response.data;
       paymentWindow = window.open(response.data.redirect_url, '_blank');
-
-      // Start checking payment status
-      checkPaymentStatus();
+      window.open(response.data.redirect_url, '_blank');
+      await checkPaymentStatus();
     }
   } catch (error) {
     console.error('Error creating order:', error);
@@ -200,9 +199,9 @@ const handlePaymentCallback = async (event: MessageEvent) => {
       emit('paymentComplete', 'failure');
     }
 
-    if (paymentWindow) {
-      paymentWindow.close();
-    }
+    // if (paymentWindow) {
+    //   paymentWindow.close();
+    // }
   }
 };
 

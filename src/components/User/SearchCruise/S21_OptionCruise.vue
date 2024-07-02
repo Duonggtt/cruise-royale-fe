@@ -43,9 +43,9 @@ const selectedCategories = ref<string[]>([]);
 const selectedUtilities = ref<string[]>([]);
 
 const categories = ref([
-  {name: "3 sao", key: "3"},
-  {name: "4 sao", key: "4"},
-  {name: "5 sao", key: "5"}
+  {name: "3 sao", key: "3s"},
+  {name: "4 sao", key: "4s"},
+  {name: "5 sao", key: "5s"}
 ]);
 
 interface TagItem {

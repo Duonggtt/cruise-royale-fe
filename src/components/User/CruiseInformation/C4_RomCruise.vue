@@ -12,7 +12,7 @@
       <img :src="room.images[0]" :alt="room.name" class="w-20 h-20 object-cover rounded-2xl"/>
       <div class="flex flex-col flex-grow mx-4 min-w-48">
         <h2 class="font-semibold text-lg cursor-pointer" @click="roomShow(room)">{{ room.name }}</h2>
-        <p class="text-gray-600 text-xs">{{ room.size }} m² - Tối đa: {{ room.maxGuests }} <span class="pi pi-user text-xs"></span></p>
+        <p class="text-gray-600 text-xs">{{ room.size }} m² - Tối đa: {{ room.maxGuests }}  - Còn:{{ room.maxCount }} phòng<span class="pi pi-user text-xs"></span></p>
       </div>
       <div class="flex items-center">
         <div class="mr-3">
@@ -249,5 +249,5 @@ const handlePaymentComplete = (status: string) => {
     toast.add({ severity: 'error', summary: 'Error', detail: 'Thanh toán thất bại !', life: 5000 });
   }
 };
-
+const paymentStatus = ref('pending');
 </script>
