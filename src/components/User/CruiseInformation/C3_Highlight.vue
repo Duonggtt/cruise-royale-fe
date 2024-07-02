@@ -16,7 +16,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div v-for="tag in props.cruise?.tags" :key="tag.id" class="feature-item flex items-center ">
-            <span class="flex items-center z-0"> <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
+            <span class="flex items-center"> <span class="text-primary scale-75 material-symbols-outlined">{{ tag.icon }}</span> {{ tag.name }}</span>
           </div>
         </div>
         <div class=" list-disc space-y-2 pt-5">

@@ -4,7 +4,7 @@
       <DataView :value="displayedCruises" dataKey="id" :paginator="true" :rows="5" :lazy="true"
                 :totalRecords="totalRecords" @page="onPage" :loading="loading">
         <template #list="slotProps">
-          <div class="grid grid-cols-1 gap-6 animate-duration-[1500ms] animate-ease-in-out"  v-animateonscroll="{ enterClass: 'animate-fadeinleft'}">
+          <div class="grid grid-cols-1 gap-6 ">
             <div v-for="cruise in slotProps.items" :key="cruise.id"
                  class="transform transition-all duration-500 ease-out translate-x-0 opacity-100">
               <div class="flex flex-col lg:flex-row p-4 gap-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition-shadow duration-300">

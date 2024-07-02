@@ -24,6 +24,7 @@ import Introduce from "@/components/User/CruiseInformation/C5_Introduce.vue";
 import Rules from "@/components/User/CruiseInformation/C6_Rules.vue";
 import Evaluate from "@/components/User/CruiseInformation/C7_Evaluate.vue";
 import OderForm from "@/components/User/CruiseInformation/OderForm.vue";
+import RoomInfo from "@/components/User/CruiseInformation/RoomInfo.vue";
 
 
 
@@ -87,6 +88,7 @@ app.component("Introduce", Introduce)
 app.component("Rules", Rules)
 app.component("Evaluate", Evaluate)
 app.component("OderForm", OderForm)
+app.component("RoomInfo", RoomInfo)
 
 
 app.mount('#app')

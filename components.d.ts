@@ -40,6 +40,7 @@ declare module 'vue' {
     ProgressBar: typeof import('primevue/progressbar')['default']
     Rating: typeof import('primevue/rating')['default']
     Register: typeof import('./src/components/User/Account_Auth/Register.vue')['default']
+    RoomInfo: typeof import('./src/components/User/CruiseInformation/RoomInfo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     S1_SearchCuise: typeof import('./src/components/User/SearchCruise/S1_SearchCuise.vue')['default']
