@@ -128,8 +128,8 @@ const navigation: NavigationItem[] = [
   {name: 'Tìm du thuyền', href: 'SearchCuiseView', current: true},
   {name: 'Doanh nghiệp', href: '/', current: false},
   {name: 'Blog', href: 'profile', current: false},
-  {name: 'Đặt tour và quản lý tình trạng đặt tour.', href: 'profile', current: false},
-  {name: 'Xem báo cáo doanh thu và tình trạng tour.', href: '/cruise/1', current: false},
+  // {name: 'Đặt tour và quản lý tình trạng đặt tour.', href: 'profile', current: false},
+  // {name: 'Xem báo cáo doanh thu và tình trạng tour.', href: '/cruise/1', current: false},
 ]
 
 

@@ -29,11 +29,11 @@ const images = ref([
 ]);
 
 const videos = ref([
-  // {src: 'Video/Cruise04.mp4', type: 'video/mp4'},
-  // {src: 'Video/Cruise01.mp4', type: 'video/mp4'},
-  // {src: 'Video/Cruise02.mp4', type: 'video/mp4'},
-  // {src: 'Video/Cruise03.mp4', type: 'video/mp4'},
-  // {src: 'Video/Cruise05.mp4', type: 'video/mp4'},
+  {src: 'Video/Cruise04.mp4', type: 'video/mp4'},
+  {src: 'Video/Cruise01.mp4', type: 'video/mp4'},
+  {src: 'Video/Cruise02.mp4', type: 'video/mp4'},
+  {src: 'Video/Cruise03.mp4', type: 'video/mp4'},
+  {src: 'Video/Cruise05.mp4', type: 'video/mp4'},
   {src: 'Video/Cruise06.mp4', type: 'video/mp4'},
 ]);
 
